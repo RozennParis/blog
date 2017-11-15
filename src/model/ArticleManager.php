@@ -19,7 +19,7 @@ class ArticleManager extends Manager
 	/** Function to add an article/chapter by admin
 	 * 
 	 */
-	public function addArticle()
+	public function addArticle($title, $content)
 	{
 
 		$req = $this->db->prepare('INSERT INTO articles(title, content, date_creation) VALUES(:title, :content, NOW())');
@@ -76,7 +76,7 @@ class ArticleManager extends Manager
 		$req->execute();
 		$articles = $req->fetchAll();
 
-
+	
 		return $articles;
 	}
 
@@ -85,8 +85,12 @@ class ArticleManager extends Manager
 	/** Function to display the extract of the article on the homepage.
 	 *
 	 */
-	public function getExtract($article)
+	public function getExtracts($articles)
 	{
-		$extract = wordwrap($article, 300,"...", false);
+		foreach ($articles as $article)
+		{
+		$extract = wordwrap($article['content'], 300,"...", false);
+		}
+
 	}
 }

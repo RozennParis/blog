@@ -7,38 +7,35 @@ class Comments
 	protected $author;
 	protected $comment;
 	protected $dateComment;
-	protected $moderationStatement;
-	protected $alert
+	protected $moderationStatement = 0;
+	protected $alert = 0;
 
-	/*public function __construct($comment, $moderationStatement, $alert) >>> auteur, comment, date comment , statut modération, alert)
+	/*public function __construct($moderationStatement, $alert) //>>> on veut donner des valeurs par défaut au moment de l'ajout du commentaires dans la bdd
 	{
-		$this->setAuthor($author);
-		$this->setComment($comment);
-		$this->setComment($comment);
-
-
+		$this->setModerationStatement($moderationStatement);
+		$this->setAlert($alert);
 	}*/
 
 
-	public function get()
+	public function getModerationStatement()
 	{
-		return $this->;
+		return $this->moderationStatement;
 	}
 
-	public function set()
+	public function setModerationStatement($moderationStatement)
 	{
-		$this->title = $title;
+		$this->moderationStatement = $moderationStatement;
 	}
 
 
-	public function get()
+	public function getAlert()
 	{
-		return $this->;
+		return $this->alert;
 	}
 
-	public function set($)
+	public function setAlert($alert)
 	{
-		$this->content = $;
+		$this->alert = $alert;
 	}
 
 

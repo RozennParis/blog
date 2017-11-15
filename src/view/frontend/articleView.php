@@ -14,28 +14,29 @@
 
     <head>
         <meta charset="utf-8" />
-        <title>Mon blog</title>
+        <title>Billet simple pour l'Alaska</title>
         <link href="style.css" rel="stylesheet" /> 
     </head>
 
         
     <body>
-        <h1>Mon super blog !</h1>
-        <p><a href="index.php">Retour à la liste des billets</a></p>
+        <h1>Billet simple pour l'Alaska</h1>
+        <p><a href="index.php?action=listArticles">Retour à la page d'accueil</a></p>
 
         <div class="news">
             <h3>
-                <?= htmlspecialchars($post['title']) ?>
-                <em>le <?= $post['creation_date_fr'] ?></em>
+                <?= htmlspecialchars($article['title']) ?>
+                <em>le <?= $article['date_creation_fr'] ?></em>
             </h3>
 
-            <p> <?= nl2br(htmlspecialchars($post['content'])) ?></p>
+            <p> <?= nl2br(htmlspecialchars($article['content'])) ?></p>
         </div>
 
-        <h2>Commentaires</h2>
+        <div>
+        <h4>Commentaires</h4>
 
         <?php
-        while ($comment = $comments->fetch())
+        foreach ($comments as $comment)
         {
         ?>
 
@@ -45,6 +46,17 @@
         <?php
         }
         ?>
+
+        </div>
+        <h4>Exprimez-vous !!!</h4>
+
+        <form method="post" action="index.php?action=addComment&amp;id=<?= $article['id'] ?>">
+
+            <p><input id="author" type="text" name="author" placeholder="Votre nom"></p>
+            <p><textarea id="comment" name="comment" placeholder="Saisissez votre commentaire ici"></textarea></p>
+            <p><input type="submit" value="Envoyer"></p>
+
+        </form>
 
     </body>
 </html> 

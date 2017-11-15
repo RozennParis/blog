@@ -36,7 +36,7 @@
             echo nl2br(htmlspecialchars($article['content']));
             ?>
             <br />
-            <em><a href="articleView.php"><button>En lire plus</button></a></em>
+            <em><a href="index.php?action=article&id=<?php echo $article['id'] ?>"><button>En lire plus</button></a></em>
             </p>
         </div>
         <?php
