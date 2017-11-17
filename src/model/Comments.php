@@ -7,7 +7,7 @@ class Comments
 	protected $author;
 	protected $comment;
 	protected $dateComment;
-	protected $moderationStatement = 0;
+	protected $moderationStatus = 0;
 	protected $alert = 0;
 
 	/*public function __construct($moderationStatement, $alert) //>>> on veut donner des valeurs par défaut au moment de l'ajout du commentaires dans la bdd
@@ -17,14 +17,14 @@ class Comments
 	}*/
 
 
-	public function getModerationStatement()
+	public function getModerationStatus()
 	{
-		return $this->moderationStatement;
+		return $this->moderationStatus;
 	}
 
-	public function setModerationStatement($moderationStatement)
+	public function setModerationStatus($moderationStatus)
 	{
-		$this->moderationStatement = $moderationStatement;
+		$this->moderationStatement = $moderationStatus;
 	}
 
 

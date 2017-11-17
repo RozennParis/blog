@@ -17,6 +17,7 @@ class ArticleController
 	    $articles = $articleManager->getArticles(); // appel de la fonction de cet objet
 
 
+
 	    require('src/view/frontend/listArticlesView.php');
 	}
 

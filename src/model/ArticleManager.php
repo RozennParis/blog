@@ -24,9 +24,9 @@ class ArticleManager extends Manager
 
 		$req = $this->db->prepare('INSERT INTO articles(title, content, date_creation) VALUES(:title, :content, NOW())');
 
-		$listArticles = $req->execute(array(
-								'title'=>$_POST['title'],
-								'content'=>$_POST['content']));
+		$addedArticle = $req->execute(array(
+							'title'=>$_POST['title'],
+							'content'=>$_POST['content']));
 					
 	}
 
@@ -71,13 +71,26 @@ class ArticleManager extends Manager
 	public function getArticles()
 	{
 
-		$req = $this->db->prepare('SELECT id, title, content, DATE_FORMAT(date_creation, \'%d/%m/%Y\') AS date_creation_fr FROM articles ORDER BY date_creation LIMIT 0, 6');
+		$req = $this->db->query('SELECT id, title, content, DATE_FORMAT(date_creation, \'%d/%m/%Y\') AS date_creation_fr FROM articles ORDER BY date_creation LIMIT 0, 6');
 
 		$req->execute();
+
+
 		$articles = $req->fetchAll();
 
+		foreach ($articles as $article)
+		{
 	
-		return $articles;
+			$excerpt =$this->getExtract($article['content'], 0, 600, ' ');
+
+			$article['content'] = $excerpt;
+
+			$articleCropped[]=$article;
+
+		}
+
+
+		return $articleCropped;
 	}
 
 
@@ -85,12 +98,14 @@ class ArticleManager extends Manager
 	/** Function to display the extract of the article on the homepage.
 	 *
 	 */
-	public function getExtracts($articles)
+	public function getExtract($content,$start,$lenght,$endStr)
 	{
-		foreach ($articles as $article)
-		{
-		$extract = wordwrap($article['content'], 300,"...", false);
-		}
+
+        $str = mb_substr($content, $start, $lenght - strlen($endStr) + 1, 'UTF-8');
+
+		$extract = substr($str, 0, strrpos($str, ' ')) .  $endStr . ' ...';
+
+		return $extract;
 
 	}
 }

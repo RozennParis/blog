@@ -24,10 +24,8 @@
         <p><a href="index.php?action=listArticles">Retour à la page d'accueil</a></p>
 
         <div class="news">
-            <h3>
-                <?= htmlspecialchars($article['title']) ?>
-                <em>le <?= $article['date_creation_fr'] ?></em>
-            </h3>
+            <h3><?= htmlspecialchars($article['title']) ?></h3>
+            <h5><em><?= $article['date_creation_fr'] ?></em></h5>
 
             <p> <?= nl2br(htmlspecialchars($article['content'])) ?></p>
         </div>
