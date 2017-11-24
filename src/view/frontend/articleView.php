@@ -41,25 +41,28 @@
         <?php
         foreach ($comments as $comment)
         {
-           
+            if (array_key_exists('answer',$comment) == false){
         ?>
            
-            <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date_fr'] ?></p>
-            <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
+                <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date_fr'] ?></p>
+                <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
 
-            
-
-            <!-- <?php
-            foreach ($answers as $answer)
-            {
-            ?>
-                <div>
-                    <p><strong><?= htmlspecialchars($answer['author']) ?></strong> le <?= $answer['answer_date_fr'] ?></p>
-                    <p><?= nl2br(htmlspecialchars($answer['answer'])) ?></p>
-                </div>
-            <?php
+        <?php
             }
-            ?>-->
+            else {
+
+                foreach ($comment['answer'] as $answer)
+                {
+        ?>
+                    <div>
+                        <p><strong><?= htmlspecialchars($answer['author']) ?></strong> le <?= $answer['comment_date_fr'] ?></p>
+                        <p><?= nl2br(htmlspecialchars($answer['comment'])) ?></p>
+                    </div>
+        <?php
+                }
+            }
+        ?>
+        
             
             <form method="post" action="index.php?action=addComment&amp;id=<?= $article['id'] ?>&amp;parentId=<?= $comment['id'] ?>">
 
@@ -72,7 +75,7 @@
             
             <form>
                 <button type="submit" name="alert">Signaler</button>
-            </form>-->
+            </form>
 
         <?php
         }

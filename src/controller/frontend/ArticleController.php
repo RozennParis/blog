@@ -21,13 +21,13 @@ class ArticleController
 	    require('src/view/frontend/listArticlesView.php');
 	}
 
-	public function article()
+	public function article($articleId)
 	{
 		$articleManager = new ArticleManager();
 	    $article = $articleManager->getArticle($_GET['id']);
 
 	    $commentManager = new CommentManager();
-	    $comments = $commentManager->getComments($articleId, $parentId);
+	    $comments = $commentManager->getComments($_GET['id']);
 
 
 

@@ -53,15 +53,28 @@ class CommentManager extends Manager
 	/** Function to display comments on the article's page >>> front
 	 * 
 	 */
-	public function getComments($articleId,$parentId)
+	public function getComments($articleId)
 	{
-		$comments = $this->db->prepare('SELECT id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%i\') AS comment_date_fr FROM comments WHERE 	article_id = ? AND parent_id = ? ORDER BY comment_date');
+		$comments = $this->db->prepare('SELECT id, author, parent_id, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%i\') AS comment_date_fr FROM comments WHERE article_id = ? ORDER BY comment_date');
 
-    	$comments->execute(array($articleId, $parentId));
+    	$comments->execute(array($articleId));
 
-    	return $comments;
+    	foreach ($comments as $comment)
+    	{
+    		if ($comment['parent_id'] != 0){
+    			$arrComments[$comment['parent_id']]['answer'][] = $comment;
+    		}
+    		else {
+    			$arrComments[$comment['id']] = $comment;
+    		}
+
+    		
+    	}
+
+    	return $arrComments;
 	
     }
+
     	
 	
 }

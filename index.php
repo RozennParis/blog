@@ -20,7 +20,7 @@ if (isset($_GET['action'])) {
         {
 
             $articleController = new \blog\controller\frontend\ArticleController();
-            $data = $articleController->article($_GET['id'], $_GET['parentId']);
+            $data = $articleController->article($_GET['id']);
             
 
         }
