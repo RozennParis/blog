@@ -13,9 +13,12 @@
 <html>
 
     <head>
-        <meta charset="utf-8" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <link rel="icon" href=../../favicon.ico>
         <title>Billet simple pour l'Alaska</title>
-        <link href="style.css" rel="stylesheet" /> 
+        <link href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" /> 
     </head>
 
         
@@ -31,27 +34,58 @@
         </div>
 
         <div>
+
+
         <h4>Commentaires</h4>
 
         <?php
         foreach ($comments as $comment)
         {
+           
         ?>
-
+           
             <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date_fr'] ?></p>
             <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
+
+            
+
+            <!-- <?php
+            foreach ($answers as $answer)
+            {
+            ?>
+                <div>
+                    <p><strong><?= htmlspecialchars($answer['author']) ?></strong> le <?= $answer['answer_date_fr'] ?></p>
+                    <p><?= nl2br(htmlspecialchars($answer['answer'])) ?></p>
+                </div>
+            <?php
+            }
+            ?>-->
+            
+            <form method="post" action="index.php?action=addComment&amp;id=<?= $article['id'] ?>&amp;parentId=<?= $comment['id'] ?>">
+
+                
+                <p><input class="author" type="text" name="author" placeholder="Votre nom" required></p>
+                <p><textarea id="answer" name="answer" placeholder="Saisissez votre réponse ici" required></textarea></p>
+                <button type="submit" name="answer">Envoyer la réponse</button>
+                    
+            </form>
+            
+            <form>
+                <button type="submit" name="alert">Signaler</button>
+            </form>-->
 
         <?php
         }
         ?>
+        
 
         </div>
         <h4>Exprimez-vous !!!</h4>
 
         <form method="post" action="index.php?action=addComment&amp;id=<?= $article['id'] ?>">
 
-            <p><input id="author" type="text" name="author" placeholder="Votre nom"></p>
-            <p><textarea id="comment" name="comment" placeholder="Saisissez votre commentaire ici"></textarea></p>
+            <p><input class="author" type="text" name="author" placeholder="Votre nom" required></p>
+            <p><textarea id="comment" name="comment" placeholder="Saisissez votre commentaire ici" required></textarea></p>
             <p><input type="submit" value="Envoyer"></p>
 
         </form>

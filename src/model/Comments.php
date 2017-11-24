@@ -4,6 +4,7 @@ class Comments
 {
 	protected $id;
 	protected $article_id;
+	protected $parent_id;
 	protected $author;
 	protected $comment;
 	protected $dateComment;

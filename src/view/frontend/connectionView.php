@@ -3,20 +3,21 @@
     <head>
         <meta charset="utf-8" />
         <title>Connexion Espace membre</title>
-	<link href="#" rel="stylesheet" /> 
+	 <link href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" /> 
     </head>
         
     <body>
-        <h1>Connexion</h1>
+        <div class="row">
+            <h1>Connexion</h1>
 
-        <form method="post" action="#">
+            <form method="post" action="#">
 
-            <p><label for="id">Pseudo </label> <input type="text" name="id"></p>
-            <p><label for="password">Mot de passe </label><input type="password" name="password"></p>
-           
-            <p><input type="submit" value="Envoyer"></p>
+                <p><label for="pseudo">Pseudo </label> <input type="text" name="pseudo"></p>
+                <p><label for="password">Mot de passe </label><input type="password" name="password"></p>
+               
+                <p><input type="submit" value="Envoyer"></p>
 
-        </form>
-
+            </form>
+        </div>
 </body>
 </html>

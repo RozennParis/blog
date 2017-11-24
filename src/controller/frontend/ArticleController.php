@@ -27,16 +27,37 @@ class ArticleController
 	    $article = $articleManager->getArticle($_GET['id']);
 
 	    $commentManager = new CommentManager();
-	    $comments = $commentManager->getComments($_GET['id']);
+	    $comments = $commentManager->getComments($articleId, $parentId);
 
+
+
+	    
 	    require('src/view/frontend/articleView.php');
 	}
 
 
-	public function addComments($articleId, $author, $comment)
+	public function addComments($articleId, $parentId, $author, $comment)
 	{
 		$commentManager = new CommentManager();
-	    $affectedLines = $commentManager->addComment($articleId, $author, $comment);
+	    $affectedLines = $commentManager->addComment($articleId, $parentId, $author, $comment);
+
+	    if ($affectedLines === false)
+	    {
+	    	die ('Impossible d\'ajouter le commentaire !');
+	    }
+
+	    
+	    else
+	    {
+	    	header('Location: index.php?action=article&id=' . $articleId . '&parentId=' . $parentId);
+	    }
+	}
+
+
+	/*public function addAnswers($articleId, $commentId, $author, $answer)
+	{
+		$answerManager = new AnswerCommentManager();
+	    $affectedLines = $answerManager->addAnswer($commentId, $author, $answer);
 
 	    if ($affectedLines === false)
 	    {
@@ -45,8 +66,8 @@ class ArticleController
 
 	    else 
 	    {
-	    	header('Location: index.php?action=article&id=' . $articleId);
+	    	header('Location: index.php?action=article&id=' . $articleId . '&commentId=' . $commentId);
 	    }
-	}
+	}*/
 
 }

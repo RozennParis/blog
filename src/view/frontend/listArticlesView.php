@@ -7,40 +7,68 @@
 <!-- Affichage -->
 
 
+
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8" />
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <title>Billet simple pour l'Alaska</title>
-        <link href="public/style.css" rel="stylesheet" /> 
+        <link href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" /> 
     </head>
         
     <body>
-        <h1>Billet simple pour l'Alaska</h1>
- 
-        
-        <?php
 
+        <header> 
 
-        foreach ($articles as $article)
-        {
-        ?>
+            <div class="row">
+                <h1>Billet simple pour l'Alaska</h1>
+            </div>
+        </header>
+
+        <nav class="navbar navbar-inverse" >
+            <div class="container">
+                <div class"navbar-header">
+                  <a class="navbar-brand" href="#">Accueil</a>
+                  <a class="navbar-brand" href="#">Chapitres</a>
+                  <a class="navbar-brand" href="#">autre</a>
+                  <a class="navbar-brand" href="#">autre</a>
+                
+            </div>
+        </nav>
+
         <div>
-            <h3>
-                <?php echo 'Chapitre ' . htmlspecialchars($article['id']) . ' : ' . htmlspecialchars($article['title']); ?>
-                <em>le <?php echo $article['date_creation_fr']; ?></em>
-            </h3>
-            
-            <p>
             <?php
-            echo nl2br(htmlspecialchars($article['content']));
+
+
+            foreach ($articles as $article)
+            {
             ?>
-            <br />
-            <em><a href="index.php?action=article&id=<?php echo $article['id'] ?>"><button>En lire plus</button></a></em>
-            </p>
+            <div class="col-lg-4">
+                <h3>
+                    <?php echo 'Chapitre ' . htmlspecialchars($article['id']) . ' : ' . htmlspecialchars($article['title']); ?>
+                </h3>   
+                <h5><em><?php echo $article['date_creation_fr']; ?></em></h5>
+                
+                
+                <p>
+                <?php
+                echo nl2br(htmlspecialchars($article['content']));
+                ?>
+                <br />
+                <em><a href="index.php?action=article&id=<?php echo $article['id'] ?>"><button>En lire plus</button></a></em>
+                </p>
+            </div>
+            <?php
+            }
+            ?>
         </div>
-        <?php
-        }
-        ?>
     </body>
+
+    <footer>
+        <a href="index.php?action=connexion"><button>Connexion</button></a>
+
+    </footer>
 </html>
