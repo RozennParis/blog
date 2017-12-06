@@ -15,16 +15,12 @@ class Member
 	
 	public function getPseudo()
 	{
-		return $this->;
+		return $this->pseudo;
 	}
 
 
 	public function getPassword()
 	{
-		return $this->;
+		return $this->password;
 	}
-
-	
- 
-
 }

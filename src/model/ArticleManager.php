@@ -25,8 +25,8 @@ class ArticleManager extends Manager
 		$req = $this->db->prepare('INSERT INTO articles(title, content, date_creation) VALUES(:title, :content, NOW())');
 
 		$addedArticle = $req->execute(array(
-							'title'=>$_POST['title'],
-							'content'=>$_POST['content']));
+							'title'=>$title,
+							'content'=>$content));
 					
 	}
 
@@ -34,8 +34,17 @@ class ArticleManager extends Manager
 	/** Function to modify an article by admin
 	 *
 	 */
-	public function modifyArticle()
+	public function modifyArticle($articleId, $title, $content)
 	{
+		$req = $this->db->prepare('UPDATE articles SET title = :title , content =:content WHERE id = :id ' );
+
+		$modifiedArticle = $req->execute(array(
+				'id'=>$articleId,
+				'title'=>$title,
+				'content'=>$content));	
+
+		return $modifiedArticle;
+
 
 	}
 
@@ -43,9 +52,43 @@ class ArticleManager extends Manager
 	/** Function to delete an article by admin
 	 *
 	 */ 
-	public function deleteArticle()
+	public function deleteArticle($articleId)
 	{
-		
+		$req = $this->db->prepare('DELETE FROM articles WHERE id = :id');
+
+		$deleteArticle = $req->execute(array('id'=>$articleId));
+			
+	}
+
+
+	/** Function to display a list of the articles on the Admin homepage.
+	 *
+	 */
+	public function getAdminArticles()
+	{
+
+		$req = $this->db->query('SELECT id, title FROM articles ORDER BY date_creation DESC LIMIT 0, 5');
+
+		$req->execute();
+
+
+		$articles = $req->fetchAll();
+
+		return $articles;
+	}
+
+
+	public function showArticles()
+	{
+
+		$req = $this->db->query('SELECT id, title FROM articles ORDER BY date_creation DESC');
+
+		$req->execute();
+
+
+		$articles = $req->fetchAll();
+
+		return $articles;
 	}
 
 
@@ -84,11 +127,9 @@ class ArticleManager extends Manager
 			$excerpt =$this->getExtract($article['content'], 0, 600, ' ');
 
 			$article['content'] = $excerpt;
-
 			$articleCropped[]=$article;
 
 		}
-
 
 		return $articleCropped;
 	}
@@ -108,4 +149,6 @@ class ArticleManager extends Manager
 		return $extract;
 
 	}
+
+
 }

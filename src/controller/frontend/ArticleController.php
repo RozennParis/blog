@@ -53,21 +53,4 @@ class ArticleController
 	    }
 	}
 
-
-	/*public function addAnswers($articleId, $commentId, $author, $answer)
-	{
-		$answerManager = new AnswerCommentManager();
-	    $affectedLines = $answerManager->addAnswer($commentId, $author, $answer);
-
-	    if ($affectedLines === false)
-	    {
-	    	die ('Impossible d\'ajouter le commentaire !');
-	    }
-
-	    else 
-	    {
-	    	header('Location: index.php?action=article&id=' . $articleId . '&commentId=' . $commentId);
-	    }
-	}*/
-
 }

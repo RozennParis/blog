@@ -5,6 +5,8 @@
         }
     },
     "require": {
-        "twbs/bootstrap": "^3.3"
+        "twbs/bootstrap": "^3.3",
+        "tinymce/tinymce": "^4.7"
+        
     }
 }

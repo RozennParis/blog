@@ -8,7 +8,7 @@
   */
 ?>
 
-<!DOCTYPE html> <!-- données à modifier -->
+<!DOCTYPE html>
 
 <html>
 
@@ -41,20 +41,20 @@
         <?php
         foreach ($comments as $comment)
         {
-            if (array_key_exists('answer',$comment) == false){
+            
         ?>
            
                 <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date_fr'] ?></p>
                 <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
 
         <?php
-            }
-            else {
+            
+            if (array_key_exists('answer',$comment) == true){
 
                 foreach ($comment['answer'] as $answer)
                 {
         ?>
-                    <div>
+                    <div style="margin-left: 50px">
                         <p><strong><?= htmlspecialchars($answer['author']) ?></strong> le <?= $answer['comment_date_fr'] ?></p>
                         <p><?= nl2br(htmlspecialchars($answer['comment'])) ?></p>
                     </div>
@@ -63,17 +63,18 @@
             }
         ?>
         
-            
-            <form method="post" action="index.php?action=addComment&amp;id=<?= $article['id'] ?>&amp;parentId=<?= $comment['id'] ?>">
+            <div>
+            <form  method="post" action="index.php?action=addComment&amp;id=<?= $article['id'] ?>&amp;parentId=<?= $comment['id'] ?>">
 
                 
                 <p><input class="author" type="text" name="author" placeholder="Votre nom" required></p>
-                <p><textarea id="answer" name="answer" placeholder="Saisissez votre réponse ici" required></textarea></p>
+                <p><textarea id="answer" name="comment" placeholder="Saisissez votre réponse ici" required></textarea></p>
                 <button type="submit" name="answer">Envoyer la réponse</button>
                     
             </form>
             
             <form>
+                <button type="text" name="answer" onclick="">Répondre</button>
                 <button type="submit" name="alert">Signaler</button>
             </form>
 
@@ -85,7 +86,7 @@
         </div>
         <h4>Exprimez-vous !!!</h4>
 
-        <form method="post" action="index.php?action=addComment&amp;id=<?= $article['id'] ?>">
+        <form method="post" action="index.php?action=addComment&amp;id=<?= $article['id'] ?>&amp;parentId=0">
 
             <p><input class="author" type="text" name="author" placeholder="Votre nom" required></p>
             <p><textarea id="comment" name="comment" placeholder="Saisissez votre commentaire ici" required></textarea></p>

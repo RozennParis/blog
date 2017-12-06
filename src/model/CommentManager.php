@@ -12,7 +12,7 @@ class CommentManager extends Manager
 
 
 	//------------ BACKEND ------------
-	/** Function to make moderate a comment >>> back
+	/** Function to make moderate a comment 
 	 * 
 	 */
 	public function moderateComment()
@@ -21,6 +21,36 @@ class CommentManager extends Manager
 	}
 
 
+	/** Function to display a list of the articles on the Admin homepage.
+	 *
+	 */
+	public function getAdminComments()
+	{
+
+		$req = $this->db->query('SELECT id, article_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS comment_date_fr FROM comments ORDER BY comment_date DESC LIMIT 0, 10');
+
+		$req->execute();
+
+		$comments = $req->fetchAll();
+
+		return $comments;
+	}
+
+
+	/** Function to display all comments on the page to moderate comments
+	 * 
+	 */
+	public function showComments()
+	{
+		$req = $this->db->query('SELECT id, article_id, author, comment, moderation_status, alert, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS comment_date_fr FROM comments ORDER BY comment_date DESC');
+
+		$req->execute();
+
+		$comments = $req->fetchAll();
+
+		return $comments;
+	
+    }
 
 	//------------ FRONTEND ------------
 	/** function to add an article/chapter >>> front
@@ -28,7 +58,7 @@ class CommentManager extends Manager
 	 */
 	public function addComment( $articleId, $parentId, $author, $comment)
 	{
-		$req = $this->db->prepare('INSERT INTO comments (author, comment, article_id, parent_id; comment_date) VALUES (:author, :comment, :article_id, :parent_id, NOW())');
+		$req = $this->db->prepare('INSERT INTO comments (author, comment, article_id, parent_id,comment_date) VALUES (:author, :comment, :article_id, :parent_id, NOW())');
 	
 		$affectedLines = $req->execute(array(
 
