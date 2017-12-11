@@ -53,4 +53,16 @@ class ArticleController
 	    }
 	}
 
+
+	public function alertComments($articleId, $commentId, $alert)
+	{
+		$commentManager = new CommentManager();
+		$alertComment = $commentManager->alertComment($commentId, $alert);
+
+		header('Location: index.php?action=article&id=' . $articleId);
+	}
+
+
+	
+
 }

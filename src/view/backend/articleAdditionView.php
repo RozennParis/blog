@@ -1,60 +1,93 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <script src="vendor/tinymce/tinymce/tinymce.min.js"></script>
+    <head>
+        
+        <link href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" /> 
+        <link href="src/public/css/dashboard.css" rel="stylesheet" />
+        <script src="vendor/tinymce/tinymce/tinymce.min.js" type="text/javascript"></script>
 
-    <script>
-        tinymce.init({
-            selector: 'textarea#textarea',
-            language: 'fr_FR',
+        <script>
+            tinymce.init({
+                selector: 'textarea#textarea',
+                language: 'fr_FR',
 
-            theme: 'modern',
-            width: 900,
-            height: 300,
-            plugins: [
-            'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
-            'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
-            'save table contextmenu directionality emoticons template paste textcolor code'
-             ],
-            content_css: 'css/content.css',
-            toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons | code',
-            advlist_bullet_styles: 'square',
-            advlist_number_styles: 'lower-alpha,lower-roman,upper-alpha,upper-roman'
+                theme: 'modern',
+                width: 900,
+                height: 300,
+                plugins: [
+                'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
+                'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+                'save table contextmenu directionality emoticons template paste textcolor code'
+                 ],
+                content_css: 'css/content.css',
+                toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons | code',
+                advlist_bullet_styles: 'square',
+                advlist_number_styles: 'lower-alpha,lower-roman,upper-alpha,upper-roman'
 
-        });
-    </script>
-</head>
+            });
+        </script>
+    </head>
+         
+    <body>
 
-<body>
+        <header>  
+        </header>
 
-     <nav class="navbar navbar-inverse nav-stacked" >
+        <nav class="navbar navbar-inverse navbar-fixed-top" >
+
             <div class="container-fluid">
-                <ul class="nav navbar-nav">
-                    <li><a class="navbar-brand" href="index.php">Accueil</a></li>
-                    <li><a class="navbar-brand" href="index.php?action=adminView">Tableau de bord</a></li>
-                    <li><a class="navbar-brand">Chapitres</a></li>
-                        <ul>
-                            <li><a href="index.php?action=adminArticles"> Tous les chapitres</a></li>
-                            <li><a href="index.php?action=adminAddArticle"> Ajouter un chapitre</a></li>
-                        </ul>
-                    <li><a class="navbar-brand" href="index.php?action=adminComments"> Commentaires</a></li>
-                </ul>
+                <div class="navbar-header">
+                    <a  class="navbar-brand" href="index.php">Billet simple pour l'Alaska</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="navbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="index.php?action=deconnexion"><button>Déconnexion</button></a></li>
+                    </ul>
+                </div>
             </div>
-        </nav> 
+        </nav>
 
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm3 col-md-2 sidebar">
+                    <ul class="nav nav-sidebar">
+                        <li class="active"><a class="" href="index.php?action=adminView">Tableau de bord</a>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Chapitres <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="index.php?action=adminArticles"> Tous les chapitres</a></li>
+                                <li><a href="index.php?action=adminAddArticle"> Ajouter un chapitre</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="" href="index.php?action=adminComments"> Commentaires</a></li>
+                    </ul>
+                </div> 
 
-        <h1>Nouveau chapitre</h1>
-       
+                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                
+                    <h1 class="page-header">Nouveau chapitre</h1>
 
-        <form method="post" action="index.php?action=additionArticle"> <!-- attention, adresse à modifier par la suite-->
+                    <div class="row placeholders"></div>
 
-            <p><input class="textarea" type="text" name="title" placeholder="Titre" required></p>
-            <p><textarea id="textarea" name="content" required></textarea></p>
-            <p><input type="submit" value="Valider"></p>
+                    <div class="table-responsive">
 
-        </form>
-    </div>       
+                        <form method="post" action="index.php?action=additionArticle"> 
+
+                            <p><input class="textarea" type="text" name="title" placeholder="Titre" required></p>
+                            <p><textarea id="textarea" name="content" required></textarea></p>
+                            <p><input type="submit" value="Valider"></p>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>  
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>     
 </body>
 
 </html>

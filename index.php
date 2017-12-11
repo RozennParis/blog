@@ -61,6 +61,21 @@ if (isset($_GET['action'])) {
     }
 
 
+    elseif ($_GET['action'] == 'alertComment') {
+
+        if (!empty($_GET['id']) && !empty($_GET['commentId']) && !empty($_GET['alert'])) {
+
+            $articleController = new ArticleController();
+            $alertedComment = $articleController->alertComments($_GET['id'], $_GET['commentId'], $_GET['alert']);
+        }
+
+        else {
+
+            echo 'Erreur : votre message d\'alerte n\'a pas été envoyé !!!';
+        }
+    }
+
+
     elseif ($_GET['action'] == 'connexion'){
 
        
@@ -155,6 +170,21 @@ if (isset($_GET['action'])) {
         else {
 
              echo 'Erreur : tous les champs ne sont pas remplis !';
+        }
+    }
+
+    elseif ($_GET['action'] == 'moderateComment') {
+
+        if (!empty($_GET['commentId']) && !empty($_GET['moderation'])) {
+
+            $adminController = new AdminController();
+            $moderatedComment = $adminController->moderateComments($_GET['commentId'], $_GET['moderation']);
+
+        }
+
+        else {
+
+            echo 'Erreur : le message n\'a pas été modéré !!!';
         }
     }
 

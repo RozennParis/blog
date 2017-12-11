@@ -67,4 +67,14 @@ class AdminController
 		require ('src/view/backend/commentsAdminView.php');
 	}
 
+
+	public function moderateComments($commentId, $moderation, $alert)
+	{
+		$commentManager = new commentManager();
+		$comments = $commentManager->moderateComment($commentId, $moderation);
+
+
+		header ('Location: index.php?action=adminComments');
+	}
+
 }

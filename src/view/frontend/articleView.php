@@ -27,10 +27,10 @@
         <p><a href="index.php?action=listArticles">Retour à la page d'accueil</a></p>
 
         <div class="news">
-            <h3><?= htmlspecialchars($article['title']) ?></h3>
+            <h3><?= $article['title'] ?></h3>
             <h5><em><?= $article['date_creation_fr'] ?></em></h5>
 
-            <p> <?= nl2br(htmlspecialchars($article['content'])) ?></p>
+            <p> <?= nl2br($article['content']) ?></p>
         </div>
 
         <div>
@@ -57,33 +57,42 @@
                     <div style="margin-left: 50px">
                         <p><strong><?= htmlspecialchars($answer['author']) ?></strong> le <?= $answer['comment_date_fr'] ?></p>
                         <p><?= nl2br(htmlspecialchars($answer['comment'])) ?></p>
+
+                        <form method="post" action="index.php?action=alertComment&amp;id=<?= $article['id'] ?>&amp;commentId=<?= $answer['id'] ?>&amp;alert=1">
+                            <button type="submit" name="alert">Signaler</button>
+                        </form>
                     </div>
+
+
         <?php
                 }
             }
         ?>
         
             <div>
-            <form  method="post" action="index.php?action=addComment&amp;id=<?= $article['id'] ?>&amp;parentId=<?= $comment['id'] ?>">
+                <form  method="post" action="index.php?action=addComment&amp;id=<?= $article['id'] ?>&amp;parentId=<?= $comment['id'] ?>">
 
-                
-                <p><input class="author" type="text" name="author" placeholder="Votre nom" required></p>
-                <p><textarea id="answer" name="comment" placeholder="Saisissez votre réponse ici" required></textarea></p>
-                <button type="submit" name="answer">Envoyer la réponse</button>
                     
-            </form>
-            
-            <form>
-                <button type="text" name="answer" onclick="">Répondre</button>
-                <button type="submit" name="alert">Signaler</button>
-            </form>
+                    <p><input class="author" type="text" name="author" placeholder="Votre nom" required></p>
+                    <p><textarea id="answer" name="comment" placeholder="Saisissez votre réponse ici" required></textarea></p>
+                    <button type="submit" name="answer">Envoyer la réponse</button>
+                        
+                </form>
+                
+                <form>
+                    <button type="text" name="answer" onclick="">Répondre</button>
+                </form>
+
+                <form method="post" action="index.php?action=alertComment&amp;id=<?= $article['id'] ?>&amp;commentId=<?= $comment['id'] ?>&amp;alert=1">
+                    <button type="submit" name="alert">Signaler</button>
+                </form>
 
         <?php
         }
         ?>
         
 
-        </div>
+            </div>
         <h4>Exprimez-vous !!!</h4>
 
         <form method="post" action="index.php?action=addComment&amp;id=<?= $article['id'] ?>&amp;parentId=0">

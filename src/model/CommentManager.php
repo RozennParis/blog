@@ -15,9 +15,16 @@ class CommentManager extends Manager
 	/** Function to make moderate a comment 
 	 * 
 	 */
-	public function moderateComment()
+	public function moderateComment($commentId, $moderation)
 	{
 
+		$req=$this->db->prepare('UPDATE comments SET moderation_status = :moderation_status WHERE id = :id');
+
+		$moderatedComment = $req->execute(array(
+				'id'=>$commentId,
+				'moderation_status'=>$moderation));	
+
+		return $moderatedComment;
 	}
 
 
@@ -74,10 +81,18 @@ class CommentManager extends Manager
 	/** Function to make an alert about a comment >>> front
 	 * 
 	 */
-	public function alertComment()
+	public function alertComment($commentId, $alert)
 	{
+		$req=$this->db->prepare('UPDATE comments SET alert = :alert WHERE id = :id');
+
+		$alertedComment = $req->execute(array(
+				'id'=>$commentId,
+				'alert'=>$alert));	
+
+		return $alertedComment;
 
 	}
+
 
 
 	/** Function to display comments on the article's page >>> front
@@ -85,23 +100,27 @@ class CommentManager extends Manager
 	 */
 	public function getComments($articleId)
 	{
-		$comments = $this->db->prepare('SELECT id, author, parent_id, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%i\') AS comment_date_fr FROM comments WHERE article_id = ? ORDER BY comment_date');
+		$comments = $this->db->prepare('SELECT id, author, parent_id, comment, moderation_status, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%i\') AS comment_date_fr FROM comments WHERE article_id = ? ORDER BY comment_date');
 
     	$comments->execute(array($articleId));
 
     	foreach ($comments as $comment)
     	{
+    		if ($comment['moderation_status'] == 2){
+    			$comment['comment'] = 'Ce commentaire a été modéré par l\'auteur';
+    		}
+
     		if ($comment['parent_id'] != 0){
-    			$arrComments[$comment['parent_id']]['answer'][] = $comment;
+    			$arrayComments[$comment['parent_id']]['answer'][] = $comment;
     		}
     		else {
-    			$arrComments[$comment['id']] = $comment;
+    			$arrayComments[$comment['id']] = $comment;
     		}
 
     		
     	}
-
-    	return $arrComments;
+   
+    	return $arrayComments;
 	
     }
 

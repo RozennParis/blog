@@ -48,14 +48,14 @@
             ?>
             <div class="col-lg-4">
                 <h3>
-                    <?php echo 'Chapitre ' . htmlspecialchars($article['id']) . ' : ' . htmlspecialchars($article['title']); ?>
+                    <?php echo 'Chapitre ' . $article['id'] . ' : ' . $article['title']; ?>
                 </h3>   
                 <h5><em><?php echo $article['date_creation_fr']; ?></em></h5>
                 
                 
                 <p>
                 <?php
-                echo nl2br(htmlspecialchars($article['content']));
+                echo nl2br($article['content']);
                 ?>
                 <br />
                 <em><a href="index.php?action=article&id=<?php echo $article['id'] ?>"><button>En lire plus</button></a></em>
