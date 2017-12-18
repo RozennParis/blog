@@ -6,7 +6,8 @@
     },
     "require": {
         "twbs/bootstrap": "^3.3",
-        "tinymce/tinymce": "^4.7"
+        "tinymce/tinymce": "^4.7",
+        "twig/twig": "^2.4"
         
     }
 }

@@ -1,4 +1,5 @@
-
+<?php
+?>
 
 <!-- page d'accueil qui affiche les extraits des chapitres : 6 par "page"
  ordre à définir, du plus récent au plus vieux ou le 1er chapitre >>> le plus récent pour respecter l'ordre de lecture -->
@@ -29,13 +30,18 @@
         </header>
 
         <nav class="navbar navbar-inverse" >
-            <div class="container">
-                <div class"navbar-header">
-                  <a class="navbar-brand" href="#">Accueil</a>
-                  <a class="navbar-brand" href="#">Chapitres</a>
-                  <a class="navbar-brand" href="#">autre</a>
-                  <a class="navbar-brand" href="#">autre</a>
-                
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Accueil</a>
+                      <a class="navbar-brand" href="#">Chapitres</a>
+                      <a class="navbar-brand" href="#">A propos</a>
+                </div>
+
+            <div class=" navbar-collapse collapse" id="navbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="index.php?action=connectionAccess"><button>Connexion</button></a></li>
+                    <li><a href="index.php?action=inscriptionAccess"><button>Inscription</button></a></li>
+                </ul>
             </div>
         </nav>
 
@@ -48,17 +54,17 @@
             ?>
             <div class="col-lg-4">
                 <h3>
-                    <?php echo 'Chapitre ' . $article['id'] . ' : ' . $article['title']; ?>
+                    <?php echo 'Chapitre ' . $article->getArticleNumber() . ' : ' . $article->getTitle(); ?>
                 </h3>   
-                <h5><em><?php echo $article['date_creation_fr']; ?></em></h5>
+                <h5><em><?php echo $article->getDateCreation(); ?></em></h5>
                 
                 
                 <p>
                 <?php
-                echo nl2br($article['content']);
+                echo nl2br($article->getContent());
                 ?>
                 <br />
-                <em><a href="index.php?action=article&id=<?php echo $article['id'] ?>"><button>En lire plus</button></a></em>
+                <em><a href="index.php?action=article&id=<?php echo $article->getId(); ?>"><button>En lire plus</button></a></em>
                 </p>
             </div>
             <?php
@@ -68,7 +74,7 @@
     </body>
 
     <footer>
-        <a href="index.php?action=connexion"><button>Connexion</button></a>
+       <!-- <a href="index.php?action=connexion"><button>Connexion</button></a>
 
         <form method="post" action="index.php?action=connexion">
 
@@ -77,7 +83,7 @@
                
                 <p><input type="submit" value="Envoyer"></p>
 
-            </form>
+            </form> -->
 
     </footer>
 </html>

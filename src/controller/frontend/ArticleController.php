@@ -6,6 +6,8 @@ namespace blog\controller\frontend;
 
 use \blog\model\ArticleManager;
 use \blog\model\CommentManager;
+use \blog\model\Article;
+use \blog\model\Comments;
 
 
 class ArticleController
@@ -21,25 +23,30 @@ class ArticleController
 	    require('src/view/frontend/listArticlesView.php');
 	}
 
-	public function article($articleId)
+	public function article($id)
 	{
 		$articleManager = new ArticleManager();
-	    $article = $articleManager->getArticle($_GET['id']);
+	    $article = $articleManager->getArticle($id);
 
 	    $commentManager = new CommentManager();
-	    $comments = $commentManager->getComments($_GET['id']);
-
-
+	    $comments = $commentManager->getComments($id);
 
 	    
 	    require('src/view/frontend/articleView.php');
 	}
 
 
-	public function addComments($articleId, $parentId, $author, $comment)
+	public function addComments($articleId, $parentId, $concernedArticle, $author, $comment)
 	{
+		$data = new Comments();
+		$data->setArticleId($articleId);
+		$data->setParentId($parentId);
+		$data->setConcernedArticle($concernedArticle);
+		$data->setAuthor($author);
+		$data->setComment($comment);
+
 		$commentManager = new CommentManager();
-	    $affectedLines = $commentManager->addComment($articleId, $parentId, $author, $comment);
+	    $affectedLines = $commentManager->addComment($data);
 
 	    if ($affectedLines === false)
 	    {
@@ -56,13 +63,15 @@ class ArticleController
 
 	public function alertComments($articleId, $commentId, $alert)
 	{
+		$data = new Comments();
+		$data->setId($commentId);
+		$data->setAlert($alert);
+
 		$commentManager = new CommentManager();
-		$alertComment = $commentManager->alertComment($commentId, $alert);
+		$alertComment = $commentManager->alertComment($data);
 
 		header('Location: index.php?action=article&id=' . $articleId);
 	}
 
-
 	
-
 }

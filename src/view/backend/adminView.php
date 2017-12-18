@@ -77,8 +77,8 @@
                         {
                         ?>
                                 <tr>  
-                                    <td scope="row"><?php echo $article['id'];?></td>
-                                    <td><?php echo $article['title'];?></td>
+                                    <td scope="row"><?php echo $article->getArticleNumber();?></td>
+                                    <td><?php echo $article->getTitle();?></td>
                                 </tr>
                         <?php
                         }
@@ -109,11 +109,11 @@
                                 {
                                 ?>
                                 <tr>
-                                    <td><?php echo htmlspecialchars($comment['id']);?></td>
-                                    <td><?php echo htmlspecialchars($comment['article_id']);?></td>
-                                    <td><?php echo htmlspecialchars($comment['author']);?></td>
-                                    <td><?php echo htmlspecialchars($comment['comment']);?></td>
-                                    <td><?php echo htmlspecialchars($comment['comment_date_fr']);?></td>
+                                    <td><?php echo htmlspecialchars($comment->getId());?></td>
+                                    <td><?php echo htmlspecialchars($comment->getConcernedArticle());?></td>
+                                    <td><?php echo htmlspecialchars($comment->getAuthor());?></td>
+                                    <td><?php echo htmlspecialchars($comment->getComment());?></td>
+                                    <td><?php echo htmlspecialchars($comment->getCommentDate());?></td>
                                 </tr>
                                 <?php
                                 }

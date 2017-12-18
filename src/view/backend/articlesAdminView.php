@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -73,9 +72,9 @@
                                 {
                                 ?>
                                     <tr>  
-                                        <td scope="row"><?php echo $article['id'];?></td>
-                                        <td><a href="index.php?action=adminArticle&amp;id=<?= $article['id'] ?>"><?php echo $article['title'];?></a></td>
-                                        <td><a href="index.php?action=adminArticle&amp;id=<?= $article['id'] ?>"><button>Modifier</button></a></td>
+                                        <td scope="row"><?php echo $article->getArticleNumber();?></td>
+                                        <td><a href="index.php?action=adminArticle&amp;id=<?= $article->getId(); ?>"><?php echo $article->getTitle();?></a></td>
+                                        <td><a href="index.php?action=adminArticle&amp;id=<?= $article->getId(); ?>"><button>Modifier</button></a></td>
 
                                     </tr>
                                 <?php

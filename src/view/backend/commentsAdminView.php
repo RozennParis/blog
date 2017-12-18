@@ -57,7 +57,7 @@
 
                     <div class="row placeholders"></div>
 
-                    <h2 class="sub-header">Les articles signalés, à modérer</h2>
+                    <h2 class="sub-header">Les commentaires signalés, à modérer</h2>
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
@@ -75,16 +75,16 @@
 
                         foreach ($comments as $comment)
                         {
-                            if ($comment['alert']== 1 && $comment['moderation_status']== 0)
+                            if ($comment->getAlert() == 1 && $comment->getModerationStatus() == 0)
                             {
                         ?>
                                 <tr>  
-                                    <td scope="row"><?php echo htmlspecialchars($comment['id']);?></td>
-                                    <td><?php echo htmlspecialchars($comment['article_id']);?></td>
-                                    <td><?php echo htmlspecialchars($comment['comment']);?></td>
+                                    <td scope="row"><?php echo htmlspecialchars($comment->getId());?></td>
+                                    <td><?php echo htmlspecialchars($comment->getConcernedArticle());?></td>
+                                    <td><?php echo htmlspecialchars($comment->getComment());?></td>
                                     <td>
-                                        <a href="index.php?action=moderateComment&commentId=<?php echo $comment['id'] ?>&moderation=2" ><button>Oui</button></a>
-                                        <a href="index.php?action=moderateComment&commentId=<?php echo $comment['id'] ?>&moderation=1" ><button>Non</button></a>
+                                        <a href="index.php?action=moderateComment&commentId=<?php echo $comment->getId(); ?>&moderation=2" ><button>Oui</button></a>
+                                        <a href="index.php?action=moderateComment&commentId=<?php echo $comment->getId(); ?>&moderation=1" ><button>Non</button></a>
                                     </td>
                                 </tr>
                         <?php
@@ -96,7 +96,7 @@
                         </table>
                     </div>
 
-                    <h2 class="sub-header">Tous Les articles</h2>
+                    <h2 class="sub-header">Tous les commentaires</h2>
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
@@ -117,12 +117,12 @@
                                 {
                                 ?>
                                 <tr>
-                                    <td><?php echo htmlspecialchars($comment['id']);?></td>
-                                    <td><?php echo htmlspecialchars($comment['article_id']);?></td>
-                                    <td><?php echo htmlspecialchars($comment['author']);?></td>
-                                    <td><?php echo htmlspecialchars($comment['comment']);?></td>
-                                    <td><?php echo htmlspecialchars($comment['comment_date_fr']);?></td>
-                                    <td><a href="index.php?action=moderateComment&commentId=<?php echo $comment['id'] ?>&moderation=2" ><button>Modérer</button></a></td>
+                                    <td><?php echo htmlspecialchars($comment->getId());?></td>
+                                    <td><?php echo htmlspecialchars($comment->getConcernedArticle());?></td>
+                                    <td><?php echo htmlspecialchars($comment->getAuthor());?></td>
+                                    <td><?php echo htmlspecialchars($comment->getComment());?></td>
+                                    <td><?php echo htmlspecialchars($comment->getCommentDate());?></td>
+                                    <td><a href="index.php?action=moderateComment&commentId=<?php echo $comment->getId(); ?>&moderation=2" ><button>Modérer</button></a></td>
                                 </tr>
                                 <?php
                                 }
@@ -132,7 +132,7 @@
                         </table>
                     </div>
         
-                    <h2 class="sub-header">Articles modérés</h2>
+                    <h2 class="sub-header">Commentaires modérés</h2>
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
@@ -151,15 +151,15 @@
                                 <?php
                                 foreach ($comments as $comment)
                                 {
-                                    if ($comment['moderation_status'] == 2 )
+                                    if ($comment->getModerationStatus() == 2 )
                                     {
                                 ?>
                                 <tr>
-                                    <td><?php echo htmlspecialchars($comment['id']);?></td>
-                                    <td><?php echo htmlspecialchars($comment['article_id']);?></td>
-                                    <td><?php echo htmlspecialchars($comment['author']);?></td>
-                                    <td><?php echo htmlspecialchars($comment['comment']);?></td>
-                                    <td><?php echo htmlspecialchars($comment['comment_date_fr']);?></td>
+                                    <td><?php echo htmlspecialchars($comment->getId());?></td>
+                                    <td><?php echo htmlspecialchars($comment->getConcernedArticle());?></td>
+                                    <td><?php echo htmlspecialchars($comment->getAuthor());?></td>
+                                    <td><?php echo htmlspecialchars($comment->getComment())?></td>
+                                    <td><?php echo htmlspecialchars($comment->getCommentDate());?></td>
                                     
                                 </tr>
                                 <?php

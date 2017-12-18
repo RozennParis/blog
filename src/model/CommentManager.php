@@ -2,6 +2,8 @@
 
 namespace blog\model;
 
+use \PDO;
+
 class CommentManager extends Manager
 {
 
@@ -15,33 +17,38 @@ class CommentManager extends Manager
 	/** Function to make moderate a comment 
 	 * 
 	 */
-	public function moderateComment($commentId, $moderation)
+	public function moderateComment(Comments $comment)
 	{
 
 		$req=$this->db->prepare('UPDATE comments SET moderation_status = :moderation_status WHERE id = :id');
 
 		$moderatedComment = $req->execute(array(
-				'id'=>$commentId,
-				'moderation_status'=>$moderation));	
+				'id'=>$comment->getId(),
+				'moderation_status'=>$comment->getModerationStatus()));	
 
 		return $moderatedComment;
 	}
 
 
-	/** Function to display a list of the articles on the Admin homepage.
+	/** Function to display a list of the comments on the Admin homepage.
 	 *
 	 */
-	public function getAdminComments()
+	public function getAdminComments() //exemple à suivre
 	{
-
-		$req = $this->db->query('SELECT id, article_id, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS comment_date_fr FROM comments ORDER BY comment_date DESC LIMIT 0, 10');
-
+		$req = $this->db->query('SELECT id, concerned_article, author, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS commentDate FROM comments ORDER BY comment_date DESC LIMIT 0, 10');
+		
 		$req->execute();
 
-		$comments = $req->fetchAll();
+		$values = $req->fetchAll(PDO::FETCH_ASSOC);
+
+		foreach ($values as $value)
+		{
+			$comments[] = new Comments($value); 
+		}
 
 		return $comments;
 	}
+
 
 
 	/** Function to display all comments on the page to moderate comments
@@ -49,11 +56,16 @@ class CommentManager extends Manager
 	 */
 	public function showComments()
 	{
-		$req = $this->db->query('SELECT id, article_id, author, comment, moderation_status, alert, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS comment_date_fr FROM comments ORDER BY comment_date DESC');
+		$req = $this->db->query('SELECT id, concerned_article, author, comment, moderation_status, alert, DATE_FORMAT(comment_date, \'%d/%m/%Y\') AS commentDate FROM comments ORDER BY comment_date DESC');
 
 		$req->execute();
 
-		$comments = $req->fetchAll();
+		$values = $req->fetchAll(PDO::FETCH_ASSOC);
+
+		foreach ($values as $value)
+		{
+			$comments[] = new Comments($value); 
+		}
 
 		return $comments;
 	
@@ -63,68 +75,78 @@ class CommentManager extends Manager
 	/** function to add an article/chapter >>> front
 	 * 
 	 */
-	public function addComment( $articleId, $parentId, $author, $comment)
+	public function addComment(Comments $comment)
 	{
-		$req = $this->db->prepare('INSERT INTO comments (author, comment, article_id, parent_id,comment_date) VALUES (:author, :comment, :article_id, :parent_id, NOW())');
+		$req = $this->db->prepare('INSERT INTO comments (author, comment, article_id, concerned_article, parent_id, comment_date) VALUES (:author, :comment, :article_id, :concerned_article, :parent_id, NOW())');
 	
-		$affectedLines = $req->execute(array(
+		$addedComment = $req->execute(array(
 
-		    'author' => $author,
-		    'comment' => $comment,
-			'article_id' => $articleId,
-			'parent_id'=> $parentId ));
+		    'author' => $comment->getAuthor(),
+		    'comment' => $comment->getComment(),
+			'article_id' => $comment->getArticleId(),
+			'concerned_article'=> $comment->getConcernedArticle(),
+			'parent_id'=> $comment->getParentId()));
 
-		return $affectedLines;
+		return $addedComment;
 	}
 
 
 	/** Function to make an alert about a comment >>> front
 	 * 
 	 */
-	public function alertComment($commentId, $alert)
+	public function alertComment(Comments $comment)
 	{
 		$req=$this->db->prepare('UPDATE comments SET alert = :alert WHERE id = :id');
 
 		$alertedComment = $req->execute(array(
-				'id'=>$commentId,
-				'alert'=>$alert));	
+				'id'=>$comment->getId(),
+				'alert'=>$comment->getAlert()));	
 
 		return $alertedComment;
 
 	}
 
 
-
 	/** Function to display comments on the article's page >>> front
 	 * 
-	 */
+	 */    	
 	public function getComments($articleId)
 	{
-		$comments = $this->db->prepare('SELECT id, author, parent_id, comment, moderation_status, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%i\') AS comment_date_fr FROM comments WHERE article_id = ? ORDER BY comment_date');
+		$req = $this->db->prepare('SELECT *, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%i\') AS commentDate FROM comments WHERE article_id = ? ORDER BY comment_date');
 
-    	$comments->execute(array($articleId));
+    	$req->execute(array($articleId));
+
+    	$comments = $req->fetchAll(PDO::FETCH_ASSOC);
+
 
     	foreach ($comments as $comment)
     	{
+
     		if ($comment['moderation_status'] == 2){
     			$comment['comment'] = 'Ce commentaire a été modéré par l\'auteur';
     		}
 
-    		if ($comment['parent_id'] != 0){
-    			$arrayComments[$comment['parent_id']]['answer'][] = $comment;
+    		$com = new Comments($comment);
+
+    		if ($comment['parent_id'] != 0 && $comment['answer'] != 0){
+    			
+    			
+    			$arrayComments[$comment['parent_id']]['answer'][] = $com;
+    			//$arrayComments[$comment['parent_id']] = new Comments($comment);    			
     		}
     		else {
-    			$arrayComments[$comment['id']] = $comment;
+    			//$arrayComments[$comment['id']] = $comment;
+    			$arrayComments[$comment['id']][] = $com;
     		}
 
-    		
+    		  		
     	}
-   
+    	//echo '<pre>'; var_dump($arrayComments); die;
     	return $arrayComments;
+
 	
     }
-
-    	
-	
 }
 
+
+		

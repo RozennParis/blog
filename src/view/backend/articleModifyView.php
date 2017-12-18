@@ -1,5 +1,3 @@
-<?php
-?>
 
 <!DOCTYPE html>
 <html>
@@ -79,10 +77,11 @@
                     <div class="row placeholders"></div>
                     <div class="table-responsive">
 
-                        <form method="post" action="index.php?action=modifArticle&amp;id=<?= $article['id'] ?>"> 
+                        <form method="post" action="index.php?action=modifArticle&amp;id=<?= $article->getId() ?>"> 
 
-                            <p><input  type="text" name="title" required value="<?php echo htmlspecialchars($article['title']);?>"</p>
-                            <p><textarea id="textarea" name="content" required><?php echo htmlspecialchars($article['content']);?></textarea></p>
+                            <p><input  type="text" name="number" required value="<?php echo htmlspecialchars($article->getArticleNumber());?>"></p>
+                            <p><input  type="text" name="title" required value="<?php echo htmlspecialchars($article->getTitle());?>"></p>
+                            <p><textarea  id="textarea" name="content"  required><?php echo htmlspecialchars($article->getContent());?></textarea></p>
                             <p><input type="submit" value="Valider la modification"></p>
 
                         </form>

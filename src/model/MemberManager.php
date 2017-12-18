@@ -2,6 +2,9 @@
 
 namespace blog\model;
 
+use \PDO;
+
+
 class MemberManager extends Manager
 {
 	protected $db;
@@ -11,15 +14,25 @@ class MemberManager extends Manager
 		$this->db = self::dbConnect();
 	}
 	
-	public function controlMember($pseudo, $password)
+
+	public function addNewMember(Member $member)
 	{
 		
-		$req = $this->db->prepare('SELECT pseudo, password FROM members WHERE pseudo = :pseudo AND password = :password');
+		$req = $this->db->prepare('INSERT INTO members (pseudo, password, date_inscription) VALUES (:pseudo, :password, NOW())');
 		$req->execute(array(
-			'pseudo' => $pseudo,
-			'password'=> $password));
+			'pseudo' => $member->getPseudo(),
+			'password'=> $member->getPassword()));
+
+	}
+
+	public function controlMember(Member $member)
+	{
 		
-		$result = $req->fetch();
+		$req = $this->db->prepare('SELECT pseudo, password FROM members WHERE pseudo = :pseudo');
+		$req->execute(array(
+			'pseudo' => $member->getPseudo()));
+		
+		$result = $req->fetch(PDO::FETCH_ASSOC);
 
 		return $result;
 	}

@@ -4,14 +4,20 @@ namespace blog\controller\backend;
 
 use \blog\model\ArticleManager;
 use \blog\model\CommentManager;
+use \blog\model\Article;
+use \blog\model\Comments;
 
 class AdminController
 {
-	public function addArticles($title, $content)
+	public function addArticles($article_number, $title, $content)
 	{
-		
+		$data = new Article();
+		$data->setArticleNumber($article_number);
+		$data->setTitle($title);
+		$data->setContent($content);
+
 		$articleManager = new ArticleManager(); //création de l'objet
-	    $article = $articleManager->addArticle($title,$content); // appel de la fonction de cet objet
+	    $article = $articleManager->addArticle($data); // appel de la fonction de cet objet
 
 	    header('Location: index.php?action=adminView');
 	}
@@ -49,10 +55,16 @@ class AdminController
 	}
 
 
-	public function modifArticle($articleId, $title, $content)
+	public function modifArticle($id, $article_number, $title, $content)
 	{
+		$data = new Article();
+		$data->setId($id);
+		$data->setArticleNumber($article_number);
+		$data->setTitle($title);
+		$data->setContent($content);
+
 		$articleManager = new ArticleManager();
-		$article = $articleManager->modifyArticle($articleId, $title, $content);
+		$article = $articleManager->modifyArticle($data);
 
 		header('Location: index.php?action=adminArticles');
 		
@@ -68,10 +80,14 @@ class AdminController
 	}
 
 
-	public function moderateComments($commentId, $moderation, $alert)
+	public function moderateComments($commentId, $moderation)
 	{
+		$data = new Comments();
+		$data->setId($commentId);
+		$data->setModerationStatus($moderation);
+
 		$commentManager = new commentManager();
-		$comments = $commentManager->moderateComment($commentId, $moderation);
+		$comments = $commentManager->moderateComment($data);
 
 
 		header ('Location: index.php?action=adminComments');

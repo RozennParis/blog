@@ -1,16 +1,66 @@
 <?php
 
+namespace blog\model;
+
 class Article
 {
 	protected $id;
+	protected $article_number;
 	protected $title;
 	protected $content;
 	protected $dateCreation;
 
-	public function __construct($title, $content)
+	public function __construct($values = null)
 	{
-		$this->setTitle($title);
-		$this->setContent($content);
+		if ($values != null)
+		{
+			$this->hydrate($values);
+		}
+		
+	}
+
+
+	public function hydrate(array $values)
+	{
+		foreach ($values as $key=>$value)
+		{
+			$elements = explode('_',$key);
+			$newKey='';
+
+			foreach($elements as $el)
+			{
+				$newKey .= ucfirst($el);
+			}
+			
+			$method = 'set' .ucfirst($newKey);
+
+			if (method_exists($this, $method))
+			{
+				$this->$method($value);
+			}
+		}
+	}
+
+
+	public function getId()
+	{
+		return $this->id;
+	}
+
+	public function setId($id)
+	{
+		$this->id = $id;
+	}
+
+
+	public function getArticleNumber()
+	{
+		return $this->article_number;
+	}
+
+	public function setArticleNumber($article_number)
+	{
+		$this->article_number = $article_number;
 	}
 
 
@@ -33,6 +83,17 @@ class Article
 	public function setContent($content)
 	{
 		$this->content = $content;
+	}
+
+
+	public function getDateCreation()
+	{
+		return $this->dateCreation;
+	}
+
+	public function setDateCreation($dateCreation)
+	{
+		$this->dateCreation = $dateCreation;
 	}
 
 

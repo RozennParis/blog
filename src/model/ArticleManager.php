@@ -2,6 +2,7 @@
 
 namespace blog\model;
 
+use \PDO;
 
 class ArticleManager extends Manager
 {
@@ -19,14 +20,15 @@ class ArticleManager extends Manager
 	/** Function to add an article/chapter by admin
 	 * 
 	 */
-	public function addArticle($title, $content)
+	public function addArticle(Article $article)
 	{
 
-		$req = $this->db->prepare('INSERT INTO articles(title, content, date_creation) VALUES(:title, :content, NOW())');
+		$req = $this->db->prepare('INSERT INTO articles(article_number,title, content, date_creation) VALUES(:article_number, :title, :content, NOW())');
 
 		$addedArticle = $req->execute(array(
-							'title'=>$title,
-							'content'=>$content));
+							'article_number'=>$article->getArticleNumber(),
+							'title'=>$article->getTitle(),
+							'content'=>$article->getContent()));
 					
 	}
 
@@ -34,14 +36,15 @@ class ArticleManager extends Manager
 	/** Function to modify an article by admin
 	 *
 	 */
-	public function modifyArticle($articleId, $title, $content)
+	public function modifyArticle(Article $article)
 	{
-		$req = $this->db->prepare('UPDATE articles SET title = :title , content =:content WHERE id = :id ' );
+		$req = $this->db->prepare('UPDATE articles SET article_number = :article_number, title = :title , content =:content WHERE id = :id ' );
 
 		$modifiedArticle = $req->execute(array(
-				'id'=>$articleId,
-				'title'=>$title,
-				'content'=>$content));	
+				'id'=>$article->getId(),
+				'article_number'=>$article->getArticleNumber(),
+				'title'=>$article->getTitle(),
+				'content'=>$article->getContent()));	
 
 		return $modifiedArticle;
 
@@ -66,14 +69,18 @@ class ArticleManager extends Manager
 	 */
 	public function getAdminArticles()
 	{
+		$articles = [];
 
-		$req = $this->db->query('SELECT id, title FROM articles ORDER BY date_creation DESC LIMIT 0, 5');
-
+		$req = $this->db->query('SELECT id, article_number, title FROM articles ORDER BY date_creation DESC LIMIT 0, 5');
 		$req->execute();
 
+		$values = $req->fetchAll(PDO::FETCH_ASSOC);
 
-		$articles = $req->fetchAll();
-
+		foreach ($values as $value)
+		{
+			$articles[] = new Article($value);
+		}
+		
 		return $articles;
 	}
 
@@ -81,12 +88,16 @@ class ArticleManager extends Manager
 	public function showArticles()
 	{
 
-		$req = $this->db->query('SELECT id, title FROM articles ORDER BY date_creation DESC');
+		$req = $this->db->query('SELECT id, article_number, title FROM articles ORDER BY date_creation DESC');
 
 		$req->execute();
 
+		$values = $req->fetchAll(PDO::FETCH_ASSOC);
 
-		$articles = $req->fetchAll();
+		foreach ($values as $value)
+		{
+			$articles[] = new Article($value);
+		}
 
 		return $articles;
 	}
@@ -97,12 +108,14 @@ class ArticleManager extends Manager
 	/** Function to display the choosen article
 	 *
 	 */
-	public function getArticle($articleId)
+	public function getArticle($id) //exemple à suivre
 	{
-		$req = $this->db->prepare('SELECT id, title, content, DATE_FORMAT(date_creation, \'%d/%m/%Y \') AS date_creation_fr FROM articles WHERE id = ?');
+		$req = $this->db->prepare('SELECT id, article_number, title, content, DATE_FORMAT(date_creation, \'%d/%m/%Y \') AS dateCreation FROM articles WHERE id = ?');
 
-		$req->execute(array($articleId));
-		$article = $req->fetch();
+		$req->execute(array($id));
+		$article = $req->fetch(PDO::FETCH_ASSOC);
+
+		$article = new Article($article);
 
 		return $article;
 		
@@ -111,27 +124,24 @@ class ArticleManager extends Manager
 	/** Function to display the articles on the homepage.
 	 *
 	 */
-	public function getArticles()
+	public function getArticles($page = 1) //exemple à suivre 
 	{
 
-		$req = $this->db->query('SELECT id, title, content, DATE_FORMAT(date_creation, \'%d/%m/%Y\') AS date_creation_fr FROM articles ORDER BY date_creation LIMIT 0, 6');
+		$req = $this->db->query('SELECT id, article_number, title, content, DATE_FORMAT(date_creation, \'%d/%m/%Y\') AS dateCreation FROM articles ORDER BY date_creation DESC LIMIT 0, 6');
 
 		$req->execute();
 
+		$values = $req->fetchAll(PDO::FETCH_ASSOC);
 
-		$articles = $req->fetchAll();
 
-		foreach ($articles as $article)
+		foreach ($values as $value)
 		{
-	
-			$excerpt =$this->getExtract($article['content'], 0, 600, ' ');
-
-			$article['content'] = $excerpt;
-			$articleCropped[]=$article;
-
+			
+			$value['content']= $this->getExtract($value['content'], 0, 600, ' ');
+			$articles[] = new Article($value);
 		}
 
-		return $articleCropped;
+		return $articles;
 	}
 
 
@@ -149,6 +159,32 @@ class ArticleManager extends Manager
 		return $extract;
 
 	}
+
+
+	/** Function to display differents pages on the homepage >>> 6 extracts/articles per page
+	 *
+	 */
+	/*public function Paginate($page = null)
+	{
+		$articlesPerPage = 6;
+
+		$req = $this->db->query('SELECT id FROM articles');
+
+       	$totalArticles = $req ->rowCount();
+       	$totalPages = ceil($totalArticles/$articlesPerPage);
+
+       	if (isset($page) && !empty($page)) && $page > 0 && $page <=$totalPages) {
+			$page = int($page);
+			$currentPage = $page;
+		}
+		else {
+			$currentPage = 1;
+		}
+
+		$begin = ($currentPage - 1) * $articlesPerPage;
+		
+
+	}*/
 
 
 }

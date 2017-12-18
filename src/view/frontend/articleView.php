@@ -1,5 +1,6 @@
 <?php
 
+
 /* ici page dédiée à l'affichage de l'article avec les commentaires
  
  - chapitre entier sur une page
@@ -19,6 +20,7 @@
         <link rel="icon" href=../../favicon.ico>
         <title>Billet simple pour l'Alaska</title>
         <link href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" /> 
+        <link href="src/public/css/style.css" rel="stylesheet" /> 
     </head>
 
         
@@ -27,10 +29,10 @@
         <p><a href="index.php?action=listArticles">Retour à la page d'accueil</a></p>
 
         <div class="news">
-            <h3><?= $article['title'] ?></h3>
-            <h5><em><?= $article['date_creation_fr'] ?></em></h5>
+            <h3><?= $article->getTitle(); ?></h3>
+            <h5><em><?= $article->getDateCreation(); ?></em></h5>
 
-            <p> <?= nl2br($article['content']) ?></p>
+            <p> <?= nl2br($article->getContent()); ?></p>
         </div>
 
         <div>
@@ -39,38 +41,47 @@
         <h4>Commentaires</h4>
 
         <?php
-        foreach ($comments as $comment)
-        {
-            
+
+        foreach ($comments as $commentGrp)
+        {   
+            foreach($commentGrp as $comment){
         ?>
-           
-                <p><strong><?= htmlspecialchars($comment['author']) ?></strong> le <?= $comment['comment_date_fr'] ?></p>
-                <p><?= nl2br(htmlspecialchars($comment['comment'])) ?></p>
+              
+        <?php        
+                if (array_key_exists('answer',$commentGrp)){
+
+                    if (key($commentGrp) == 'answer'){
+
+                        foreach ($comment as $answer)
+                        {
+        ?>
+                            <div class="answer">
+                                <p><strong><?= htmlspecialchars($answer->getAuthor()); ?></strong> le <?= $answer->getCommentDate(); ?></p>
+                                <p><?= nl2br(htmlspecialchars($answer->getComment())); ?></p>
+
+                                <form method="post" action="index.php?action=alertComment&amp;id=<?= $article->getId(); ?>&amp;commentId=<?= $answer->getId(); ?>&amp;alert=1">
+                                    <button type="submit" name="alert">Signaler</button>
+                                </form>
+                            </div>
 
         <?php
-            
-            if (array_key_exists('answer',$comment) == true){
-
-                foreach ($comment['answer'] as $answer)
-                {
+                        }
+                    } else {
         ?>
-                    <div style="margin-left: 50px">
-                        <p><strong><?= htmlspecialchars($answer['author']) ?></strong> le <?= $answer['comment_date_fr'] ?></p>
-                        <p><?= nl2br(htmlspecialchars($answer['comment'])) ?></p>
-
-                        <form method="post" action="index.php?action=alertComment&amp;id=<?= $article['id'] ?>&amp;commentId=<?= $answer['id'] ?>&amp;alert=1">
-                            <button type="submit" name="alert">Signaler</button>
-                        </form>
-                    </div>
-
-
+                        <p><strong><?= htmlspecialchars($comment->getAuthor()); ?></strong> le <?= htmlspecialchars($comment->getCommentDate()); ?></p>
+                        <p><?= nl2br(htmlspecialchars($comment->getComment())); ?></p>
         <?php
+                    }
+                } else {
+        ?>        
+                    <p><strong><?= htmlspecialchars($comment->getAuthor()); ?></strong> le <?= htmlspecialchars($comment->getCommentDate()); ?></p>
+                    <p><?= nl2br(htmlspecialchars($comment->getComment())); ?></p>
+        <?php    
                 }
-            }
         ?>
         
             <div>
-                <form  method="post" action="index.php?action=addComment&amp;id=<?= $article['id'] ?>&amp;parentId=<?= $comment['id'] ?>">
+                <form  method="post" action="index.php?action=addComment&amp;id=<?= $article->getId(); ?>&amp;parentId=<?= $comment->getId(); ?>&amp;answer=1">
 
                     
                     <p><input class="author" type="text" name="author" placeholder="Votre nom" required></p>
@@ -80,14 +91,15 @@
                 </form>
                 
                 <form>
-                    <button type="text" name="answer" onclick="">Répondre</button>
+                    <button type="text" name="" onclick="">Répondre</button>
                 </form>
 
-                <form method="post" action="index.php?action=alertComment&amp;id=<?= $article['id'] ?>&amp;commentId=<?= $comment['id'] ?>&amp;alert=1">
+                <form method="post" action="index.php?action=alertComment&amp;id=<?= $article->getId(); ?>&amp;commentId=<?= $comment->getId(); ?>&amp;alert=1">
                     <button type="submit" name="alert">Signaler</button>
                 </form>
 
         <?php
+            }
         }
         ?>
         
@@ -95,7 +107,7 @@
             </div>
         <h4>Exprimez-vous !!!</h4>
 
-        <form method="post" action="index.php?action=addComment&amp;id=<?= $article['id'] ?>&amp;parentId=0">
+        <form method="post" action="index.php?action=addComment&amp;id=<?= $article->getId(); ?>&amp;parentId=0&amp;chapitre=<?= $article->getArticleNumber(); ?>">
 
             <p><input class="author" type="text" name="author" placeholder="Votre nom" required></p>
             <p><textarea id="comment" name="comment" placeholder="Saisissez votre commentaire ici" required></textarea></p>
