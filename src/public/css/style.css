@@ -2,3 +2,16 @@
 {
 margin-left: 50px;
 }
+
+header
+{
+background-image: url("../images/aurora-borealis-1002259_1920.jpg");
+color : #FCFAE1;
+height : 500px;
+margin-top: 0px;
+}
+
+body
+{
+padding-top: 0px;
+}

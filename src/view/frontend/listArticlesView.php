@@ -17,14 +17,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Billet simple pour l'Alaska</title>
-        <link href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" /> 
+        <link href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="src/public/css/dashboard.css" rel="stylesheet" />
+        <link href="src/public/css/style.css" rel="stylesheet" />
     </head>
         
     <body>
 
         <header> 
 
-            <div class="row">
+            <div>
                 <h1>Billet simple pour l'Alaska</h1>
             </div>
         </header>
@@ -32,17 +34,50 @@
         <nav class="navbar navbar-inverse" >
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Accueil</a>
+                    <button class="navbar-toogle" type="button" data-toogle="collapse" data-target="#navbar" aria-expanded="true" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.php">Accueil</a>
                       <a class="navbar-brand" href="#">Chapitres</a>
                       <a class="navbar-brand" href="#">A propos</a>
                 </div>
 
-            <div class=" navbar-collapse collapse" id="navbar">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="index.php?action=connectionAccess"><button>Connexion</button></a></li>
-                    <li><a href="index.php?action=inscriptionAccess"><button>Inscription</button></a></li>
-                </ul>
-            </div>
+            
+        <?php
+            if (isset($_SESSION['pseudo'])) {
+        ?>
+                <div class=" navbar-collapse collapse" id="navbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a class="navbar-brand" href="index.php?action=adminView">Administration</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Chapitres <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="index.php?action=adminArticles"> Tous les chapitres</a></li>
+                                <li><a href="index.php?action=adminAddArticle"> Ajouter un chapitre</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="" href="index.php?action=adminComments"> Commentaires</a></li>
+
+                        <li><a href="index.php?action=disconnection"><button>Déconnexion</button></a></li>
+                    </ul>
+                </div>
+
+        <?php
+            }
+            else {
+        ?>
+                <div class=" navbar-collapse collapse" id="navbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="index.php?action=connectionAccess"><button>Connexion</button></a></li>
+                        <!--<li><a href="index.php?action=inscriptionAccess"><button>Inscription</button></a></li>-->
+                    </ul>
+                </div>
+        <?php
+            }
+        ?>    
         </nav>
 
         <div>
@@ -71,19 +106,11 @@
             }
             ?>
         </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
     </body>
 
     <footer>
-       <!-- <a href="index.php?action=connexion"><button>Connexion</button></a>
-
-        <form method="post" action="index.php?action=connexion">
-
-                <p><label for="pseudo">Pseudo </label> <input type="text" name="pseudo"></p>
-                <p><label for="password">Mot de passe </label><input type="password" name="password"></p>
-               
-                <p><input type="submit" value="Envoyer"></p>
-
-            </form> -->
-
     </footer>
 </html>

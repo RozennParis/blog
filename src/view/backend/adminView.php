@@ -34,7 +34,7 @@
 
                 <div class="collapse navbar-collapse" id="navbar">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="index.php?action=deconnexion"><button>Déconnexion</button></a></li>
+                        <li><a href="index.php?action=disconnection"><button>Déconnexion</button></a></li>
                     </ul>
                 </div>
             </div>

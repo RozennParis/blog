@@ -110,7 +110,7 @@ if (isset($_GET['action'])) {
         
     } 
 
-    elseif ($_GET['action'] == 'deconnection'){
+    elseif ($_GET['action'] == 'disconnection'){
 
         $connectionController = new ConnectionController();
         $data = $connectionController->closeAdmin();
