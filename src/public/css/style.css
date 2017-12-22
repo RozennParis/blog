@@ -3,6 +3,12 @@
 margin-left: 50px;
 }
 
+body
+{
+padding-top: 0px;
+}
+
+
 header
 {
 background-image: url("../images/aurora-borealis-1002259_1920.jpg");
@@ -11,7 +17,19 @@ height : 500px;
 margin-top: 0px;
 }
 
-body
+section
 {
-padding-top: 0px;
+background-image: url("../images/andreea-chidu-234595.jpg");
+}
+
+.navbar
+{
+border-radius: 0px;
+}
+
+.navbar-inverse
+{
+background-color: #1E1832;
+border-color: #1E1832;
+
 }

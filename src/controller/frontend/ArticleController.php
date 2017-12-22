@@ -8,6 +8,7 @@ use \blog\model\ArticleManager;
 use \blog\model\CommentManager;
 use \blog\model\Article;
 use \blog\model\Comments;
+use \blog\model\Pagination;
 
 
 class ArticleController
@@ -17,7 +18,6 @@ class ArticleController
 	{
 	    $articleManager = new ArticleManager(); //création de l'objet
 	    $articles = $articleManager->getArticles(); // appel de la fonction de cet objet
-
 
 
 	    require('src/view/frontend/listArticlesView.php');

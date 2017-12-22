@@ -124,10 +124,10 @@ class ArticleManager extends Manager
 	/** Function to display the articles on the homepage.
 	 *
 	 */
-	public function getArticles($page = 1) //exemple à suivre 
+	public function getArticles() 
 	{
 
-		$req = $this->db->query('SELECT id, article_number, title, content, DATE_FORMAT(date_creation, \'%d/%m/%Y\') AS dateCreation FROM articles ORDER BY date_creation DESC LIMIT 0, 6');
+		$req = $this->db->query('SELECT id, article_number, title, content, DATE_FORMAT(date_creation, \'%d/%m/%Y\') AS dateCreation FROM articles ORDER BY date_creation DESC');
 
 		$req->execute();
 
@@ -145,7 +145,6 @@ class ArticleManager extends Manager
 	}
 
 
-
 	/** Function to display the extract of the article on the homepage.
 	 *
 	 */
@@ -161,10 +160,11 @@ class ArticleManager extends Manager
 	}
 
 
+
 	/** Function to display differents pages on the homepage >>> 6 extracts/articles per page
 	 *
 	 */
-	/*public function Paginate($page = null)
+	/*public function Paginate($page = 1)
 	{
 		$articlesPerPage = 6;
 
@@ -187,4 +187,42 @@ class ArticleManager extends Manager
 	}*/
 
 
+	/** ------- Pagination ------- */
+
+	public function getArticlesByPage($page = 1)
+	{
+		$articlesPerPage = 6;
+		$begin = 0;
+
+		if ($page > 1) {
+			$page = int($page);
+			$begin = ($page - 1) * $articlesPerPage ;
+		}
+		
+		$req = $this->db->query('SELECT * , DATE_FORMAT(date_creation, \'%d/%m/%Y\') AS dateCreation FROM articles ORDER BY date_creation DESC ');
+
+		$req->execute();
+
+		$totalArticles = $req->rowCount();
+		$numberOfPages = (int)($totalArticles / $articlesPerPage) + 1 ;
+		
+		$values = $req->fetchAll(PDO::FETCH_ASSOC);
+
+
+		foreach ($values as $value)
+		{
+			
+			$value['content']= $this->getExtract($value['content'], 0, 600, ' ');
+			$articles[] = new Article($value);
+		}		
+
+		$paginatedArticles = array_slice($articles, $begin, $articlesPerPage);
+
+		return $paginatedArticles;
+		
+
+		
+	}
+
+	
 }

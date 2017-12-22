@@ -19,30 +19,32 @@
         <title>Billet simple pour l'Alaska</title>
         <link href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
         <link href="src/public/css/dashboard.css" rel="stylesheet" />
+        <link href="src/public/css/gsdk.css"/ rel="stylesheet">
         <link href="src/public/css/style.css" rel="stylesheet" />
     </head>
         
     <body>
 
-        <header> 
+        <header class="container-fluid"> 
 
             <div>
                 <h1>Billet simple pour l'Alaska</h1>
+                <h3>Jean Forteroche</h3>
             </div>
         </header>
 
-        <nav class="navbar navbar-inverse" >
+        <nav class="navbar navbar-inverse navbar-static-top" >
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <button class="navbar-toogle" type="button" data-toogle="collapse" data-target="#navbar" aria-expanded="true" aria-controls="navbar">
+                    <button class="navbar-toogle" type="button" data-toogle="collapse" data-target="#bs-example-navbar-collapse1" >
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.php">Accueil</a>
-                      <a class="navbar-brand" href="#">Chapitres</a>
-                      <a class="navbar-brand" href="#">A propos</a>
+                    <a class="navbar-brand" href="index.php"> Accueil </a>
+                      <a class="" href="#"> Chapitres </a>
+                      <a class="" href="#"> A propos </a>
                 </div>
 
             
@@ -61,7 +63,7 @@
                         </li>
                         <li><a class="" href="index.php?action=adminComments"> Commentaires</a></li>
 
-                        <li><a href="index.php?action=disconnection"><button>Déconnexion</button></a></li>
+                        <li><a class="btn btn-default btn-round" role="button" href="index.php?action=disconnection"><button>Déconnexion</button></a></li>
                     </ul>
                 </div>
 
@@ -71,7 +73,7 @@
         ?>
                 <div class=" navbar-collapse collapse" id="navbar">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="index.php?action=connectionAccess"><button>Connexion</button></a></li>
+                        <li><a class="btn btn-default btn-round" role="button" href="index.php?action=connectionAccess">Connexion</a></li>
                         <!--<li><a href="index.php?action=inscriptionAccess"><button>Inscription</button></a></li>-->
                     </ul>
                 </div>
@@ -80,35 +82,56 @@
         ?>    
         </nav>
 
-        <div>
+        <section class="row">
             <?php
 
-
+            
             foreach ($articles as $article)
             {
             ?>
-            <div class="col-lg-4">
-                <h3>
-                    <?php echo 'Chapitre ' . $article->getArticleNumber() . ' : ' . $article->getTitle(); ?>
-                </h3>   
-                <h5><em><?php echo $article->getDateCreation(); ?></em></h5>
-                
-                
-                <p>
-                <?php
-                echo nl2br($article->getContent());
-                ?>
-                <br />
-                <em><a href="index.php?action=article&id=<?php echo $article->getId(); ?>"><button>En lire plus</button></a></em>
-                </p>
-            </div>
+            <article class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="..." alt="...">
+                    <div class="caption">
+                        <h3>
+                            <?php echo 'Chapitre ' . $article->getArticleNumber() . ' : ' . $article->getTitle(); ?>
+                        </h3>   
+                        <!--<h5><em><?php echo $article->getDateCreation(); ?></em></h5>-->
+                        
+                        <p><?php echo nl2br($article->getContent()); ?></p>
+                        <p><a class="btn btn-default" role="button" href="index.php?action=article&id=<?php echo $article->getId(); ?>">En lire plus</a></p>
+                    </div>
+                </div>
+            </article>
+            <?php
+            }
+
+            for ($i=1; $i<=$numberOfPages ;$i++)
+            {
+            ?>
+            <a href="<?php echo 'index.php?page=' . $i ?>"><?php echo $i ?> ></a>
             <?php
             }
             ?>
-        </div>
+
+            <aside class="col-sm-4">
+            <?php
+                foreach ($articles as $article)
+                {     
+            ?>
+
+                <p><a class="" role="" href="index.php?action=article&id=<?php echo $article->getId(); ?>"><?php echo 'Chapitre ' . $article->getArticleNumber() . ' : ' . $article->getTitle(); ?></a></p>
+            <?php
+                }
+            ?>
+            </aside>
+
+
+        </section>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="src/public/get-shit-done-1.4.1/get-shit-done-1.4.1/assets/js/jquery-ui-1.10.4.custom.min.js"></script>
     </body>
 
     <footer>
