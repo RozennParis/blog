@@ -21,8 +21,18 @@ if (isset($_GET['action'])) {
 
     if ($_GET['action'] == 'listArticles') {
 
-        $articleController = new ArticleController();
-        $data = $articleController->listArticles();
+        if (isset($_GET['page'])) 
+        {
+            $articleController = new ArticleController();
+            $data = $articleController->listArticles($_GET['page']);
+        } 
+        else 
+        {
+            $articleController = new ArticleController();
+            $data = $articleController->listArticles(1);
+        }
+
+       
     }
 
     elseif ($_GET['action'] == 'article'){
@@ -271,7 +281,15 @@ if (isset($_GET['action'])) {
 
 else {
 
-    $articleController = new ArticleController();
-    $data = $articleController->listArticles();
+    if (isset($_GET['page'])) 
+        {
+            $articleController = new ArticleController();
+            $data = $articleController->listArticles($_GET['page']);
+        } 
+        else 
+        {
+            $articleController = new ArticleController();
+            $data = $articleController->listArticles(1);
+        }
 
 }

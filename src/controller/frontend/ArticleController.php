@@ -8,17 +8,19 @@ use \blog\model\ArticleManager;
 use \blog\model\CommentManager;
 use \blog\model\Article;
 use \blog\model\Comments;
-use \blog\model\Pagination;
+
 
 
 class ArticleController
 {
 
-	public function listArticles()
+	public function listArticles($page)
 	{
 	    $articleManager = new ArticleManager(); //création de l'objet
-	    $articles = $articleManager->getArticles(); // appel de la fonction de cet objet
-
+	    
+	    $articles = $articleManager->getArticles($page); // appel de la fonction de cet objet
+	    $numbers = $articleManager->getPage($articles);
+	    
 
 	    require('src/view/frontend/listArticlesView.php');
 	}

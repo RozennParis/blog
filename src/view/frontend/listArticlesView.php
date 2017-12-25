@@ -106,7 +106,7 @@
             <?php
             }
 
-            for ($i=1; $i<=$numberOfPages ;$i++)
+            for ($i=1; $i<=$numbers ;$i++)
             {
             ?>
             <a href="<?php echo 'index.php?page=' . $i ?>"><?php echo $i ?> ></a>
