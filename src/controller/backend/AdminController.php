@@ -16,6 +16,8 @@ class AdminController
 		$data->setTitle($title);
 		$data->setContent($content);
 
+		
+
 		$articleManager = new ArticleManager(); //création de l'objet
 	    $article = $articleManager->addArticle($data); // appel de la fonction de cet objet
 

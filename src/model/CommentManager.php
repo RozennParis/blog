@@ -128,7 +128,7 @@ class CommentManager extends Manager
 
     		$com = new Comments($comment);
 
-    		if ($comment['parent_id'] != 0 && $comment['answer'] != 0){
+    		if ($comment['parent_id'] != 0){
     			
     			
     			$arrayComments[$comment['parent_id']]['answer'][] = $com;

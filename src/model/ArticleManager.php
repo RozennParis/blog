@@ -23,7 +23,7 @@ class ArticleManager extends Manager
 	public function addArticle(Article $article)
 	{
 
-		$req = $this->db->prepare('INSERT INTO articles(article_number,title, content, date_creation) VALUES(:article_number, :title, :content, NOW())');
+		$req = $this->db->prepare('INSERT INTO articles (article_number,title, content, date_creation) VALUES (:article_number, :title, :content, NOW())');
 
 		$addedArticle = $req->execute(array(
 							'article_number'=>$article->getArticleNumber(),
@@ -182,71 +182,6 @@ class ArticleManager extends Manager
 		return $numberOfPages;
 
 	}
-
-	/** Function to display differents pages on the homepage >>> 6 extracts/articles per page
-	 *
-	 */
-	/*public function Paginate($page = 1)
-	{
-		$articlesPerPage = 6;
-
-		$req = $this->db->query('SELECT id FROM articles');
-
-       	$totalArticles = $req ->rowCount();
-       	$totalPages = ceil($totalArticles/$articlesPerPage);
-
-       	if (isset($page) && !empty($page)) && $page > 0 && $page <=$totalPages) {
-			$page = int($page);
-			$currentPage = $page;
-		}
-		else {
-			$currentPage = 1;
-		}
-
-		$begin = ($currentPage - 1) * $articlesPerPage;
-		
-
-	}*/
-
-
-	/** ------- Pagination ------- */
-
-	/*public function getArticlesByPage($page = 1)
-	{
-		$articlesPerPage = 6;
-		$begin = 0;
-
-		if ($page > 1) {
-			$page = int($page);
-			$begin = ($page - 1) * $articlesPerPage ;
-		}
-		
-		$req = $this->db->query('SELECT * , DATE_FORMAT(date_creation, \'%d/%m/%Y\') AS dateCreation FROM articles ORDER BY date_creation DESC ');
-
-		$req->execute();
-
-		$totalArticles = $req->rowCount();
-		$numberOfPages = (int)($totalArticles / $articlesPerPage) + 1 ;
-		
-		$values = $req->fetchAll(PDO::FETCH_ASSOC);
-
-
-		foreach ($values as $value)
-		{
-			
-			$value['content']= $this->getExtract($value['content'], 0, 600, ' ');
-			$articles[] = new Article($value);
-		}		
-
-		$arrayOfArticles = array_slice($articles, $begin, $articlesPerPage);
-
-
-
-		return $paginatedArticles;
-		
-
-		
-	}*/
 
 	
 }

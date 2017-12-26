@@ -8,7 +8,6 @@ class Comments
 	protected $article_id;
 	protected $concerned_article;
 	protected $parent_id;
-	protected $answer;
 	protected $author;
 	protected $comment;
 	protected $comment_date;
@@ -91,17 +90,6 @@ class Comments
 	public function setParentId($parent_id)
 	{
 		$this->parent_id = $parent_id;
-	}
-
-
-	public function getAnswer()
-	{
-		return $this->answer;
-	}
-
-	public function setAnswer($answer)
-	{
-		$this->answer = $answer;
 	}
 
 

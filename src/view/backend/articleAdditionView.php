@@ -78,17 +78,16 @@
 
                         <form method="post" action="index.php?action=additionArticle"> 
 
-                            <p><input class="textarea" type="text" name="number" placeholder="N° de chapitre" required></p>
-                            <p><input class="textarea" type="text" name="title" placeholder="Titre" required></p>
-                            <p><textarea id="textarea" name="content" required></textarea></p>
-                            <p><input type="submit" value="Valider"></p>
+                            <p><input class="textarea" type="text" name="number" placeholder="N° de chapitre"></p>
+                            <p><input class="textarea" type="text" name="title" placeholder="Titre"></p>
+                            <p><textarea id="textarea" name="content" ></textarea></p>
+                            <p><input type="submit" name="addition" value="Valider"></p>
 
                         </form>
                     </div>
                 </div>
             </div>
         </div>  
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>     
 </body>

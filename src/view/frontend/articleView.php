@@ -81,7 +81,7 @@
         ?>
         
             <div>
-                <form  method="post" action="index.php?action=addComment&amp;id=<?= $article->getId(); ?>&amp;parentId=<?= $comment->getId(); ?>&amp;answer=1">
+                <form  method="post" action="index.php?action=addComment&amp;id=<?= $article->getId(); ?>&amp;parentId=<?= $comment->getId(); ?>">
 
                     
                     <p><input class="author" type="text" name="author" placeholder="Votre nom" required></p>

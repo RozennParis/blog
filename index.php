@@ -204,6 +204,7 @@ if (isset($_GET['action'])) {
     elseif ($_GET['action'] == 'adminAddArticle'){
 
         if (isset($_SESSION['pseudo'])) {
+
             require ('src/view/backend/articleAdditionView.php');
         }
         else {
@@ -245,6 +246,7 @@ if (isset($_GET['action'])) {
     elseif ($_GET['action'] == 'additionArticle') {
 
         if (isset($_SESSION['pseudo'])) {
+
             if (!empty($_POST['number']) &&!empty($_POST['title']) && !empty($_POST['content'])) {
 
                 $adminController = new AdminController();
