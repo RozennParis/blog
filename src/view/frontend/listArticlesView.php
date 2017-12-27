@@ -50,13 +50,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#gsdk">GSDKit</a>
+              <a class="navbar-brand" href="index.php">BSA</a>
             </div>
         
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse in" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="index.php">Accueil</a></li>
+                <li><a href="index.php">Accueil</a></li>
                 <li class="dropdown">
                     <a href="#gsdk" class="dropdown-toggle" data-toggle="dropdown">Chapitres <b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -70,7 +70,7 @@
             ?>                     
                     </ul>
                 </li>
-                <li class="active"><a href="#">A propos</a></li>
+                <li><a href="#">A propos</a></li>
               </ul>
 
             <?php
@@ -109,58 +109,60 @@
 
             <div class="title">
                 <h1>Billet simple pour l'Alaska</h1>
-                <h3>Jean Forteroche</h3>
+                <h3 id="subtitle">Jean Forteroche</h3>
             </div>
         </header>
 
-        <section class="row">
-            <?php
+        <section class="container-fluid">
+            <div class="row">
+                <div class="col-md-10 col-md-push-1">
+                    <div class="row">
 
-            
-            foreach ($articles as $article)
-            {
-            ?>
-            <article class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                    <img src="..." alt="...">
-                    <div class="caption">
-                        <h3>
-                            <?php echo 'Chapitre ' . $article->getArticleNumber() . ' : ' . $article->getTitle(); ?>
-                        </h3>   
-                        <!--<h5><em><?php echo $article->getDateCreation(); ?></em></h5>-->
-                        
-                        <p><?php echo nl2br($article->getContent()); ?></p>
-                        <p><a class="btn btn-default" role="button" href="index.php?action=article&id=<?php echo $article->getId(); ?>">En lire plus</a></p>
+
+                        <?php
+                        foreach ($articles as $article)
+                        {
+                        ?>
+                            <article class="col-sm-6 col-md-4">
+
+                                <div class="thumbnail">
+                                    <img src="..." alt="...">
+                                        <div class="row">
+                                            <div id="date" class="col-md-1">
+                                                <h6><em><?php echo $article->getDateCreation(); ?></em></h6>
+                                            </div>
+                                        </div>
+                                        <div class="caption">
+                                            <h4 class="center">
+                                                <?php echo 'Chapitre ' . $article->getArticleNumber() . ' : ' . $article->getTitle(); ?>
+                                            </h4>   
+                                                
+                                                
+                                            <p><?php echo nl2br($article->getContent()); ?></p>
+                                            <p class="center"><a class="btn btn-default btn-round " href="index.php?action=article&id=<?php echo $article->getId(); ?>">En lire plus</a></p>
+                                        </div>
+                                </div>
+                            </article>
+                        <?php
+                        }
+                        ?>
                     </div>
                 </div>
-            </article>
-            <?php
-            }
-            ?>
+            </div>
             
-            <aside class="col-sm-4">
-            <?php
-                foreach ($articles as $article)
-                {     
-            ?>
 
-                <p><a class="" role="" href="index.php?action=article&id=<?php echo $article->getId(); ?>"><?php echo 'Chapitre ' . $article->getArticleNumber() . ' : ' . $article->getTitle(); ?></a></p>
+            <div class="center">
+                <ul class="pagination">
+                <?php
+                    for ($i=1; $i<=$numbers ;$i++)
+                    {
+                ?>  
+                        <li><a  href="<?php echo 'index.php?page=' . $i ?>"><?php echo $i ?></a></li>
             <?php
-                }
+                    }
             ?>
-            </aside>
-
-            <ul class="pagination ct-blue">
-            <?php
-                for ($i=1; $i<=$numbers ;$i++)
-                {
-            ?>  
-                <li><a  href="<?php echo 'index.php?page=' . $i ?>"><?php echo $i ?> ></a></li>
-            <?php
-                }
-            ?>
-            </ul>
-            
+                </ul>
+           </div>
         </section>
 
         
