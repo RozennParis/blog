@@ -126,7 +126,7 @@
                             <article class="col-sm-6 col-md-4">
 
                                 <div class="thumbnail">
-                                    <img src="..." alt="...">
+                                    <!--<img src="..." alt="...">-->
                                         <div class="row">
                                             <div id="date" class="col-md-1">
                                                 <h6><em><?php echo $article->getDateCreation(); ?></em></h6>
@@ -138,8 +138,9 @@
                                             </h4>   
                                                 
                                                 
-                                            <p><?php echo nl2br($article->getContent()); ?></p>
-                                            <p class="center"><a class="btn btn-default btn-round " href="index.php?action=article&id=<?php echo $article->getId(); ?>">En lire plus</a></p>
+                                            <p><?php echo $article->getContent();?></p>
+
+                                            <p class="center"><a class="btn btn-default btn-round" href="index.php?action=article&id=<?php echo $article->getId(); ?>">En lire plus</a></p>
                                         </div>
                                 </div>
                             </article>
