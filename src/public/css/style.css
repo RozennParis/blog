@@ -28,6 +28,11 @@ article
 margin-top: 5%;
 }
 
+p article
+{
+	margin-bottom: 10%;
+}
+
 .title
 {
 margin-top: 500px;
