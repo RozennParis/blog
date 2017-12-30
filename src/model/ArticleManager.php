@@ -134,8 +134,6 @@ class ArticleManager extends Manager
 		
 		$req = $this->db->query('SELECT id, article_number, title, content, DATE_FORMAT(date_creation, \'%d/%m/%Y\') AS dateCreation FROM articles ORDER BY date_creation DESC LIMIT ' . $begin . ',' . $articlesPerPage);
 
-		/*$req = $this->db->query('SELECT id, article_number, title, content, DATE_FORMAT(date_creation, \'%d/%m/%Y\') AS dateCreation FROM articles ORDER BY date_creation DESC LIMIT 0, 15');*/
-
 		$req->execute();
 
 		$values = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -146,7 +144,7 @@ class ArticleManager extends Manager
 			$value['content']= $this->getExtract($value['content'], 0, 600, ' ');
 			$articles[] = new Article($value);
 		}
-		//echo '<pre>'; var_dump($articles); die;
+
 		return $articles;
 	}
 
@@ -183,6 +181,27 @@ class ArticleManager extends Manager
 
 		return $numberOfPages;
 
+	}
+
+
+	/** Function to display all the articles in navbar
+	 *
+	 */
+	public function getChapters() 
+	{
+
+		$req = $this->db->query('SELECT id, article_number, title FROM articles ORDER BY date_creation');
+
+		$req->execute();
+
+		$values = $req->fetchAll(PDO::FETCH_ASSOC);
+
+		foreach ($values as $value)
+		{
+			$chapters[] = new Article($value);
+		}
+
+		return $chapters;
 	}
 
 	

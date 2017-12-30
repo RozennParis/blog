@@ -18,29 +18,22 @@
 
         <title>Billet simple pour l'Alaska</title>
         <link href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-        <link href="src/public/css/dashboard.css" rel="stylesheet" />
-        <link href="src/public/css/gsdk.css"/ rel="stylesheet">
+        <!--<link href="src/public/css/dashboard.css" rel="stylesheet" />-->
         <link href="src/public/get-shit-done-1.4.1/get-shit-done-1.4.1/assets/css/gsdk.css"/ rel="stylesheet">
-        <link href="src/public/get-shit-done-1.4.1/get-shit-done-1.4.1/assets/css/demo.css" rel="stylesheet" /> 
-        
+        <link href="src/public/css/style.css" rel="stylesheet" />
         <!--     Font Awesome     -->
-        <link href="bootstrap3/css/font-awesome.css" rel="stylesheet">
+    
         <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
 
-        <link href="src/public/css/style.css" rel="stylesheet" />
+        
     </head>
         
     <body>
 
-        <header class="container-fluid"> 
+        <header class="container-fluid homepage"> 
 
-            <nav class="navbar navbar-ct-blue navbar-transparent navbar-fixed-top" role="navigation">
-              <div class="alert alert-success hidden">
-                <div class="container">
-                    <b>Lorem ipsum</b> dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                </div>
-              </div>
-          
+        <nav class="navbar-ct-blue navbar-transparent navbar-fixed-top" role="navigation">
+              
           <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -52,26 +45,25 @@
               </button>
               <a class="navbar-brand" href="index.php">BSA</a>
             </div>
-        
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse in" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav">
-                <li><a href="index.php">Accueil</a></li>
-                <li class="dropdown">
-                    <a href="#gsdk" class="dropdown-toggle" data-toggle="dropdown">Chapitres <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="index.php">Accueil</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Chapitres <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
                 <?php 
-                        foreach ($articles as $article) 
-                        {
+                            foreach ($chapters as $chapter) 
+                            {
                 ?>
-                            <li><a href="index.php?action=article&id=<?php echo $article->getId(); ?>"> chapitre <?php echo $article->getId(); ?></a></li>
-            <?php
-                        }
-            ?>                     
-                    </ul>
-                </li>
-                <li><a href="#">A propos</a></li>
-              </ul>
+                                <li><a href="index.php?action=article&id=<?php echo $chapter->getArticleNumber(); ?>"> chapitre <?php echo $chapter->getId(); ?></a></li>
+                <?php
+                            }
+                ?>                     
+                        </ul>
+                    </li>
+                    <li><a href="#">A propos</a></li>
+                </ul>
 
             <?php
             if (isset($_SESSION['pseudo'])) {
@@ -102,34 +94,34 @@
             ?>
 
             </div><!-- /.navbar-collapse -->
-          </div><!-- /.container-fluid -->
+
+          </div> 
         </nav>
-                </div>
-            </div>
+          
 
             <div class="title">
                 <h1>Billet simple pour l'Alaska</h1>
-                <h3 id="subtitle">Jean Forteroche</h3>
+                <h3 class="subtitle">Jean Forteroche</h3>
             </div>
         </header>
 
         <section class="container-fluid">
-            <div class="row">
-                <div class="col-md-10 col-md-push-1">
-                    <div class="row">
+            <!--<div class="row">-->
+               <div class="col-xs-10 col-xs-push-1">
+                    <div class="row ">
 
 
                         <?php
                         foreach ($articles as $article)
                         {
                         ?>
-                            <article class="col-sm-6 col-md-4">
+                            <article class="col-sm-6 col-md-4 "> <!-- vérifier pour plein écran-->
 
                                 <div class="thumbnail">
                                     <!--<img src="..." alt="...">-->
                                         <div class="row">
-                                            <div id="date" class="col-md-1">
-                                                <h6><em><?php echo $article->getDateCreation(); ?></em></h6>
+                                            <div id="date" class="col-xs-1">
+                                                <h6><?php echo $article->getDateCreation(); ?><h6>
                                             </div>
                                         </div>
                                         <div class="caption">
@@ -147,7 +139,7 @@
                         <?php
                         }
                         ?>
-                    </div>
+                   </div>
                 </div>
             </div>
             
@@ -171,14 +163,11 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="src/public/js/jquery-1.10.2.js" type="text/javascript"></script>
-        <script src="src/public/js/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
-        <script src="src/public/js/gsdk-checkbox.js"></script>
-        <script src="src/public/js/gsdk-radio.js"></script>
+        
         <script src="src/public/js/gsdk-bootstrapswitch.js"></script>
         <script src="src/public/js/get-shit-done.js"></script>
-    
-        <script src="src/public/js/custom.js"></script>
+        <!--<script src="src/public/js/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
+        <script src="src/public/js/custom.js"></script>-->
     </body>
 
     <footer>

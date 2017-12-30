@@ -20,7 +20,8 @@ class ArticleController
 	    
 	    $articles = $articleManager->getArticles($page); // appel de la fonction de cet objet
 	    $numbers = $articleManager->getPage($articles);
-	 
+	 	$chapters = $articleManager->getChapters();
+	 	
 	    require('src/view/frontend/listArticlesView.php');
 	}
 

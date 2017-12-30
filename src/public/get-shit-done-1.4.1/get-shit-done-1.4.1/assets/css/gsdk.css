@@ -1429,7 +1429,7 @@ input.ct-red + span + label + span.switch-right {
     background-color: #F5F5F5;
     color: #333333;
     opacity: 1;
-    text-decoration: none; }
+    text-decoration: none;}
   .dropdown-menu > .active > a, .dropdown-menu > .active > a:focus, .dropdown-menu > .active > a:hover {
     background-color: #2CA8FF; }
 

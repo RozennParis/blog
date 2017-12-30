@@ -1,57 +1,99 @@
 .answer
 {
-margin-left: 50px;
+	margin-left: 50px;
 }
 
 body
 {
-padding-top: 0px;
+	padding-top: 0px;
 }
 
 
-header
+.homepage
 {
-background-image: url("../images/aurora-borealis-1002259_1920.jpg");
-color : #FCFAE1;
-height : 750px;
-margin-top: 0px;
+	background-image: url("../images/aurora-borealis-1002259_1920.jpg");
+	color : #FCFAE1;
+	height : 750px;
+	margin-top: 0px;
 }
 
 section
 {
-background-image: url("../images/jeremy-kovac-179174.jpg");
+	background-image: url("../images/jeremy-kovac-179174.jpg");
 }
 
-
+.row
+{
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
 article
 {
-margin-top: 5%;
+	margin-top: 5%;
 }
 
-p article
+article p
 {
-	margin-bottom: 10%;
+	margin-top: 1%;
+	margin-bottom: 1%;
 }
+
+
+nav {
+	font-family: "Helvetica Neue","Open Sans",Arial,sans-serif;
+	font-size: 16px
+	border: 0;
+	font-size: 16px;
+	transition: all 0.4s;
+	-webkit-transition: all 0.4s; }
+	nav .navbar-brand {
+	    font-weight: 600;
+	    margin: 5px 0px;
+	    padding: 20px 15px;
+	    font-size: 20px; }
+	nav .navbar-nav > li > a {
+	    padding: 10px 15px;
+	    margin: 15px 3px; }
+	nav .navbar-nav > li > a.btn {
+	    margin: 15px 3px;
+	    padding: 8px 16px; }
+	nav .navbar-nav > li > a.btn-round {
+	    margin: 16px 3px; }
+	nav .navbar-nav > li > a [class^="fa"] {
+	    font-size: 19px;
+	    position: relative;
+	    top: 1px; }
+	nav .btn {
+	    margin: 15px 3px;
+	    font-size: 14px; }
+	nav .btn-simple {
+	    font-size: 16px; }
+
+
+
 
 .title
 {
-margin-top: 500px;
+	margin-top: 500px;
 }
 
 .thumbnail
 {
-background-color: #F6F6F6;
+	background-color: #F6F6F6;
 }
 
 #date
 {
-background-color: #C5C5C5;
-margin-top: 4%; 
-margin-left: -2%;
-width: 20%;
-padding-left: 2%;
-border-radius: 5%;
-color: #F6F6F6;
+	background-color: #C5C5C5;
+	margin-top: 10px; 
+	margin-left: -5px;
+	width: 87px;
+	padding-left: 7px;
+	vertical-align: center;
+	border-radius: 5px;
+	color: #F6F6F6;
+	height: 38px;
+
 }
 
 
@@ -59,3 +101,4 @@ color: #F6F6F6;
 {
 	text-align: center;
 }
+

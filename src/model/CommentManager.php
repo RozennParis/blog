@@ -131,17 +131,17 @@ class CommentManager extends Manager
     		if ($comment['parent_id'] != 0){
     			
     			
-    			$arrayComments[$comment['parent_id']]['answer'][] = $com;
-    			//$arrayComments[$comment['parent_id']] = new Comments($comment);    			
+    			$arrayComments[$comment['parent_id']][] = $com;
+    			    			
     		}
     		else {
-    			//$arrayComments[$comment['id']] = $comment;
+    			
     			$arrayComments[$comment['id']][] = $com;
     		}
 
     		  		
     	}
-    	//echo '<pre>'; var_dump($arrayComments); die;
+    	
     	return $arrayComments;
 
 	
