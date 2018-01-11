@@ -55,11 +55,13 @@ class ArticleManager extends Manager
 	/** Function to delete an article by admin
 	 *
 	 */ 
-	public function deleteArticle($articleId)
+	public function delArticle($id)
 	{
-		$req = $this->db->prepare('DELETE FROM articles WHERE id = :id');
+		$req = $this->db->prepare('DELETE FROM articles WHERE id = ?');
 
-		$deleteArticle = $req->execute(array('id'=>$articleId));
+		$deleteArticle = $req->execute(array($id));
+
+		return $deleteArticle;
 			
 	}
 
@@ -126,7 +128,7 @@ class ArticleManager extends Manager
 	 */
 	public function getArticles($page = 1) 
 	{
-		$articlesPerPage = 6;
+		$articlesPerPage = 3;
 
 
 		$page = (int)($page);
@@ -170,7 +172,7 @@ class ArticleManager extends Manager
 	 */
 	public function getPage()
 	{
-		$articlesPerPage = 6;
+		$articlesPerPage = 3;
 
 		$req = $this->db->query('SELECT COUNT(*) AS totalArticles FROM articles');
 

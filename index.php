@@ -114,10 +114,7 @@ if (isset($_GET['action'])) {
         else 
         {
             echo 'Merci de remplir tous les champs';
-        }
-
-
-        
+        }  
     } 
 
     elseif ($_GET['action'] == 'disconnection'){
@@ -213,7 +210,7 @@ if (isset($_GET['action'])) {
         
     }
 
-     // <----- modification / addition / moderation ----->
+     // <----- modification / deletion/ addition / moderation ----->
     elseif ($_GET['action'] == 'modifArticle'){ 
 
        if (isset($_SESSION['pseudo'])) {
@@ -230,6 +227,26 @@ if (isset($_GET['action'])) {
                 else {
                     echo 'Erreur : tous les champs ne sont pas remplis !';
                 }
+            }
+            else {
+
+                echo 'Erreur : aucun identifiant de billet envoyé';
+            }
+        }
+        else {
+            echo 'Veuillez vous connecter pour accéder à l\'administration du blog';
+        }
+
+    }
+
+
+    elseif ($_GET['action'] == 'deleteArticle'){ 
+
+       if (isset($_SESSION['pseudo'])) {
+            if (isset($_GET['id']) && $_GET['id'] > 0) 
+            {
+                $adminController = new AdminController();
+                $data = $adminController->deleteArticle($_GET['id']); 
             }
             else {
 

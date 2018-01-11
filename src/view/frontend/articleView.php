@@ -15,105 +15,188 @@
 
     <head>
         <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
-        <link rel="icon" href=../../favicon.ico>
-        <title>Billet simple pour l'Alaska</title>
-        <link href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" /> 
-        <link href="src/public/css/style.css" rel="stylesheet" /> 
-    </head>
+        
+        <title>BSA - chapitre <?= $article->getId(); ?></title>
 
+        <link href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="src/public/get-shit-done-1.4.1/get-shit-done-1.4.1/assets/css/gsdk.css" rel="stylesheet"/> 
+        <link href="src/public/css/style.css" rel="stylesheet" /> 
+
+          <!--     Font Awesome     -->
+        <link href="src/public/get-shit-done-1.4.1/get-shit-done-1.4.1/bootstrap3/css/font-awesome.css" rel="stylesheet">
+        <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
+
+    </head>
         
     <body>
-        <h1>Billet simple pour l'Alaska</h1>
-        <p><a href="index.php?action=listArticles">Retour à la page d'accueil</a></p>
 
-        <div class="news">
-            <h3><?= $article->getTitle(); ?></h3>
-            <h5><em><?= $article->getDateCreation(); ?></em></h5>
+        <header class="container-fluid header-other-pages"> 
 
-            <p> <?= nl2br($article->getContent()); ?></p>
-        </div>
+            <?php require ('src/view/templates/_nav.php'); ?>  
 
-        <div>
+            <div>
+                <h1 ><?= $article->getArticleNumber() . ' - ' . $article->getTitle(); ?></h1>
+                <h5><em><?= $article->getDateCreation(); ?></em></h5>
+                
+            </div>
+        </header>
+
+        <main class="container-fluid main"> 
+
+                <div class="row">
+
+                    <!-- display article's content -->
+                    <div class="col-xs-12 subdivision">
+                        <h3>Un peu de lecture</h3>
+                    </div>
 
 
-        <h4>Commentaires</h4>
+                    <div class="col-xs-10 col-xs-push-1">
+                        <div class="comments">
+                           <p><?= nl2br($article->getContent()); ?></p>
+                           <!--<p>blablabla</p>-->
+                        </div>
+                    </div>
+    
+                    <!-- display comments -->
+                    <div class="col-xs-12 subdivision">
+                        <h3>Commentaires</h3>
+                    </div>
+        
 
-        <?php
 
-        foreach ($comments as $commentGrp)
-        {   
-            foreach($commentGrp as $comment){
-        ?>
-              
-        <?php        
-                if (array_key_exists('answer',$commentGrp)){
-
-                    if (key($commentGrp) == 'answer'){
-
-                        foreach ($comment as $answer)
+                    <div class="col-xs-10 col-xs-push-1">
+                        <?php
+                        
+                        if ($comments == NULL)
                         {
-        ?>
-                            <div class="answer">
-                                <p><strong><?= htmlspecialchars($answer->getAuthor()); ?></strong> le <?= $answer->getCommentDate(); ?></p>
-                                <p><?= nl2br(htmlspecialchars($answer->getComment())); ?></p>
-
-                                <form method="post" action="index.php?action=alertComment&amp;id=<?= $article->getId(); ?>&amp;commentId=<?= $answer->getId(); ?>&amp;alert=1">
-                                    <button type="submit" name="alert">Signaler</button>
-                                </form>
+                        ?>
+                            <div class="comments">
+                                <p><?= 'Il n\'y a pas encore de commentaires.'; ?></p>
                             </div>
 
-        <?php
-                        }
-                    } else {
-        ?>
-                        <p><strong><?= htmlspecialchars($comment->getAuthor()); ?></strong> le <?= htmlspecialchars($comment->getCommentDate()); ?></p>
-                        <p><?= nl2br(htmlspecialchars($comment->getComment())); ?></p>
-        <?php
-                    }
-                } else {
-        ?>        
-                    <p><strong><?= htmlspecialchars($comment->getAuthor()); ?></strong> le <?= htmlspecialchars($comment->getCommentDate()); ?></p>
-                    <p><?= nl2br(htmlspecialchars($comment->getComment())); ?></p>
-        <?php    
-                }
-        ?>
-        
-            <div>
-                <form  method="post" action="index.php?action=addComment&amp;id=<?= $article->getId(); ?>&amp;parentId=<?= $comment->getId(); ?>">
+                        <?php
+                        } else {
 
-                    
-                    <p><input class="author" type="text" name="author" placeholder="Votre nom" required></p>
-                    <p><textarea id="answer" name="comment" placeholder="Saisissez votre réponse ici" required></textarea></p>
-                    <button type="submit" name="answer">Envoyer la réponse</button>
+                            foreach ($comments as $commentGrp)
+                            {   
                         
-                </form>
-                
-                <form>
-                    <button type="text" name="" onclick="">Répondre</button>
-                </form>
+                        ?>
+                                <div class="comments">
+                        <?php
+                                foreach($commentGrp as $comment)
+                                {
+             
+                                    if ($comment->getParentId() !=0) 
+                                    { 
 
-                <form method="post" action="index.php?action=alertComment&amp;id=<?= $article->getId(); ?>&amp;commentId=<?= $comment->getId(); ?>&amp;alert=1">
-                    <button type="submit" name="alert">Signaler</button>
-                </form>
+                                        
+                        ?>          
+                                    <div class="answer">
+                                        <p><strong><?= htmlspecialchars($comment->getAuthor()); ?></strong> le <?= $comment->getCommentDate(); ?></p>
+                                        <p><?= nl2br(htmlspecialchars($comment->getComment())); ?></p>
 
-        <?php
-            }
-        }
-        ?>
+                                                
+                        <?php
+                        
+                                        if ($comment->getModerationStatus() !=2)
+                                        {  
+                        ?>
+                                            <form method="post" action="index.php?action=alertComment&amp;id=<?= $article->getId(); ?>&amp;commentId=<?= $comment->getId(); ?>&amp;alert=1">
+                                                <button type="submit" name="alert">Signaler</button>
+                                            </form>
+                        <?php
+
+                                        }       
+                        ?>
+                                    </div>
+                                    
+                                       
+                        <?php
+                                
+                                } else {
+                        ?>      <div class="comment">
+                                        <div >
+                                            <p><strong><?= htmlspecialchars($comment->getAuthor()); ?></strong> le <?= htmlspecialchars($comment->getCommentDate()); ?></p>
+                                            <p><?= nl2br(htmlspecialchars($comment->getComment())); ?></p>
+                                        </div>  
+
+                                        <div class="panel-group" id="accordion<?= $comment->getId();?>" aria-multiselectable="false">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading" id="headingOne">
+                                                    <button data-toggle="collapse" data-parent="#accordion<?= $comment->getId(); ?>" href= "#collapse<?= $comment->getId(); ?>" aria-expanded="false" aria-controls="collapseOne">Répondre</button>  
+                        <?php
+                        
+                                                    if ($comment->getModerationStatus() !=2) 
+                                                    {  
+                        ?>
+                                                        <form method="post" action="index.php?action=alertComment&amp;id=<?= $article->getId(); ?>&amp;commentId=<?= $comment->getId(); ?>&amp;alert=1">
+                                                            <button type="submit" name="alert">Signaler</button>
+                                                        </form>
+                        <?php
+
+                                                    }       
+                        ?>
+
+                                                </div>
+                                        
+
+
+                                                <div id="collapse<?= $comment->getId(); ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                                    <div class="panel-body">
+
+                                                        <form  method="post" action="index.php?action=addComment&amp;id=<?= $article->getId(); ?>&amp;parentId=<?= $comment->getId(); ?>">
+
+                                                                
+                                                            <p><input class="author" type="text" name="author" placeholder="Votre nom" required></p>
+                                                            <p><textarea id="answer" name="comment" placeholder="Saisissez votre réponse ici" required></textarea></p>
+                                                            <button type="submit" name="answer">Envoyer la réponse</button>
+                                                                    
+                                                        </form>
+
+                                                        
+                                                    </div>
+                                                </div>           
+                                            </div>
+                                        </div>
+                                    </div>
+                        <?php    
+                                }
+                      
+                            }
+                        
+                        ?>
+                            </div> 
+                            
+                        <?php
+                        }
+                    }
+                        ?>
+                            
+                    </div>
+                    
+               
+                    <!-- display form to add a comment -->
+                    <div class="col-xs-12 subdivision">
+                        <h3>Exprimez-vous !!!</h3>
+                    </div>
         
+                    <div class="col-xs-10 col-xs-push-1 ">
 
-            </div>
-        <h4>Exprimez-vous !!!</h4>
+                        <form class="comment-form" method="post" action="index.php?action=addComment&amp;id=<?= $article->getId(); ?>&amp;parentId=0&amp;chapitre=<?= $article->getArticleNumber(); ?>">
 
-        <form method="post" action="index.php?action=addComment&amp;id=<?= $article->getId(); ?>&amp;parentId=0&amp;chapitre=<?= $article->getArticleNumber(); ?>">
+                            <p>Laissez un message ;-)</p>
+                            <p><input class="author" type="text" name="author" placeholder="Votre nom" required></p>
+                            <p><textarea id="comment" name="comment" placeholder="Saisissez votre commentaire ici" required></textarea></p>
+                            <p><input type="submit" value="Envoyer"></p>
 
-            <p><input class="author" type="text" name="author" placeholder="Votre nom" required></p>
-            <p><textarea id="comment" name="comment" placeholder="Saisissez votre commentaire ici" required></textarea></p>
-            <p><input type="submit" value="Envoyer"></p>
-
-        </form>
-
-    </body>
-</html> 
+                        </form>
+                    </div>
+                </div>
+            
+        </main>
+        <?php require ('src/view/templates/_footer.php'); ?>  
+    

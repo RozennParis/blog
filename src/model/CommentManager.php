@@ -118,33 +118,32 @@ class CommentManager extends Manager
 
     	$comments = $req->fetchAll(PDO::FETCH_ASSOC);
 
-
-    	foreach ($comments as $comment)
+    	if ($comments != NULL) 
     	{
 
-    		if ($comment['moderation_status'] == 2){
-    			$comment['comment'] = 'Ce commentaire a été modéré par l\'auteur';
-    		}
+    		foreach ($comments as $comment)
+		    {
 
-    		$com = new Comments($comment);
+		    	if ($comment['moderation_status'] == 2){
+		    		$comment['comment'] = 'Ce commentaire a été modéré par l\'auteur';
+		    	}
 
-    		if ($comment['parent_id'] != 0){
-    			
-    			
-    			$arrayComments[$comment['parent_id']][] = $com;
-    			    			
-    		}
-    		else {
-    			
-    			$arrayComments[$comment['id']][] = $com;
-    		}
+		    	$com = new Comments($comment);
 
-    		  		
-    	}
-    	
-    	return $arrayComments;
 
-	
+		    	if ($comment['parent_id'] != 0){
+		    			
+		    		$arrayComments[$comment['parent_id']][] = $com;
+		    			    			
+		    	}
+		    	else {
+		    			
+		    		$arrayComments[$comment['id']][] = $com;
+		    	}
+		    }
+
+    		return $arrayComments;
+    	}     	
     }
 }
 

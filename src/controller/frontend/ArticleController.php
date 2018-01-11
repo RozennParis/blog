@@ -32,7 +32,8 @@ class ArticleController
 
 	    $commentManager = new CommentManager();
 	    $comments = $commentManager->getComments($id);
-
+	   
+	    $chapters = $articleManager->getChapters();
 	    
 	    require('src/view/frontend/articleView.php');
 	}

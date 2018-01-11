@@ -60,10 +60,9 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small, .h1 small, .h2 small
 h1 small, h2 small, h3 small, h1 .small, h2 .small, h3 .small {
   font-size: 60%; }
 
-h1 .subtitle {
+.subtitle {
   display: block;
-  font-family: 'Grand Hotel',cursive;
-  margin: 0 0 30px; }
+  font-family: 'Grand Hotel',cursive; }
 
 .text-primary, .text-primary:hover {
   color: #3472F7 !important; }
@@ -1308,13 +1307,13 @@ input.ct-red + span + label + span.switch-right {
 .navbar-toggle:focus {
   background-color: transparent; }
 
-/*
+
 .navbar-transparent{
     .dropdown-menu .divider{
         background-color: rgba($white-color,.2);
     }
 }
-*/
+
 .navbar-inverse .navbar-toggle:hover,
 .navbar-inverse .navbar-toggle:focus {
   background-color: transparent; }
@@ -1376,8 +1375,7 @@ input.ct-red + span + label + span.switch-right {
     border-bottom: 1px solid rgba(255, 255, 255, 0.6); }
 
 .navbar-ct-blue {
-  /*background-color: rgba(52, 172, 220, 0.98);*/
-  background-color:rgba(41, 38, 66, 0.7);  }
+  background-color:rgba(33, 32, 30, 0.7); }
 
 .navbar-ct-azzure {
   background-color: rgba(91, 202, 255, 0.98); }

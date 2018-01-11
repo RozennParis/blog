@@ -1,43 +1,4 @@
-.answer
-{
-	margin-left: 50px;
-}
-
-body
-{
-	padding-top: 0px;
-}
-
-
-.homepage
-{
-	background-image: url("../images/aurora-borealis-1002259_1920.jpg");
-	color : #FCFAE1;
-	height : 750px;
-	margin-top: 0px;
-}
-
-section
-{
-	background-image: url("../images/jeremy-kovac-179174.jpg");
-}
-
-.row
-{
-	margin-top: 50px;
-	margin-bottom: 50px;
-}
-article
-{
-	margin-top: 5%;
-}
-
-article p
-{
-	margin-top: 1%;
-	margin-bottom: 1%;
-}
-
+/*<<<<<---------- navigation/menu ---------->>>>>*/
 
 nav {
 	font-family: "Helvetica Neue","Open Sans",Arial,sans-serif;
@@ -71,16 +32,49 @@ nav {
 
 
 
+/*<<<<<---------- For all pages ---------->>>>>*/	 
+
+body
+{
+	padding: 0;
+	margin: 0;
+}
+
+
+/*<<<<<---------- Homepage ---------->>>>>*/
+#wrapper
+{
+	margin: 0;
+	padding: 3em;
+	background-image: url("../images/jeremy-kovac-179174.jpg");
+}
+
+
+article
+{
+	margin-bottom: 5%;
+}
+
+article h4
+{
+	margin-top: 1%;
+}
+
+
+.homepage
+{
+	background-image: url("../images/aurora-borealis-1002259_1920.jpg");
+	color : #FCFAE1;
+	height : 750px;
+	margin-top: 0px;
+}
+
 
 .title
 {
 	margin-top: 500px;
 }
 
-.thumbnail
-{
-	background-color: #F6F6F6;
-}
 
 #date
 {
@@ -93,12 +87,160 @@ nav {
 	border-radius: 5px;
 	color: #F6F6F6;
 	height: 38px;
-
 }
-
 
 .center
 {
 	text-align: center;
 }
 
+.carousel img
+{
+	border-radius: 5px;
+}
+
+.carousel
+{
+	border-radius: 5px;
+}
+
+.presentation
+{
+	margin-top: 5%;
+}
+
+/*<<<<<---------- Homepage and Article's page rules---------->>>>>*/
+
+.thumbnail, .main
+{
+
+	background-color: #F6F6F6;
+	border-radius: 5px;
+}
+
+/*<<<<<---------- Article's page ---------->>>>>*/
+
+
+header h1
+{
+	margin-top: 150px;
+	color : #F6F6F6;
+}
+
+/*main
+{
+	background-image: url("../images/preview.jpg");
+}*/
+
+
+.header-other-pages
+{
+	background-image: url("../images/nelly-volkovich-16093-cut.jpg");
+	height: 250px;
+	color : #F6F6F6;
+}
+
+.subdivision
+{
+	background-color: #DCDCDC;
+	color: #808080;
+	width: 100%;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-bottom: 2%;
+	padding-left: 30px;
+
+}
+
+
+/*------ Display of article and comments on article's page-----*/
+.comments
+{
+	margin-bottom: 2%;
+	border: 1px #DCDCDC solid;
+	border-radius: 10px;
+	padding-top: 1%;
+	padding-left: 1%;
+	padding-right: 1%;
+	
+}
+
+.comment, .answer
+{
+	background-color: #FFFFFF;
+	border: 1px #DCDCDC solid;
+	border-radius: 10px;
+	padding: 10px;
+	margin-bottom: 2%;
+
+}
+
+.panel-heading
+{
+	display: inline-flex;
+}
+
+.answer
+{
+	margin-left: 4%;
+}
+
+
+/*------ Display of form to add a comment on article's page-----*/
+
+.comment-form
+{
+	border: 1px #DCDCDC solid;
+	border-radius: 10px;
+	padding: 1%;
+	margin-bottom: 3%;
+}
+
+.comment-form input, .comment-form textarea
+{
+	width: 50%;
+}
+
+.comment-form textarea
+{
+	/*border-radius: 5px;*/
+	height : 40%;
+
+}
+
+
+/*<<<<<---------- Footer ---------->>>>>*/
+
+footer
+{
+	
+	background-color: #21201E;
+	/*color: #F6F6F6;*/
+	color: #808080;
+	
+}
+
+.haut
+{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.in-the-middle
+{
+	border-left: 2px #808080 solid;
+	border-right: 2px #808080  solid;
+
+}
+
+
+/*<<<<<---------- Connection view ---------->>>>>*/
+.connection
+{
+	margin-top: 3%;
+}
+
+#connection
+{
+	min-height: 40vh;
+}

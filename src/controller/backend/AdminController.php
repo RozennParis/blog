@@ -73,6 +73,16 @@ class AdminController
 	}
 
 
+	public function deleteArticle($id)
+	{
+		$articleManager = new ArticleManager();
+	    $article = $articleManager->delArticle($id);
+
+	    //require ('src/view/backend/articlesAdminView.php');
+	    header('Location: index.php?action=adminArticles');
+	}
+
+
 	public function showAllComments()
 	{
 		$commentManager = new commentManager();

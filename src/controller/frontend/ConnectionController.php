@@ -4,17 +4,27 @@
 */
 namespace blog\controller\frontend;
 
+use \blog\model\ArticleManager;
+use \blog\model\Article;
 use \blog\model\MemberManager;
 use \blog\model\Member;
 
 class ConnectionController
 {
-
+	/** Method to have an access to the inscription page 
+	 * 
+	 */
 	public function accessToInscription()
 	{
+
 		require('src/view/frontend/inscriptionView.php');
+
 	}
 
+
+	/** Method to add a member 
+	 * 
+	 */
 	public function addMember($login, $password, $passwordBis)
 	{
 		if ($password === $passwordBis){
@@ -35,6 +45,9 @@ class ConnectionController
 		}
 	}
 
+	/** Method to open the admin page 
+	 * 
+	 */
 	public function openAdmin($pseudo, $password)
 	{
 
@@ -65,17 +78,26 @@ class ConnectionController
 
 	}
 
+
+	/** Method to close the admin
+	 * 
+	 */
 	public function closeAdmin()
 	{
 		session_unset();
 		session_destroy();
 
-		require ('src/view/frontend/listArticlesView.php');
+		header('Location: index.php');
 	}
 
-
+	/** Method to have an access to the login page 
+	 * 
+	 */
 	public function accessToAdmin()
 	{
+		$articleManager = new ArticleManager();
+		$chapters = $articleManager->getChapters();
+		
 		require('src/view/frontend/connectionView.php');
 	}
 }
