@@ -1,6 +1,6 @@
 <?php
 
-/* dans ce dossier, >>> toutes les vérifications à propos de l'affichage des articles sur la page listArticlesView ou articleView */
+/*  >>> all verifications about display of articles on listArticlesView or articleView */
 
 namespace blog\controller\frontend;
 
@@ -11,18 +11,24 @@ use \blog\model\Comments;
 
 
 
-class ArticleController
+class ArticleController extends \blog\controller\Controller
 {
 
 	public function listArticles($page)
 	{
-	    $articleManager = new ArticleManager(); //création de l'objet
+	    $articleManager = new ArticleManager(); //creation
 	    
 	    $articles = $articleManager->getArticles($page); // appel de la fonction de cet objet
 	    $numbers = $articleManager->getPage($articles);
 	 	$chapters = $articleManager->getChapters();
 	 	
-	    require('src/view/frontend/listArticlesView.php');
+	    //require('src/view/frontend/listArticlesView.php');
+	    echo $this->twig->render('listArticlesView.twig', array(
+	    	'articles'=>$articles,
+	    	'numbers'=>$numbers,
+	    	'chapters'=>$chapters
+	    ));
+
 	}
 
 	public function article($id)
@@ -36,6 +42,11 @@ class ArticleController
 	    $chapters = $articleManager->getChapters();
 	    
 	    require('src/view/frontend/articleView.php');
+	    /*echo $this->twig->render('articleView.twig', array(
+	    	'article'=>$article,
+	    	'comments'=>$comments,
+	    	'chapters'=>$chapters
+	    ));*/
 	}
 
 

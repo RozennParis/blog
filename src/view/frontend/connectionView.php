@@ -9,11 +9,11 @@
         <title>Connexion Administration</title>
 
         <link href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-        <link href="src/public/get-shit-done-1.4.1/get-shit-done-1.4.1/assets/css/gsdk.css" rel="stylesheet"/> 
-        <link href="src/public/css/style.css" rel="stylesheet" /> 
+        <link href="public/get-shit-done-1.4.1/get-shit-done-1.4.1/assets/css/gsdk.css" rel="stylesheet"/> 
+        <link href="public/css/style.css" rel="stylesheet" /> 
 
           <!--     Font Awesome     -->
-        <link href="src/public/get-shit-done-1.4.1/get-shit-done-1.4.1/bootstrap3/css/font-awesome.css" rel="stylesheet">
+        <link href="public/get-shit-done-1.4.1/get-shit-done-1.4.1/bootstrap3/css/font-awesome.css" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
 
     </head>

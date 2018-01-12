@@ -9,7 +9,7 @@ use \blog\model\Article;
 use \blog\model\MemberManager;
 use \blog\model\Member;
 
-class ConnectionController
+class ConnectionController extends \blog\controller\Controller
 {
 	/** Method to have an access to the inscription page 
 	 * 
@@ -39,6 +39,9 @@ class ConnectionController
 			$member = $memberManager->addNewMember($data);
 
 			require('src/view/frontend/connectionView.php');
+			/*echo $this->twig->render('connectionView.twig', array(
+	    	'member'=>$member
+	    	));*/
 		}
 		else {
 			echo 'Les mots de passe ne sont pas identiques';
@@ -99,6 +102,9 @@ class ConnectionController
 		$chapters = $articleManager->getChapters();
 		
 		require('src/view/frontend/connectionView.php');
+		/*echo $this->twig->render('connectionView.twig', array(
+	    	'chapters'=>$chapters
+	    ));*/
 	}
 }
 

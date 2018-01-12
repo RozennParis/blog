@@ -1,45 +1,14 @@
-<?php
+{% extends 'template.twig' %}
+{% block title %}
+    Ch.{{ article.articleNumber}} - {{parent()}}
+{% endblock %}
+{% block body %}
 
-
-/* ici page dédiée à l'affichage de l'article avec les commentaires
- 
- - chapitre entier sur une page
- - bloc commentaires en dessous avec bouton signaler
- - formulaire de saisie de commentaires avec champ pour pseudo, champ pour texte commentaires et bouton submit
-  */
-?>
-
-<!DOCTYPE html>
-
-<html>
-
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="">
-        
-        <title>BSA - chapitre <?= $article->getId(); ?></title>
-
-        <link href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-        <link href="public/get-shit-done-1.4.1/get-shit-done-1.4.1/assets/css/gsdk.css" rel="stylesheet"/> 
-        <link href="public/css/style.css" rel="stylesheet" /> 
-
-          <!--     Font Awesome     -->
-        <link href="public/get-shit-done-1.4.1/get-shit-done-1.4.1/bootstrap3/css/font-awesome.css" rel="stylesheet">
-        <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
-
-    </head>
-        
-    <body>
-
-        <header class="container-fluid header-other-pages"> 
-
-            <?php require ('src/view/templates/_nav.php'); ?>  
+    <header class="container-fluid header-other-pages">  
 
             <div>
-                <h1 ><?= $article->getArticleNumber() . ' - ' . $article->getTitle(); ?></h1>
-                <h5><em><?= $article->getDateCreation(); ?></em></h5>
+                <h1 >{{ article.articleNumber}} - {{ article.title}}</h1>
+                <h5><em>{{ article.dateCreation}}</em></h5>
                 
             </div>
         </header>
@@ -56,7 +25,7 @@
 
                     <div class="col-xs-10 col-xs-push-1">
                         <div class="comments">
-                           <p><?= nl2br($article->getContent()); ?></p>
+                           <p>{{ article.content|raw }}</p>
                            <!--<p>blablabla</p>-->
                         </div>
                     </div>
@@ -69,66 +38,52 @@
 
 
                     <div class="col-xs-10 col-xs-push-1">
-                        <?php
                         
-                        if ($comments == NULL)
-                        {
-                        ?>
+                        {% if comments is NULL %}
+                        
                             <div class="comments">
-                                <p><?= 'Il n\'y a pas encore de commentaires.'; ?></p>
+                                <p>Il n'y a pas encore de commentaires</p>
                             </div>
 
-                        <?php
-                        } else {
-
-                            foreach ($comments as $commentGrp)
-                            {   
+                        {% else %}
+                            {% commentGrp in comments %}
+                            <!--foreach ($comments as $commentGrp)
+                            {   -->
                         
-                        ?>
+                        
                                 <div class="comments">
-                        <?php
-                                foreach($commentGrp as $comment)
-                                {
-             
-                                    if ($comment->getParentId() !=0) 
-                                    { 
+                                {% comment in commentGrp %}
+                                <!--foreach($commentGrp as $comment)
+                                {-->
+                                    {% if not comment.parentId ==0 %}
+                                    <!--if ($comment->getParentId() !=0) 
+                                    { -->          
+                                        <div class="answer">
+                                            <p><strong>{{ comment.author|e }}</strong> le {{ comment.commentDate }}</p>
+                                            <p>{{ comment.comment|e|nl2br }}</p>
 
-                                        
-                        ?>          
-                                    <div class="answer">
-                                        <p><strong><?= htmlspecialchars($comment->getAuthor()); ?></strong> le <?= $comment->getCommentDate(); ?></p>
-                                        <p><?= nl2br(htmlspecialchars($comment->getComment())); ?></p>
-
-                                                
-                        <?php
-                        
-                                        if ($comment->getModerationStatus() !=2)
-                                        {  
-                        ?>
-                                            <form method="post" action="index.php?action=alertComment&amp;id=<?= $article->getId(); ?>&amp;commentId=<?= $comment->getId(); ?>&amp;alert=1">
-                                                <button type="submit" name="alert">Signaler</button>
-                                            </form>
-                        <?php
-
-                                        }       
-                        ?>
-                                    </div>
+                                            {% if comment.moderationStatus %}
+                                            <!--if ($comment->getModerationStatus() !=2)
+                                            { --> 
+                                                <form method="post" action="index.php?action=alertComment&amp;id=<?= $article->getId(); ?>&amp;commentId=<?= $comment->getId(); ?>&amp;alert=1">
+                                                    <button type="submit" name="alert">Signaler</button>
+                                                </form>
+                                            {% endif %}
+                                        </div>
                                     
-                                       
-                        <?php
-                                
-                                } else {
-                        ?>      <div class="comment">
-                                        <div >
-                                            <p><strong><?= htmlspecialchars($comment->getAuthor()); ?></strong> le <?= htmlspecialchars($comment->getCommentDate()); ?></p>
-                                            <p><?= nl2br(htmlspecialchars($comment->getComment())); ?></p>
-                                        </div>  
+                                    
+                                    {% else %}               
+                                        <div class="comment">
+                                            <div >
+                                                <p><strong>{{ comment.author|e }}</strong> le <?= htmlspecialchars($comment->getCommentDate()); ?></p>
+                                                <p><?= nl2br(htmlspecialchars($comment->getComment())); ?></p>
+                                            </div>  
 
-                                        <div class="panel-group" id="accordion<?= $comment->getId();?>" aria-multiselectable="false">
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading" id="headingOne">
-                                                    <button data-toggle="collapse" data-parent="#accordion<?= $comment->getId(); ?>" href= "#collapse<?= $comment->getId(); ?>" aria-expanded="false" aria-controls="collapseOne">Répondre</button>  
-                        <?php
+                                            <div class="panel-group" id="accordion<?= $comment->getId();?>" aria-multiselectable="false">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading" id="headingOne">
+                                                        <button data-toggle="collapse" data-parent="#accordion<?= $comment->getId(); ?>" href= "#collapse<?= $comment->getId(); ?>" aria-expanded="false" aria-controls="collapseOne">Répondre</button>  
+                            <?php
                         
                                                     if ($comment->getModerationStatus() !=2) 
                                                     {  

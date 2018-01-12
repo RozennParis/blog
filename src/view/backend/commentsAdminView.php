@@ -9,7 +9,7 @@
 
         <title>Administration Commentaires</title>
         <link href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-        <link href="src/public/css/dashboard.css" rel="stylesheet" />
+        <link href="public/css/dashboard.css" rel="stylesheet" />
 
     </head>
         

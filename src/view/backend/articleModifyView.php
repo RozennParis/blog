@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
         <link href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" /> 
-        <link href="src/public/css/dashboard.css" rel="stylesheet" />
+        <link href="public/css/dashboard.css" rel="stylesheet" />
         <script src="vendor/tinymce/tinymce/tinymce.min.js" type="text/javascript"></script>
 
         <script>

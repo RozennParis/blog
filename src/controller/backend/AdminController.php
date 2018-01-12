@@ -7,7 +7,7 @@ use \blog\model\CommentManager;
 use \blog\model\Article;
 use \blog\model\Comments;
 
-class AdminController
+class AdminController extends \blog\controller\Controller
 {
 	public function addArticles($article_number, $title, $content)
 	{
@@ -35,6 +35,10 @@ class AdminController
 
 
 	    require('src/view/backend/adminView.php');
+	    /*echo $this->twig->render('adminView.twig', array(
+	    	'articles'=>$articles,
+	    	'comments'=>$comments
+	    ));*/
 	}
 
 
@@ -44,6 +48,9 @@ class AdminController
 		$articles = $articleManager->showArticles();
 
 		require ('src/view/backend/articlesAdminView.php');
+		/*echo $this->twig->render('articlesAdminView.twig', array(
+	    	'articles'=>$articles
+	    ));*/
 	}
 
 
@@ -53,6 +60,9 @@ class AdminController
 	    $article = $articleManager->getArticle($articleId);
 
 	    require ('src/view/backend/articleModifyView.php');
+	    /*echo $this->twig->render('articleModifyView.twig', array(
+	    	'article'=>$article
+	    ));*/
 
 	}
 
@@ -78,7 +88,6 @@ class AdminController
 		$articleManager = new ArticleManager();
 	    $article = $articleManager->delArticle($id);
 
-	    //require ('src/view/backend/articlesAdminView.php');
 	    header('Location: index.php?action=adminArticles');
 	}
 
