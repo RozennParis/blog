@@ -10,7 +10,9 @@ require 'vendor/autoload.php';
 
 use \blog\controller\frontend\ArticleController;
 use \blog\controller\frontend\ConnectionController;
+use \blog\controller\frontend\PageController;
 use \blog\controller\backend\AdminController;
+
 
 
 if (isset($_GET['action'])) {
@@ -47,6 +49,14 @@ if (isset($_GET['action'])) {
 
             echo 'Erreur : aucun identifiant de billet envoyé';
         }
+    }
+
+
+    elseif ($_GET['action'] == 'presentation'){
+
+            $pageController = new PageController();
+            $data = $pageController->accessToPresentation();
+        
     }
 
 
@@ -144,14 +154,14 @@ if (isset($_GET['action'])) {
     // <----- display ----->
     elseif ($_GET['action'] == 'adminView'){
 
-        //if (isset($_SESSION['pseudo'])) {
+        if (isset($_SESSION['pseudo'])) {
             $adminController = new AdminController();
             $data = $adminController->listAdmin();
-        /*}
+        }
 
         else {
             echo 'Veuillez vous connecter pour accéder à l\'administration du blog';
-        }*/
+        }
     }
 
 

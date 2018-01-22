@@ -89,10 +89,7 @@ article h4
 	height: 38px;
 }
 
-.center
-{
-	text-align: center;
-}
+
 
 .carousel img
 {
@@ -104,9 +101,31 @@ article h4
 	border-radius: 5px;
 }
 
+.center
+{
+	text-align: center;
+
+}
+
+.justify
+{
+	text-align: justify;
+}
+
+.portrait
+{
+	max-height: 140px;
+	max-width: 140px;
+}
 .presentation
 {
 	margin-top: 5%;
+}
+
+#presentation
+{
+	display: flex;
+	align-items: center;
 }
 
 /*<<<<<---------- Homepage and Article's page rules---------->>>>>*/
@@ -126,11 +145,6 @@ header h1
 	margin-top: 150px;
 	color : #F6F6F6;
 }
-
-/*main
-{
-	background-image: url("../images/preview.jpg");
-}*/
 
 
 .header-other-pages

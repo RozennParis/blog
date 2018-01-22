@@ -41,12 +41,12 @@ class ArticleController extends \blog\controller\Controller
 	   
 	    $chapters = $articleManager->getChapters();
 	    
-	    require('src/view/frontend/articleView.php');
-	    /*echo $this->twig->render('articleView.twig', array(
+	    //require('src/view/frontend/articleView.php');
+	    echo $this->twig->render('articleView.twig', array(
 	    	'article'=>$article,
 	    	'comments'=>$comments,
 	    	'chapters'=>$chapters
-	    ));*/
+	    ));
 	}
 
 

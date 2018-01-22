@@ -16,9 +16,7 @@ class ConnectionController extends \blog\controller\Controller
 	 */
 	public function accessToInscription()
 	{
-
-		require('src/view/frontend/inscriptionView.php');
-
+		echo $this->twig->render('inscriptionView.twig', array());
 	}
 
 
@@ -38,10 +36,10 @@ class ConnectionController extends \blog\controller\Controller
 			$memberManager = new MemberManager();
 			$member = $memberManager->addNewMember($data);
 
-			require('src/view/frontend/connectionView.php');
-			/*echo $this->twig->render('connectionView.twig', array(
+			//require('src/view/frontend/connectionView.php');
+			echo $this->twig->render('connectionView.twig', array(
 	    	'member'=>$member
-	    	));*/
+	    	));
 		}
 		else {
 			echo 'Les mots de passe ne sont pas identiques';
@@ -61,13 +59,13 @@ class ConnectionController extends \blog\controller\Controller
 		$memberManager = new MemberManager();
 		$member = $memberManager->controlMember($data);
 
-		
-
 		if ($member['pseudo'] === $pseudo ){
 
 			if (password_verify($password, $member['password']))
 			{	
-				$_SESSION['pseudo'] = $pseudo; 
+				session_start();
+				$_SESSION['pseudo'] = $pseudo;
+				return  $_SESSION;
 			}
 			else 
 			{
@@ -101,10 +99,10 @@ class ConnectionController extends \blog\controller\Controller
 		$articleManager = new ArticleManager();
 		$chapters = $articleManager->getChapters();
 		
-		require('src/view/frontend/connectionView.php');
-		/*echo $this->twig->render('connectionView.twig', array(
+		//require('src/view/frontend/connectionView.php');
+		echo $this->twig->render('connectionView.twig', array(
 	    	'chapters'=>$chapters
-	    ));*/
+	    ));
 	}
 }
 

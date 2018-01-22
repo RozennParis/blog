@@ -1,11 +1,10 @@
-
     
 {% extends 'template.twig' %}
 {% block title %}
     Home - {{parent()}}
 {% endblock %}
-{% block body %}
 
+{% block header %}
         <header class="container-fluid homepage">         
 
             <div class="title ">
@@ -13,8 +12,9 @@
                 <h3>Jean Forteroche</h3>
             </div>
         </header>
+{% endblock %}  
 
-      
+{% block body %}      
     <div class="container-fluid" id="wrapper">
 
           
@@ -80,8 +80,25 @@
             <article>
                 <div class="presentation">
                     <div class="thumbnail">
-                        <h4>A propos</h4>
-                        <p class="center">Passionné depuis toujours par les grands espaces, c'est tout naturellement que Jean a posé ses valises au coeur du Wild. C'est là qu'il puise l'inspiration pour écrire ses oeuvres. </p>
+                    
+                            <div class="row">
+                                <!--<div class="col-xs-1">
+                                   
+                                </div>-->
+                            
+                                <div class="col-xs-12 center">
+                                     <img src="public/images/radka-kocanova-454196.jpg" alt="portrait Jean Forteroche" class="img-circle portrait">
+                                    <h4><span>À propos</span></h4>
+                                </div>
+                            
+            
+                                <div class="col-xs-12">
+                                    <div class="caption">
+                                        <p class="justify">    Passionné depuis toujours par les grands espaces, c'est tout naturellement que Jean a posé ses valises au coeur du Wild. C'est là qu'il puise l'inspiration pour écrire ses oeuvres. </p>
+                                        <p class="center"><a class="btn btn-default btn-round" href="index.php?action=presentation">En lire plus</a></p>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
                 </div>
             </article>
@@ -139,4 +156,4 @@
             </ul>
         </div>
     </div>
-    {% endblock %}  
+{% endblock %}  

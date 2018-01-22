@@ -9,6 +9,12 @@ use \blog\model\Comments;
 
 class AdminController extends \blog\controller\Controller
 {
+	public function accessAddition()
+	{
+		echo $this->twig->render('articleAdditionView.twig', array());
+	}
+
+
 	public function addArticles($article_number, $title, $content)
 	{
 		$data = new Article();
@@ -34,11 +40,11 @@ class AdminController extends \blog\controller\Controller
 	    $comments = $commentManager->getAdminComments();
 
 
-	    require('src/view/backend/adminView.php');
-	    /*echo $this->twig->render('adminView.twig', array(
+	    //require('src/view/backend/adminView.php');
+	    echo $this->twig->render('adminView.twig', array(
 	    	'articles'=>$articles,
 	    	'comments'=>$comments
-	    ));*/
+	    ));
 	}
 
 
@@ -47,10 +53,10 @@ class AdminController extends \blog\controller\Controller
 		$articleManager = new ArticleManager();
 		$articles = $articleManager->showArticles();
 
-		require ('src/view/backend/articlesAdminView.php');
-		/*echo $this->twig->render('articlesAdminView.twig', array(
+		//require ('src/view/backend/articlesAdminView.php');
+		echo $this->twig->render('articlesAdminView.twig', array(
 	    	'articles'=>$articles
-	    ));*/
+	    ));
 	}
 
 
@@ -59,10 +65,10 @@ class AdminController extends \blog\controller\Controller
 		$articleManager = new ArticleManager();
 	    $article = $articleManager->getArticle($articleId);
 
-	    require ('src/view/backend/articleModifyView.php');
-	    /*echo $this->twig->render('articleModifyView.twig', array(
+	    //require ('src/view/backend/articleModifyView.php');
+	    echo $this->twig->render('articleModifyView.twig', array(
 	    	'article'=>$article
-	    ));*/
+	    ));
 
 	}
 
@@ -97,7 +103,10 @@ class AdminController extends \blog\controller\Controller
 		$commentManager = new commentManager();
 		$comments = $commentManager->showComments();
 
-		require ('src/view/backend/commentsAdminView.php');
+		//require ('src/view/backend/commentsAdminView.php');
+		echo $this->twig->render('commentsAdminView.twig', array(
+	    	'comments'=>$comments
+	    ));
 	}
 
 
