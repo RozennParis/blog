@@ -1,0 +1,97 @@
+{% extends 'templateAdmin.twig' %}
+{% block title %}
+    Commentaire - {{parent()}}
+{% endblock %}
+
+{% block h1 %}Commentaires{% endblock %}
+
+{% block h2 %}Les commentaires signalés, à modérer{% endblock %}
+
+{% block body %}
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">N°commentaire</th>
+                <th scope="col">Chapitre concerné</th>
+                <th scope="col">Contenu</th>
+                <th scope="col">Modération</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for comment in comments %}
+            {% if comment.alert == 1 and comment.moderationStatus == 0 %}
+                <tr>  
+                    <td scope="row">{{ comment.id|e }}</td>
+                    <td>{{ comment.concernedArticle|e }}</td>
+                    <td>{{ comment.comment|e }}</td>
+                    <td>
+                        <a href="index.php?action=moderateComment&commentId={{ comment.id }}&moderation=2" ><button>Oui</button></a>
+                        <a href="index.php?action=moderateComment&commentId={{ comment.id }}&moderation=1" ><button>Non</button></a>
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}                       
+        </tbody>
+    </table>
+</div>
+
+<h2 class="sub-header">Tous les commentaires</h2>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">N°commentaire</th>
+                <th scope="col">Chapitre concerné</th>
+                <th scope="col">Auteur</th>
+                <th scope="col">Contenu</th>
+                <th scope="col">Date</th>
+                <th scope="col">Modération</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for comment in comments %}                      
+            <tr>
+                <td>{{ comment.id|e }}</td>
+                <td>{{ comment.concernedArticle|e }}</td>
+                <td>{{ comment.author|e }}</td>
+                <td>{{ comment.comment|e }}</td>
+                <td>{{ comment.commentDate|e }}</td>
+                <td><a href="index.php?action=moderateComment&commentId={{ comment.id }}&moderation=2" ><button>Modérer</button></a></td>
+            </tr>
+        {% endfor %}
+                                
+        </tbody>
+    </table>
+</div>
+        
+<h2 class="sub-header">Commentaires modérés</h2>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">N°commentaire</th>
+                <th scope="col">Chapitre concerné</th>
+                <th scope="col">Auteur</th>
+                <th scope="col">Contenu</th>
+                <th scope="col">Date</th> 
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for comment in comments %}
+            {% if comment.moderationStatus == 2 %}                       
+                <tr>
+                    <td>{{ comment.id|e }}</td>
+                    <td>{{ comment.concernedArticle|e }}</td>
+                    <td>{{ comment.author|e }}</td>
+                    <td>{{ comment.comment|e }}</td>
+                    <td>{{ comment.commentDate|e }}</td>
+                </tr>
+            {% endif %}
+        {% endfor %} 
+        </tbody>
+    </table>
+{% endblock %}                    

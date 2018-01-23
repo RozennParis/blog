@@ -1,0 +1,49 @@
+{% extends 'template.twig' %}
+{% block title %}
+    À propos - {{parent()}}
+{% endblock %}
+
+{% block h1front %}
+    À propos
+{% endblock %}
+
+{% block displayDate %}{% endblock %}
+
+{% block body %} 
+
+	<main class="container-fluid" >
+
+        <div class="row">
+            <div class="col-xs-12 subdivision">
+                <h3>Qui est-il ?</h3>
+            </div>
+        
+
+        	<div class="col-xs-10 col-xs-push-1">
+                <div class="comments">
+                    <p>Passionné depuis toujours par les grands espaces, c'est tout naturellement que Jean a posé ses valises au coeur du Wild. C'est là qu'il puise l'inspiration pour écrire ses oeuvres. <br/>
+                    Epris de nature, il partage son temps entre l'exploration des coins les plus reculés et l'écriture. </p>
+                </div>
+            </div>
+
+
+      
+            <div class="col-xs-12 subdivision">
+                <h3>Ses publications</h3>
+            </div>
+
+            <div class="col-xs-10 col-xs-push-1">
+                <div class="comments">
+                    <ul>
+                    	<li>Fille des neiges - 2005</li>
+                    	<li>Le loup des mers - 2008</li>
+                    	<li>Radieuse aurore - 2010</li>
+                    	<li>Le vagabond des étoiles - 2013</li>
+                        <li>le fils du loup - 2014</li>
+                        <li>une odyssée du Grand Nord - 2016</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'templateAdmin.twig' %}
+{% block title %}
+    Administration - {{parent()}}
+{% endblock %}
+
+
+{% block body %} 
+
+                
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">N°chapitre</th>
+                <th scope="col">Titre</th>
+            </tr>
+        </thead>
+        <tbody>
+                                
+        {% for article in articles %}
+            <tr>  
+                <td scope="row">{{article.articleNumber}}</td>
+                <td>{{article.title}}</td>
+            </tr>
+        {% endfor %}                               
+        </tbody>
+    </table>
+</div>
+
+<h2 class="sub-header">Les derniers commentaires</h2>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">N°commentaire</th>
+                <th scope="col">Chapitre concerné</th>
+                <th scope="col">Auteur</th>
+                <th scope="col">Contenu</th>
+                <th scope="col">Date</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for comment in comments %}                     
+            <tr>
+                <td>{{comment.id|e}}</td>
+                <td>{{comment.concernedArticle|e}}</td>
+                <td>{{comment.author|e}}</td>
+                <td>{{comment.comment|e}}</td>
+                <td>{{comment.commentDate|e}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %} 
+
+{% block script %}
+{% endblock %}   

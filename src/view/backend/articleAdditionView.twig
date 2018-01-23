@@ -1,0 +1,18 @@
+{% extends 'templateAdmin.twig' %}
+{% block title %}
+    Ajout chapitre - {{parent()}}
+{% endblock %}
+
+{% block h1 %}Nouveau chapitre{% endblock %}
+
+{% block h2 %}{% endblock %}
+
+{% block body %}
+	<form method="post" action="index.php?action=additionArticle"> 
+
+        <p><input class="textarea" type="text" name="number" placeholder="N° de chapitre"></p>
+        <p><input class="textarea" type="text" name="title" placeholder="Titre"></p>
+        <p><textarea id="textarea" name="content" ></textarea></p>
+        <p><input type="submit" name="addition" value="Valider"></p>
+    </form>
+{% endblock %}
