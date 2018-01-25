@@ -212,8 +212,10 @@ if (isset($_GET['action'])) {
 
         if (isset($_SESSION['pseudo'])) {
 
-            require ('src/view/backend/articleAdditionView.php');
+            $adminController = new AdminController();
+            $data = $adminController->accessAddition();
         }
+
         else {
             echo 'Veuillez vous connecter pour accéder à l\'administration du blog';
         }
@@ -307,6 +309,7 @@ if (isset($_GET['action'])) {
         }
     }
 }
+
 
 else {
 
