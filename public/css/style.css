@@ -278,6 +278,13 @@ footer, footer a
 }
 
 
+/*<<<<<---------- Error 404 view ---------->>>>>*/
+#illustration
+{
+	padding-bottom: 1%;
+}
+
+
 /*<<<<<---------- Mobile devices ---------->>>>>*/
 
 @media (max-width: 580px)

@@ -17,4 +17,36 @@ class PageController extends \blog\controller\Controller
 	    	'chapters'=>$chapters
 	    ));
 	}
+
+
+	public function accessMention()
+	{
+		$articleManager = new ArticleManager();
+	 	$chapters = $articleManager->getChapters();
+	 	
+	    echo $this->twig->render('mentionsView.twig', array(
+	    	'chapters'=>$chapters
+	    ));
+	}
+
+
+	public function accessCredits()
+	{
+		$articleManager = new ArticleManager();
+	 	$chapters = $articleManager->getChapters();
+	 	
+	    echo $this->twig->render('creditsView.twig', array(
+	    	'chapters'=>$chapters
+	    ));
+	}
+
+	public function access404()
+	{
+		$articleManager = new ArticleManager();
+	 	$chapters = $articleManager->getChapters();
+	 	
+	    echo $this->twig->render('error404View.twig', array(
+	    	'chapters'=>$chapters
+	    ));
+	}
 }

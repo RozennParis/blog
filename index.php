@@ -98,6 +98,29 @@ if (isset($_GET['action'])) {
         }
     }
 
+
+    elseif ($_GET['action'] == 'mentions'){
+
+            $pageController = new PageController();
+            $data = $pageController->accessMention();
+        
+    }
+
+
+    elseif ($_GET['action'] == 'credits'){
+
+            $pageController = new PageController();
+            $data = $pageController->accessCredits();
+        
+    }
+
+
+    elseif ($_GET['action'] == 'error404'){
+
+            $pageController = new PageController();
+            $data = $pageController->access404();
+        
+    }
     // <--------- Connection / Deconnection / Inscription ---------> //
 
     elseif ($_GET['action'] == 'connectionAccess'){

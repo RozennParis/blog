@@ -1,0 +1,39 @@
+{% extends 'template.twig' %}
+{% block title %}
+    Error 404 - {{parent()}}
+{% endblock %}
+
+{% block h1front %}
+    À propos
+{% endblock %}
+
+{% block displayDate %}{% endblock %}
+
+{% block body %} 
+
+	<main class="container-fluid" >
+
+        <div class="row">
+            <div class="col-xs-12 subdivision">
+                <h3>Oups !!! la page n'a pas été trouvée...</h3>
+            </div>
+        
+
+        	<div class="col-xs-10 col-xs-push-1">
+                <div class="comments" id="illustration">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-lg-4" id="text404">
+                            <img src="public/images/jack-ross-371733.jpg" alt="traineau dans la neige" class="img-responsive img-thumbnail" >
+                        </div>
+
+                        <div class="col-xs-12 col-sm-6 col-lg-8">
+                
+                            <p class="center illustration">Jean est parti chercher la page en traineau</p>
+                            <p class="center illustration"> En attendant son retour vous pouvez retourner sur la page précédente en cliquant sur la flèche de gauche dans votre navigateur ou retourner à l'accueil en cliquant <a href="index.php">ici</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
