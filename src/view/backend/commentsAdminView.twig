@@ -76,7 +76,8 @@
                 <th scope="col">Chapitre concerné</th>
                 <th scope="col">Auteur</th>
                 <th scope="col">Contenu</th>
-                <th scope="col">Date</th> 
+                <th scope="col">Date</th>
+                <th scope="col">Rétablir</th>
             </tr>
         </thead>
 
@@ -89,6 +90,7 @@
                     <td>{{ comment.author|e }}</td>
                     <td>{{ comment.comment|e }}</td>
                     <td>{{ comment.commentDate|e }}</td>
+                    <td><a href="index.php?action=moderateComment&commentId={{ comment.id }}&moderation=1" ><button>oui</button></a></td>
                 </tr>
             {% endif %}
         {% endfor %} 

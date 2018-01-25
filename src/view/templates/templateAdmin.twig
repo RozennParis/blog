@@ -9,6 +9,7 @@
         <title>{% block title %}Administration{% endblock %}</title>
         <link href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
         <link href="public/css/dashboard.css" rel="stylesheet" />
+
         
     </head>
          
@@ -18,11 +19,48 @@
         <nav class="navbar navbar-inverse navbar-fixed-top" >
 
             <div class="container-fluid">
-                <div class="navbar-header">
+                <!--<div class="navbar-header">
                     <a  class="navbar-brand" href="index.php">Billet simple pour l'Alaska</a>
+                </div>-->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <ul id="dot-list">
+                        <li><a class="navbar-brand" href="index.php">Accueil</a></li>
+                    </ul>
                 </div>
 
-                <div class="collapse navbar-collapse" id="navbar">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Chapitres <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                {% for chapter in chapters %}
+                                
+                                    <li><a href="index.php?action=article&id={{ chapter.id }}"> chapitre {{ chapter.articleNumber }}</a></li>
+
+                                {% endfor %}        
+                            </ul>
+                        </li>
+                        <li><a href="index.php?action=presentation">A propos</a></li>
+                    </ul>
+               <!-- <div class="collapse navbar-collapse" id="navbar">-->
+                    <ul class="nav navbar-nav navbar-right" id="mobile">
+                        <li><a href="index.php?action=adminView">Tableau de bord</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Chapitres <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="index.php?action=adminArticles"> Tous les chapitres</a></li>
+                                <li><a href="index.php?action=adminAddArticle"> Ajouter un chapitre</a></li>
+                            </ul>
+                        </li>
+                        <li ><a href="index.php?action=adminComments"> Commentaires</a></li>
+                    </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="index.php?action=disconnection"><button>Déconnexion</button></a></li>
                     </ul>
@@ -32,9 +70,9 @@
 
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm3 col-md-2 sidebar">
+                <div class="col-sm-3 col-md-2 sidebar">
                     <ul class="nav nav-sidebar">
-                        <li><a class="" href="index.php?action=adminView">Tableau de bord</a></li>
+                        <li><a href="index.php?action=adminView">Tableau de bord</a></li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Chapitres <span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -42,7 +80,7 @@
                                 <li><a href="index.php?action=adminAddArticle"> Ajouter un chapitre</a></li>
                             </ul>
                         </li>
-                        <li><a class="" href="index.php?action=adminComments"> Commentaires</a></li>
+                        <li><a href="index.php?action=adminComments"> Commentaires</a></li>
                     </ul>
                 </div>
 

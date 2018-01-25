@@ -103,3 +103,26 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+
+/*
+ * Personnal add-ons
+ */
+
+button a
+{
+  color: #333;
+}
+
+@media all and (min-width: 768px) 
+{
+  #mobile
+  {
+      display: none; 
+  }
+}
+
+#dot-list
+ {
+  list-style-type: none;
+ }

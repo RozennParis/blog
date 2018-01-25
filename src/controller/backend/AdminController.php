@@ -11,7 +11,12 @@ class AdminController extends \blog\controller\Controller
 {
 	public function accessAddition()
 	{
-		echo $this->twig->render('articleAdditionView.twig', array());
+		$articleManager = new ArticleManager();
+	 	$chapters = $articleManager->getChapters();
+
+		echo $this->twig->render('articleAdditionView.twig', array(
+			'chapters'=>$chapters
+		));
 	}
 
 
@@ -33,16 +38,16 @@ class AdminController extends \blog\controller\Controller
 
 	public function listAdmin()
 	{
-	    $articleManager = new ArticleManager(); //création de l'objet
-	    $articles = $articleManager->getAdminArticles(); // appel de la fonction de cet objet
+	    $articleManager = new ArticleManager();
+	    $articles = $articleManager->getAdminArticles();
+	    $chapters = $articleManager->getChapters();
 
 	    $commentManager = new CommentManager();
 	    $comments = $commentManager->getAdminComments();
 
-
-	    //require('src/view/backend/adminView.php');
 	    echo $this->twig->render('adminView.twig', array(
 	    	'articles'=>$articles,
+	    	'chapters'=>$chapters,
 	    	'comments'=>$comments
 	    ));
 	}
@@ -52,10 +57,11 @@ class AdminController extends \blog\controller\Controller
 	{
 		$articleManager = new ArticleManager();
 		$articles = $articleManager->showArticles();
+		$chapters = $articleManager->getChapters();
 
-		//require ('src/view/backend/articlesAdminView.php');
 		echo $this->twig->render('articlesAdminView.twig', array(
-	    	'articles'=>$articles
+	    	'articles'=>$articles,
+	    	'chapters'=>$chapters
 	    ));
 	}
 
@@ -64,10 +70,12 @@ class AdminController extends \blog\controller\Controller
 	{
 		$articleManager = new ArticleManager();
 	    $article = $articleManager->getArticle($articleId);
+	    $chapters = $articleManager->getChapters();
 
-	    //require ('src/view/backend/articleModifyView.php');
+	 
 	    echo $this->twig->render('articleModifyView.twig', array(
-	    	'article'=>$article
+	    	'article'=>$article,
+	    	'chapters'=>$chapters
 	    ));
 
 	}
@@ -100,12 +108,15 @@ class AdminController extends \blog\controller\Controller
 
 	public function showAllComments()
 	{
+		$articleManager = new ArticleManager();
+	 	$chapters = $articleManager->getChapters();
+
 		$commentManager = new commentManager();
 		$comments = $commentManager->showComments();
 
-		//require ('src/view/backend/commentsAdminView.php');
 		echo $this->twig->render('commentsAdminView.twig', array(
-	    	'comments'=>$comments
+	    	'comments'=>$comments,
+	    	'chapters'=>$chapters
 	    ));
 	}
 

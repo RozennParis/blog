@@ -14,7 +14,10 @@
         <p><input  type="text" name="number" required value="{{article.articleNumber|e}}"></p>
         <p><input  type="text" name="title" required value="{{article.title|e}}"></p>
         <p><textarea  id="textarea" name="content"  required>{{article.content|e}}</textarea></p>
-        <p><input type="submit" value="Valider la modification"></p>
+        <p>
+        	<input type="submit" value="Valider la modification">
+        	<button><a href="index.php?action=adminArticles">retour</a></button>
+        </p>
 
     </form>
 {% endblock %}

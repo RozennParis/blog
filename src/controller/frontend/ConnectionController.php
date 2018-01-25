@@ -36,7 +36,6 @@ class ConnectionController extends \blog\controller\Controller
 			$memberManager = new MemberManager();
 			$member = $memberManager->addNewMember($data);
 
-			//require('src/view/frontend/connectionView.php');
 			echo $this->twig->render('connectionView.twig', array(
 	    	'member'=>$member
 	    	));
@@ -63,10 +62,9 @@ class ConnectionController extends \blog\controller\Controller
 
 			if (password_verify($password, $member['password']))
 			{	
-				session_start();
 				$_SESSION['pseudo'] = $pseudo;
-				return  $_SESSION;
-			}
+				return $_SESSION;
+			}	
 			else 
 			{
 				echo 'Mauvais mot de passe !';
@@ -99,7 +97,6 @@ class ConnectionController extends \blog\controller\Controller
 		$articleManager = new ArticleManager();
 		$chapters = $articleManager->getChapters();
 		
-		//require('src/view/frontend/connectionView.php');
 		echo $this->twig->render('connectionView.twig', array(
 	    	'chapters'=>$chapters
 	    ));

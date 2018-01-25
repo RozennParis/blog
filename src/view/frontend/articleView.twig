@@ -58,7 +58,7 @@
                                 <div class="comment">
                                     <div >
                                         <p><strong>{{ comment.author|e }}</strong> le {{ comment.commentDate|e }}</p>
-                                        <p>{{ comment.comment|e|nl2br }}></p>
+                                        <p>{{ comment.comment|e|nl2br }}</p>
                                     </div>  
 
                                     <div class="panel-group" id="accordion{{ comment.id }}" aria-multiselectable="false">
@@ -78,10 +78,15 @@
                                             <div id="collapse{{ comment.id }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                                                 <div class="panel-body">
                                                     <form  method="post" action="index.php?action=addComment&amp;id={{ article.id }}&amp;parentId={{ comment.id }}&amp;chapitre={{ article.articleNumber }}">
-                                                        
-                                                        <p><input class="author" type="text" name="author" placeholder="Votre nom" required></p>
-                                                        <p><textarea id="answer" name="comment" placeholder="Saisissez votre réponse ici" required></textarea></p>
-                                                            <button type="submit" name="answer">Envoyer la réponse</button>
+                                                        <div class="form-group">
+                                                            <label for="answer-author">Votre nom :</label>
+                                                            <input class="author form-control" type="text" name="author" placeholder="Votre nom" required>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="answer-answer">Votre réponse :</label>
+                                                            <textarea id="answer answer-answer" class="form-control" name="comment" placeholder="Saisissez votre réponse ici" required></textarea>
+                                                        </div>
+                                                        <button type="submit" name="answer">Envoyer la réponse</button>
                                                                     
                                                     </form>                                
                                                 </div>
@@ -108,10 +113,17 @@
                 <form class="comment-form" method="post" action="index.php?action=addComment&amp;id={{ article.id }}&amp;parentId=0&amp;chapitre={{ article.articleNumber }}">
 
                     <p>Laissez un message ;-)</p>
-                    <p><input class="author" type="text" name="author" placeholder="Votre nom" required></p>
-                    <p><textarea id="comment" name="comment" placeholder="Saisissez votre commentaire ici" required></textarea></p>
-                    <p><input type="submit" value="Envoyer"></p>
-
+                    <div class="form-group">
+                        <label for="author">Votre nom :</label>
+                        <input class="author form-control" id="author" type="text" name="author" placeholder="Votre nom" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment">Votre message :</label>
+                        <textarea id="comment" class="form-control" name="comment" placeholder="Saisissez votre commentaire ici" required></textarea>
+                    </div>
+                    <div>
+                        <input type="submit" value="Envoyer"></p>
+                    </div>
                 </form>
             </div>
         </div>

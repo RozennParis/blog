@@ -13,16 +13,17 @@ use \blog\model\Comments;
 
 class ArticleController extends \blog\controller\Controller
 {
-
+	/** Method to list the extracts on the homepage 
+	 * 
+	 */
 	public function listArticles($page)
 	{
-	    $articleManager = new ArticleManager(); //creation
+	    $articleManager = new ArticleManager();
 	    
-	    $articles = $articleManager->getArticles($page); // appel de la fonction de cet objet
+	    $articles = $articleManager->getArticles($page);
 	    $numbers = $articleManager->getPage($articles);
 	 	$chapters = $articleManager->getChapters();
 	 	
-	    //require('src/view/frontend/listArticlesView.php');
 	    echo $this->twig->render('listArticlesView.twig', array(
 	    	'articles'=>$articles,
 	    	'numbers'=>$numbers,
@@ -31,6 +32,9 @@ class ArticleController extends \blog\controller\Controller
 
 	}
 
+	/** Method to show the article on its page
+	 * 
+	 */
 	public function article($id)
 	{
 		$articleManager = new ArticleManager();
@@ -41,7 +45,6 @@ class ArticleController extends \blog\controller\Controller
 	   
 	    $chapters = $articleManager->getChapters();
 	    
-	    //require('src/view/frontend/articleView.php');
 	    echo $this->twig->render('articleView.twig', array(
 	    	'article'=>$article,
 	    	'comments'=>$comments,
@@ -49,7 +52,9 @@ class ArticleController extends \blog\controller\Controller
 	    ));
 	}
 
-
+	/** Method to add a comment on the article's page
+	 * 
+	 */
 	public function addComments($articleId, $parentId, $concernedArticle, $author, $comment)
 	{
 		$data = new Comments();
@@ -74,7 +79,9 @@ class ArticleController extends \blog\controller\Controller
 	    }
 	}
 
-
+	/** Method to alert about a specific comment (by readers)
+	 * 
+	 */
 	public function alertComments($articleId, $commentId, $alert)
 	{
 		$data = new Comments();
