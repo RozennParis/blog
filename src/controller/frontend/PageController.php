@@ -42,6 +42,8 @@ class PageController extends \blog\controller\Controller
 
 	public function access404()
 	{
+		header("HTTP/1.0 404 Not Found");
+		
 		$articleManager = new ArticleManager();
 	 	$chapters = $articleManager->getChapters();
 	 	

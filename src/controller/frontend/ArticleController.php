@@ -69,12 +69,14 @@ class ArticleController extends \blog\controller\Controller
 
 	    if ($affectedLines === false)
 	    {
-	    	die ('Impossible d\'ajouter le commentaire !');
+	    	$_SESSION['messageDanger'] = 'mettre le message qui va bien' ;
 	    }
 
 	    
 	    else
 	    {
+	    	
+	    	$_SESSION['messageSuccess'] = 'mettre le message qui va bien' ;
 	    	header('Location: index.php?action=article&id=' . $articleId . '&parentId=' . $parentId);
 	    }
 	}

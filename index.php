@@ -47,7 +47,8 @@ if (isset($_GET['action'])) {
         }
         else {
 
-            echo 'Erreur : aucun identifiant de billet envoyé';
+            $pageController = new PageController();
+            $data = $pageController->access404();
         }
     }
 
@@ -72,14 +73,17 @@ if (isset($_GET['action'])) {
             }
 
             else {
-
-                echo 'Erreur : tous les champs ne sont pas remplis !';
+                
+                $pageController = new PageController();
+                $data = $pageController->access404();
+                // echo 'Erreur : tous les champs ne sont pas remplis !';
             }
         }
 
         else {
 
-            echo 'Erreur : aucun identifiant de billet envoyé';
+            $pageController = new PageController();
+            $data = $pageController->access404();
         }
     }
 
@@ -94,7 +98,8 @@ if (isset($_GET['action'])) {
 
         else {
 
-            echo 'Erreur : votre message d\'alerte n\'a pas été envoyé !!!';
+            $pageController = new PageController();
+            $data = $pageController->access404();
         }
     }
 
@@ -114,13 +119,6 @@ if (isset($_GET['action'])) {
         
     }
 
-
-    elseif ($_GET['action'] == 'error404'){
-
-            $pageController = new PageController();
-            $data = $pageController->access404();
-        
-    }
     // <--------- Connection / Deconnection / Inscription ---------> //
 
     elseif ($_GET['action'] == 'connectionAccess'){
@@ -146,7 +144,9 @@ if (isset($_GET['action'])) {
         }
         else 
         {
-            echo 'Merci de remplir tous les champs';
+            $pageController = new PageController();
+            $data = $pageController->access404();
+            //echo 'Merci de remplir tous les champs';
         }  
     } 
 
@@ -183,7 +183,9 @@ if (isset($_GET['action'])) {
         }
 
         else {
-            echo 'Veuillez vous connecter pour accéder à l\'administration du blog';
+            $pageController = new PageController();
+            $data = $pageController->access404();
+            //echo 'Veuillez vous connecter pour accéder à l\'administration du blog'; ou message warning
         }
     }
 
@@ -196,7 +198,10 @@ if (isset($_GET['action'])) {
             $data = $adminController->showAllArticles();
         }
         else {
-            echo 'Veuillez vous connecter pour accéder à l\'administration du blog';
+            
+            $pageController = new PageController();
+            $data = $pageController->access404();
+            //echo 'Veuillez vous connecter pour accéder à l\'administration du blog';
         }
     }
 
@@ -211,11 +216,15 @@ if (isset($_GET['action'])) {
             }
             else {
 
-                echo 'Erreur : aucun identifiant de billet envoyé';
+                $pageController = new PageController();
+                $data = $pageController->access404();
             }
         }
         else {
-            echo 'Veuillez vous connecter pour accéder à l\'administration du blog';
+            
+            $pageController = new PageController();
+            $data = $pageController->access404();
+            //echo 'Veuillez vous connecter pour accéder à l\'administration du blog';
         }
     }
 
@@ -227,7 +236,10 @@ if (isset($_GET['action'])) {
             $data = $adminController->showAllComments();
         }
         else {
-            echo 'Veuillez vous connecter pour accéder à l\'administration du blog';
+            
+            $pageController = new PageController();
+            $data = $pageController->access404();
+            //echo 'Veuillez vous connecter pour accéder à l\'administration du blog';
         }
     }
 
@@ -240,7 +252,9 @@ if (isset($_GET['action'])) {
         }
 
         else {
-            echo 'Veuillez vous connecter pour accéder à l\'administration du blog';
+            $pageController = new PageController();
+            $data = $pageController->access404();
+            //echo 'Veuillez vous connecter pour accéder à l\'administration du blog';
         }
         
     }
@@ -260,16 +274,21 @@ if (isset($_GET['action'])) {
                 }
 
                 else {
-                    echo 'Erreur : tous les champs ne sont pas remplis !';
+                    $pageController = new PageController();
+                    $data = $pageController->access404();
+                    //echo 'Erreur : tous les champs ne sont pas remplis !';
                 }
             }
             else {
-
-                echo 'Erreur : aucun identifiant de billet envoyé';
+                $pageController = new PageController();
+                $data = $pageController->access404();
+                //echo 'Erreur : aucun identifiant de billet envoyé';
             }
         }
         else {
-            echo 'Veuillez vous connecter pour accéder à l\'administration du blog';
+            $pageController = new PageController();
+            $data = $pageController->access404();
+            //echo 'Veuillez vous connecter pour accéder à l\'administration du blog';
         }
 
     }
@@ -284,14 +303,16 @@ if (isset($_GET['action'])) {
                 $data = $adminController->deleteArticle($_GET['id']); 
             }
             else {
-
-                echo 'Erreur : aucun identifiant de billet envoyé';
+                $pageController = new PageController();
+                $data = $pageController->access404();
+                //echo 'Erreur : aucun identifiant de billet envoyé';
             }
         }
         else {
-            echo 'Veuillez vous connecter pour accéder à l\'administration du blog';
+            $pageController = new PageController();
+            $data = $pageController->access404();
+            //echo 'Veuillez vous connecter pour accéder à l\'administration du blog';
         }
-
     }
 
     
@@ -306,12 +327,15 @@ if (isset($_GET['action'])) {
             }
 
             else {
-
-                 echo 'Erreur : tous les champs ne sont pas remplis !';
+                $pageController = new PageController();
+                $data = $pageController->access404();
+                //echo 'Erreur : tous les champs ne sont pas remplis !';
             }
         }
          else {
-            echo 'Veuillez vous connecter pour accéder à l\'administration du blog';
+            $pageController = new PageController();
+            $data = $pageController->access404();
+            //echo 'Veuillez vous connecter pour accéder à l\'administration du blog';
         }
     }
 
@@ -324,11 +348,15 @@ if (isset($_GET['action'])) {
                 $moderatedComment = $adminController->moderateComments($_GET['commentId'], $_GET['moderation']);
             }
             else {
-                echo 'Erreur : le message n\'a pas été modéré !!!';
+                $pageController = new PageController();
+                $data = $pageController->access404();
+                //echo 'Erreur : le message n\'a pas été modéré !!!';
             }
         }
         else {
-            echo 'Veuillez vous connecter pour accéder à l\'administration du blog';
+            $pageController = new PageController();
+            $data = $pageController->access404();
+            //echo 'Veuillez vous connecter pour accéder à l\'administration du blog';
         }
     }
 }
@@ -337,14 +365,15 @@ if (isset($_GET['action'])) {
 else {
 
     if (isset($_GET['page'])) 
-        {
-            $articleController = new ArticleController();
-            $data = $articleController->listArticles($_GET['page']);
-        } 
-        else 
-        {
-            $articleController = new ArticleController();
-            $data = $articleController->listArticles(1);
-        }
+    {
+        $articleController = new ArticleController();
+        $data = $articleController->listArticles($_GET['page']);
+    } 
+    else 
+    {
+        $articleController = new ArticleController();
+        $data = $articleController->listArticles(1);
+    }
 
 }
+

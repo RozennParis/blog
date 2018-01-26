@@ -93,6 +93,21 @@
         {% endblock %}
 
 
+        {% if _session.messageSuccess %}
+            <div class="alert alert-success alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Parfait !!! </strong>{{ _session.messageSuccess }}
+            </div>
+
+        {% endif %}
+
+        {% if _session.messageDanger %}
+        <div class="alert alert-danger fade in" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Misère !!! </strong>{{ _session.messageDanger }}
+        </div>
+        {% endif %}
+
 		{% block body %}
 
 
@@ -131,7 +146,6 @@
                             <h6>Autres</h6>
                             <p><a href="index.php?action=mentions">Mentions légales</a></p>
                             <p><a href="index.php?action=credits">Crédits photos</a></p>
-                            <p><a href="index.php?action=error404">test erreur404</a></p>
                         </div>
                     </div>
                 </div>

@@ -17,6 +17,12 @@ class Controller
 		$this->twig = new Twig_Environment($loader, array( 'cache' => false, 'debug' => true ));
 		$this->twig->addExtension(new Twig_Extension_Debug());
 		$this->twig->addGlobal('_session', $_SESSION);
-		$this->twig->addGlobal('_post', $_POST);
+
 	}
+
+	public function setFlashMessage()
+	{
+
+	}
+
 }
