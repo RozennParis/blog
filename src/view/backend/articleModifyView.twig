@@ -15,9 +15,20 @@
         <p><input  type="text" name="title" required value="{{article.title|e}}"></p>
         <p><textarea  id="textarea" name="content"  required>{{article.content|e}}</textarea></p>
         <p>
-        	<input type="submit" value="Valider la modification">
+        	<input type="submit" name="submit" value="Valider la modification">
         	<button><a href="index.php?action=adminArticles">retour</a></button>
         </p>
 
     </form>
+
+    {% if _post.submit %}
+    <div class="alert alert-success alert-dismissible fade in" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Parfait !!! </strong>La modification a bien été prise en compte
+    </div>
+    {% else %}
+    <div class="alert alert-danger fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Misère !!! </strong>Le commentaire n'a pas été envoyé.</div>
+    {% endif %}
 {% endblock %}
