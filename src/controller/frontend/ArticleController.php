@@ -8,7 +8,7 @@ use \blog\model\ArticleManager;
 use \blog\model\CommentManager;
 use \blog\model\Article;
 use \blog\model\Comments;
-
+use \blog\controller\frontend\PageController;
 
 
 class ArticleController extends \blog\controller\Controller
@@ -16,7 +16,7 @@ class ArticleController extends \blog\controller\Controller
 	/** Method to list the extracts on the homepage 
 	 * 
 	 */
-	public function listArticles($page)
+	public function listArticles(int $page)
 	{
 	    $articleManager = new ArticleManager();
 	    
@@ -35,27 +35,37 @@ class ArticleController extends \blog\controller\Controller
 	/** Method to show the article on its page
 	 * 
 	 */
-	public function article($id)
+	public function article(int $id)
 	{
 		$articleManager = new ArticleManager();
-	    $article = $articleManager->getArticle($id);
+		$article = $articleManager->getArticle($id);
 
-	    $commentManager = new CommentManager();
-	    $comments = $commentManager->getComments($id);
-	   
-	    $chapters = $articleManager->getChapters();
-	    
-	    echo $this->twig->render('articleView.twig', array(
-	    	'article'=>$article,
-	    	'comments'=>$comments,
-	    	'chapters'=>$chapters
-	    ));
+		$commentManager = new CommentManager();
+		$comments = $commentManager->getComments($id);
+		   
+		$chapters = $articleManager->getChapters();
+		
+		if ($article->getId() === NULL)
+		{
+			$pageController = new PageController();
+	        $data = $pageController->access404();
+		}
+		else 
+		{
+			echo $this->twig->render('articleView.twig', array(
+			   	'article'=>$article,
+			    'comments'=>$comments,
+			    'chapters'=>$chapters
+			));
+
+
+		}
 	}
 
 	/** Method to add a comment on the article's page
 	 * 
 	 */
-	public function addComments($articleId, $parentId, $concernedArticle, $author, $comment)
+	public function addComments(int $articleId, int $parentId, int $concernedArticle, string $author, string $comment)
 	{
 		$data = new Comments();
 		$data->setArticleId($articleId);
@@ -69,14 +79,14 @@ class ArticleController extends \blog\controller\Controller
 
 	    if ($affectedLines === false)
 	    {
-	    	$_SESSION['messageDanger'] = 'mettre le message qui va bien' ;
+	    	$_SESSION['messageDanger'] = 'Le commentaire n\'a pas été envoyé.' ;
 	    }
 
 	    
 	    else
 	    {
 	    	
-	    	$_SESSION['messageSuccess'] = 'mettre le message qui va bien' ;
+	    	$_SESSION['messageSuccess'] = 'Le commentaire a bien été envoyé.' ;
 	    	header('Location: index.php?action=article&id=' . $articleId . '&parentId=' . $parentId);
 	    }
 	}
@@ -84,7 +94,7 @@ class ArticleController extends \blog\controller\Controller
 	/** Method to alert about a specific comment (by readers)
 	 * 
 	 */
-	public function alertComments($articleId, $commentId, $alert)
+	public function alertComments(int $articleId, int $commentId, int $alert)
 	{
 		$data = new Comments();
 		$data->setId($commentId);

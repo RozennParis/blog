@@ -54,7 +54,7 @@ class Comments
 		return $this->id;
 	}
 
-	public function setId($id)
+	public function setId(int $id)
 	{
 		$this->id = $id;
 	}
@@ -65,7 +65,7 @@ class Comments
 		return $this->article_id;
 	}
 
-	public function setArticleId($article_id)
+	public function setArticleId(int $article_id)
 	{
 		$this->article_id = $article_id;
 	}
@@ -76,7 +76,7 @@ class Comments
 		return $this->concerned_article;
 	}
 
-	public function setConcernedArticle($concerned_article)
+	public function setConcernedArticle(int $concerned_article)
 	{
 		$this->concerned_article = $concerned_article;
 	}
@@ -87,7 +87,7 @@ class Comments
 		return $this->parent_id;
 	}
 
-	public function setParentId($parent_id)
+	public function setParentId(int $parent_id)
 	{
 		$this->parent_id = $parent_id;
 	}
@@ -98,7 +98,7 @@ class Comments
 		return $this->author;
 	}
 
-	public function setAuthor($author)
+	public function setAuthor(string $author)
 	{
 		$this->author = $author;
 	}
@@ -109,7 +109,7 @@ class Comments
 		return $this->comment;
 	}
 
-	public function setComment($comment)
+	public function setComment(string $comment)
 	{
 		$this->comment = $comment;
 	}
@@ -130,7 +130,7 @@ class Comments
 		return $this->moderation_status;
 	}
 
-	public function setModerationStatus($moderation_status)
+	public function setModerationStatus(int $moderation_status)
 	{
 		$this->moderation_status = $moderation_status;
 	}
@@ -141,7 +141,7 @@ class Comments
 		return $this->alert;
 	}
 
-	public function setAlert($alert)
+	public function setAlert(int $alert)
 	{
 		$this->alert = $alert;
 	}

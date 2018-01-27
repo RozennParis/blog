@@ -20,7 +20,7 @@ class AdminController extends \blog\controller\Controller
 	}
 
 
-	public function addArticles($article_number, $title, $content)
+	public function addArticles(int $article_number, string $title, string $content)
 	{
 		$data = new Article();
 		$data->setArticleNumber($article_number);
@@ -66,7 +66,7 @@ class AdminController extends \blog\controller\Controller
 	}
 
 
-	public function showArticle($articleId)
+	public function showArticle(int $articleId)
 	{
 		$articleManager = new ArticleManager();
 	    $article = $articleManager->getArticle($articleId);
@@ -81,7 +81,7 @@ class AdminController extends \blog\controller\Controller
 	}
 
 
-	public function modifArticle($id, $article_number, $title, $content)
+	public function modifArticle(int $id, int $article_number, string $title, string $content)
 	{
 		$data = new Article();
 		$data->setId($id);
@@ -97,7 +97,7 @@ class AdminController extends \blog\controller\Controller
 	}
 
 
-	public function deleteArticle($id)
+	public function deleteArticle(int $id)
 	{
 		$articleManager = new ArticleManager();
 	    $article = $articleManager->delArticle($id);
@@ -121,7 +121,7 @@ class AdminController extends \blog\controller\Controller
 	}
 
 
-	public function moderateComments($commentId, $moderation)
+	public function moderateComments(int $commentId, int $moderation)
 	{
 		$data = new Comments();
 		$data->setId($commentId);

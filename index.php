@@ -21,9 +21,9 @@ if (isset($_GET['action'])) {
     // --------- FrontEnd --------- //
 
 
-    if ($_GET['action'] == 'listArticles') {
+    if ($_GET['action'] === 'listArticles') {
 
-        if (isset($_GET['page'])) 
+        if (isset($_GET['page']) && preg_match("#^\d+$#", $_GET['page'])) 
         {
             $articleController = new ArticleController();
             $data = $articleController->listArticles($_GET['page']);
@@ -37,9 +37,9 @@ if (isset($_GET['action'])) {
        
     }
 
-    elseif ($_GET['action'] == 'article'){
+    elseif ($_GET['action'] === 'article'){
 
-        if (isset($_GET['id']) && $_GET['id'] > 0) 
+        if (isset($_GET['id']) && preg_match("#^\d+$#", $_GET['id']))
         {
 
             $articleController = new ArticleController();
@@ -53,7 +53,7 @@ if (isset($_GET['action'])) {
     }
 
 
-    elseif ($_GET['action'] == 'presentation'){
+    elseif ($_GET['action'] === 'presentation'){
 
             $pageController = new PageController();
             $data = $pageController->accessToPresentation();
@@ -61,12 +61,12 @@ if (isset($_GET['action'])) {
     }
 
 
-    elseif ($_GET['action'] == 'addComment') {
+    elseif ($_GET['action'] === 'addComment') {
 
-        if (isset($_GET['id']) && $_GET['id'] > 0) {
+        if (isset($_GET['id']) && preg_match("#^\d+$#", $_GET['id'])) {
 
 
-            if (!empty($_POST['author']) && !empty($_POST['comment'])) {
+            if (!empty($_POST['author']) && !empty($_POST['comment']) && preg_match("#^\d+$#", $_GET['parentId']) && preg_match("#^\d+$#", $_GET['chapitre'])) {
 
                 $articleController = new ArticleController();
                 $addedComment = $articleController->addComments($_GET['id'], $_GET['parentId'], $_GET['chapitre'],$_POST['author'], $_POST['comment']);
@@ -88,9 +88,9 @@ if (isset($_GET['action'])) {
     }
 
 
-    elseif ($_GET['action'] == 'alertComment') {
+    elseif ($_GET['action'] === 'alertComment') {
 
-        if (!empty($_GET['id']) && !empty($_GET['commentId']) && !empty($_GET['alert'])) {
+        if (!empty($_GET['id']) && preg_match("#^\d+$#", $_GET['id']) && !empty($_GET['commentId']) && preg_match("#^\d+$#", $_GET['commentId']) && !empty($_GET['alert']) && preg_match("#^\d+$#", $_GET['alert'])) {
 
             $articleController = new ArticleController();
             $alertedComment = $articleController->alertComments($_GET['id'], $_GET['commentId'], $_GET['alert']);
@@ -104,7 +104,7 @@ if (isset($_GET['action'])) {
     }
 
 
-    elseif ($_GET['action'] == 'mentions'){
+    elseif ($_GET['action'] === 'mentions'){
 
             $pageController = new PageController();
             $data = $pageController->accessMention();
@@ -112,7 +112,7 @@ if (isset($_GET['action'])) {
     }
 
 
-    elseif ($_GET['action'] == 'credits'){
+    elseif ($_GET['action'] === 'credits'){
 
             $pageController = new PageController();
             $data = $pageController->accessCredits();
@@ -121,14 +121,14 @@ if (isset($_GET['action'])) {
 
     // <--------- Connection / Deconnection / Inscription ---------> //
 
-    elseif ($_GET['action'] == 'connectionAccess'){
+    elseif ($_GET['action'] === 'connectionAccess'){
 
-        $connectionController = new ConnectionController();
-        $data = $connectionController->accesstoAdmin();
+        $pageController = new pageController();
+        $data = $pageController->accesstoAdmin();
     }
 
 
-    elseif ($_GET['action'] == 'connection'){
+    elseif ($_GET['action'] === 'connection'){
 
        
         if (!empty($_POST['pseudo']) && !empty($_POST['password'])) {
@@ -150,20 +150,20 @@ if (isset($_GET['action'])) {
         }  
     } 
 
-    elseif ($_GET['action'] == 'disconnection'){
+    elseif ($_GET['action'] === 'disconnection'){
 
         $connectionController = new ConnectionController();
         $data = $connectionController->closeAdmin();
     }
 
 
-    elseif ($_GET['action'] == 'inscriptionAccess'){
+    elseif ($_GET['action'] === 'inscriptionAccess'){
 
         $connectionController = new ConnectionController();
         $data = $connectionController->accesstoInscription();
     }
 
-    elseif ($_GET['action'] == 'inscription'){
+    elseif ($_GET['action'] === 'inscription'){
 
         if (!empty($_POST['login']) && !empty($_POST['pass']) && !empty($_POST['passBis'])) {
             $connectionController = new ConnectionController();
@@ -175,7 +175,7 @@ if (isset($_GET['action'])) {
     // <--------- BackEnd ---------> //
 
     // <----- display ----->
-    elseif ($_GET['action'] == 'adminView'){
+    elseif ($_GET['action'] === 'adminView'){
 
         if (isset($_SESSION['pseudo'])) {
             $adminController = new AdminController();
@@ -190,7 +190,7 @@ if (isset($_GET['action'])) {
     }
 
 
-    elseif ($_GET['action'] == 'adminArticles'){
+    elseif ($_GET['action'] === 'adminArticles'){
 
 
         if (isset($_SESSION['pseudo'])) {
@@ -205,10 +205,10 @@ if (isset($_GET['action'])) {
         }
     }
 
-    elseif ($_GET['action'] == 'adminArticle'){ 
+    elseif ($_GET['action'] === 'adminArticle'){ 
         
         if (isset($_SESSION['pseudo'])) {
-            if (isset($_GET['id']) && $_GET['id'] > 0) 
+            if (isset($_GET['id']) && preg_match("#^\d+$#", $_GET['id'])) 
             {
 
                 $adminController = new AdminController();
@@ -229,7 +229,7 @@ if (isset($_GET['action'])) {
     }
 
 
-    elseif ($_GET['action'] == 'adminComments'){
+    elseif ($_GET['action'] === 'adminComments'){
 
         if (isset($_SESSION['pseudo'])) {
             $adminController = new AdminController();
@@ -243,7 +243,7 @@ if (isset($_GET['action'])) {
         }
     }
 
-    elseif ($_GET['action'] == 'adminAddArticle'){
+    elseif ($_GET['action'] === 'adminAddArticle'){
 
         if (isset($_SESSION['pseudo'])) {
 
@@ -260,13 +260,13 @@ if (isset($_GET['action'])) {
     }
 
      // <----- modification / deletion/ addition / moderation ----->
-    elseif ($_GET['action'] == 'modifArticle'){ 
+    elseif ($_GET['action'] === 'modifArticle'){ 
 
        if (isset($_SESSION['pseudo'])) {
-            if (isset($_GET['id']) && $_GET['id'] > 0) 
+            if (isset($_GET['id']) && preg_match("#^\d+$#", $_GET['id'])) 
             {
 
-                if (isset($_POST['number']) && !empty($_POST['number']) && isset($_POST['title']) && !empty($_POST['title']) && isset($_POST['content']) && !empty($_POST['content'])) {
+                if (isset($_POST['number']) && !empty($_POST['number']) && preg_match("#^\d+$#", $_POST['number']) && isset($_POST['title']) && !empty($_POST['title']) && isset($_POST['content']) && !empty($_POST['content'])) {
 
                     $adminController = new AdminController();
                     $data = $adminController->modifArticle($_GET['id'], $_POST['number'], $_POST['title'], $_POST['content']);
@@ -294,10 +294,10 @@ if (isset($_GET['action'])) {
     }
 
 
-    elseif ($_GET['action'] == 'deleteArticle'){ 
+    elseif ($_GET['action'] === 'deleteArticle'){ 
 
        if (isset($_SESSION['pseudo'])) {
-            if (isset($_GET['id']) && $_GET['id'] > 0) 
+            if (isset($_GET['id']) && preg_match("#^\d+$#", $_GET['id'])) 
             {
                 $adminController = new AdminController();
                 $data = $adminController->deleteArticle($_GET['id']); 
@@ -316,11 +316,11 @@ if (isset($_GET['action'])) {
     }
 
     
-    elseif ($_GET['action'] == 'additionArticle') {
+    elseif ($_GET['action'] === 'additionArticle') {
 
         if (isset($_SESSION['pseudo'])) {
 
-            if (!empty($_POST['number']) &&!empty($_POST['title']) && !empty($_POST['content'])) {
+            if (!empty($_POST['number']) && preg_match("#^\d+$#", $_POST['number']) && !empty($_POST['title']) && !empty($_POST['content'])) {
 
                 $adminController = new AdminController();
                 $data = $adminController->addArticles($_POST['number'], $_POST['title'], $_POST['content']);
@@ -339,10 +339,10 @@ if (isset($_GET['action'])) {
         }
     }
 
-    elseif ($_GET['action'] == 'moderateComment') {
+    elseif ($_GET['action'] === 'moderateComment') {
 
         if (isset($_SESSION['pseudo'])) {   
-            if (!empty($_GET['commentId']) && !empty($_GET['moderation'])) {
+            if (!empty($_GET['commentId']) && preg_match("#^\d+$#", $_GET['commentId']) && !empty($_GET['moderation']) && preg_match("#^\d+$#", $_GET['moderation'])) {
 
                 $adminController = new AdminController();
                 $moderatedComment = $adminController->moderateComments($_GET['commentId'], $_GET['moderation']);
@@ -359,12 +359,17 @@ if (isset($_GET['action'])) {
             //echo 'Veuillez vous connecter pour accéder à l\'administration du blog';
         }
     }
+
+    else{
+        $pageController = new PageController();
+        $data = $pageController->access404();
+    }
 }
 
 
 else {
 
-    if (isset($_GET['page'])) 
+    if (isset($_GET['page']) && preg_match("#^\d+$#", $_GET['page'])) 
     {
         $articleController = new ArticleController();
         $data = $articleController->listArticles($_GET['page']);

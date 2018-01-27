@@ -47,7 +47,7 @@ class Article
 		return $this->id;
 	}
 
-	public function setId($id)
+	public function setId(int $id)
 	{
 		$this->id = $id;
 	}
@@ -58,7 +58,7 @@ class Article
 		return $this->article_number;
 	}
 
-	public function setArticleNumber($article_number)
+	public function setArticleNumber(int $article_number)
 	{
 		$this->article_number = $article_number;
 	}
@@ -69,7 +69,7 @@ class Article
 		return $this->title;
 	}
 
-	public function setTitle($title)
+	public function setTitle(string $title)
 	{
 		$this->title = $title;
 	}
@@ -80,7 +80,7 @@ class Article
 		return $this->content;
 	}
 
-	public function setContent($content)
+	public function setContent(string $content)
 	{
 		$this->content = $content;
 	}

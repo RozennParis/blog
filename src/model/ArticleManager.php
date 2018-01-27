@@ -55,7 +55,7 @@ class ArticleManager extends Manager
 	/** Function to delete an article by admin
 	 *
 	 */ 
-	public function delArticle($id)
+	public function delArticle(int $id)
 	{
 		$req = $this->db->prepare('DELETE FROM articles WHERE id = ?');
 
@@ -86,7 +86,9 @@ class ArticleManager extends Manager
 		return $articles;
 	}
 
-
+	/** Function to display the list of all the articles on the Admin articles page.
+	 *
+	 */
 	public function showArticles()
 	{
 
@@ -110,7 +112,7 @@ class ArticleManager extends Manager
 	/** Function to display the choosen article
 	 *
 	 */
-	public function getArticle($id) //exemple à suivre
+	public function getArticle(int $id)
 	{
 		$req = $this->db->prepare('SELECT id, article_number, title, content, DATE_FORMAT(date_creation, \'%d/%m/%Y \') AS dateCreation FROM articles WHERE id = ?');
 
@@ -126,7 +128,7 @@ class ArticleManager extends Manager
 	/** Function to display the articles on the homepage.
 	 *
 	 */
-	public function getArticles($page = 1) 
+	public function getArticles(int $page = 1) 
 	{
 		$articlesPerPage = 3;
 
@@ -154,7 +156,7 @@ class ArticleManager extends Manager
 	/** Function to display the extract of the article on the homepage.
 	 *
 	 */
-	public function getExtract($content,$start,$lenght,$endStr)
+	public function getExtract(string $content,$start,$lenght,$endStr)
 	{
 
         $str = mb_substr($content, $start, $lenght - strlen($endStr) + 1, 'UTF-8');

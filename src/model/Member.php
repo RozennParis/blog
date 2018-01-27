@@ -52,7 +52,7 @@ class Member
 		return $this->id;
 	}
 
-	public function setId($id)
+	public function setId(int $id)
 	{
 		$this->id = $id;
 	}
@@ -63,7 +63,7 @@ class Member
 		return $this->pseudo;
 	}
 
-	public function setPseudo($pseudo)
+	public function setPseudo(string $pseudo)
 	{
 		$this->pseudo = $pseudo;
 	}
@@ -74,7 +74,7 @@ class Member
 		return $this->password;
 	}
 
-	public function setPassword($password)
+	public function setPassword(string $password)
 	{
 		$this->password = $password;
 	}

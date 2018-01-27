@@ -23,7 +23,7 @@ class ConnectionController extends \blog\controller\Controller
 	/** Method to add a member 
 	 * 
 	 */
-	public function addMember($login, $password, $passwordBis)
+	public function addMember(string $login, string $password, string $passwordBis)
 	{
 		if ($password === $passwordBis){
 
@@ -48,7 +48,7 @@ class ConnectionController extends \blog\controller\Controller
 	/** Method to open the admin page 
 	 * 
 	 */
-	public function openAdmin($pseudo, $password)
+	public function openAdmin(string $pseudo, string $password)
 	{
 
 		$data = new Member();
@@ -89,17 +89,6 @@ class ConnectionController extends \blog\controller\Controller
 		header('Location: index.php');
 	}
 
-	/** Method to have an access to the login page 
-	 * 
-	 */
-	public function accessToAdmin()
-	{
-		$articleManager = new ArticleManager();
-		$chapters = $articleManager->getChapters();
-		
-		echo $this->twig->render('connectionView.twig', array(
-	    	'chapters'=>$chapters
-	    ));
-	}
+	
 }
 
