@@ -29,8 +29,8 @@ class AdminController extends \blog\controller\Controller
 
 		
 
-		$articleManager = new ArticleManager(); //création de l'objet
-	    $article = $articleManager->addArticle($data); // appel de la fonction de cet objet
+		$articleManager = new ArticleManager(); 
+	    $article = $articleManager->addArticle($data);
 
 	    header('Location: index.php?action=adminView');
 	}

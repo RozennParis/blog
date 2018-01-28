@@ -235,7 +235,7 @@ header h1
 
 .comment-form textarea
 {
-	/*border-radius: 5px;*/
+	
 	height : 40%;
 
 }
@@ -247,7 +247,6 @@ footer, footer a
 {
 	
 	background-color: #21201E;
-	/*color: #F6F6F6;*/
 	color: #808080;
 	
 }
@@ -326,17 +325,3 @@ footer, footer a
 
 }
 
-
-/*<<<<<---------- Alert messages ---------->>>>>*/
-
-/*.alert-info {
-  background-color: rgba(91, 202, 255, 0.98); }
-
-.alert-success {
-  background-color: rgba(76, 217, 100, 0.98); }
-
-.alert-warning {
-  background-color: rgba(255, 149, 0, 0.98); }
-
-.alert-danger {
-  background-color: rgba(255, 76, 64, 0.98); }*/

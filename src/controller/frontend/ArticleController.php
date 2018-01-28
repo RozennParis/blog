@@ -29,6 +29,7 @@ class ArticleController extends \blog\controller\Controller
 	    	'numbers'=>$numbers,
 	    	'chapters'=>$chapters
 	    ));
+	    
 
 	}
 
@@ -49,6 +50,7 @@ class ArticleController extends \blog\controller\Controller
 		{
 			$pageController = new PageController();
 	        $data = $pageController->access404();
+	        
 		}
 		else 
 		{
@@ -57,9 +59,8 @@ class ArticleController extends \blog\controller\Controller
 			    'comments'=>$comments,
 			    'chapters'=>$chapters
 			));
-
-
 		}
+		
 	}
 
 	/** Method to add a comment on the article's page
@@ -79,14 +80,12 @@ class ArticleController extends \blog\controller\Controller
 
 	    if ($affectedLines === false)
 	    {
-	    	$_SESSION['messageDanger'] = 'Le commentaire n\'a pas été envoyé.' ;
+	    	die ('Impossible d\'ajouter le commentaire !');
 	    }
 
 	    
 	    else
 	    {
-	    	
-	    	$_SESSION['messageSuccess'] = 'Le commentaire a bien été envoyé.' ;
 	    	header('Location: index.php?action=article&id=' . $articleId . '&parentId=' . $parentId);
 	    }
 	}
@@ -103,7 +102,8 @@ class ArticleController extends \blog\controller\Controller
 		$commentManager = new CommentManager();
 		$alertComment = $commentManager->alertComment($data);
 
-		header('Location: index.php?action=article&id=' . $articleId);
+	    header('Location: index.php?action=article&id=' . $articleId);
+	 
 	}
 
 	

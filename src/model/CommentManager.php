@@ -72,7 +72,7 @@ class CommentManager extends Manager
     }
 
 	//------------ FRONTEND ------------
-	/** function to add an article/chapter >>> front
+	/** function to add a comment
 	 * 
 	 */
 	public function addComment(Comments $comment)

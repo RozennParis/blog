@@ -20,9 +20,4 @@ class Controller
 
 	}
 
-	public function setFlashMessage()
-	{
-
-	}
-
 }

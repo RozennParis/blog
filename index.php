@@ -15,6 +15,7 @@ use \blog\controller\backend\AdminController;
 
 
 
+
 if (isset($_GET['action'])) {
 
 
@@ -76,7 +77,7 @@ if (isset($_GET['action'])) {
                 
                 $pageController = new PageController();
                 $data = $pageController->access404();
-                // echo 'Erreur : tous les champs ne sont pas remplis !';
+               
             }
         }
 
@@ -146,7 +147,6 @@ if (isset($_GET['action'])) {
         {
             $pageController = new PageController();
             $data = $pageController->access404();
-            //echo 'Merci de remplir tous les champs';
         }  
     } 
 
@@ -185,7 +185,6 @@ if (isset($_GET['action'])) {
         else {
             $pageController = new PageController();
             $data = $pageController->access404();
-            //echo 'Veuillez vous connecter pour accéder à l\'administration du blog'; ou message warning
         }
     }
 
@@ -201,7 +200,7 @@ if (isset($_GET['action'])) {
             
             $pageController = new PageController();
             $data = $pageController->access404();
-            //echo 'Veuillez vous connecter pour accéder à l\'administration du blog';
+            
         }
     }
 
@@ -224,7 +223,7 @@ if (isset($_GET['action'])) {
             
             $pageController = new PageController();
             $data = $pageController->access404();
-            //echo 'Veuillez vous connecter pour accéder à l\'administration du blog';
+           
         }
     }
 
@@ -239,7 +238,7 @@ if (isset($_GET['action'])) {
             
             $pageController = new PageController();
             $data = $pageController->access404();
-            //echo 'Veuillez vous connecter pour accéder à l\'administration du blog';
+           
         }
     }
 
@@ -254,7 +253,7 @@ if (isset($_GET['action'])) {
         else {
             $pageController = new PageController();
             $data = $pageController->access404();
-            //echo 'Veuillez vous connecter pour accéder à l\'administration du blog';
+            
         }
         
     }
@@ -276,19 +275,19 @@ if (isset($_GET['action'])) {
                 else {
                     $pageController = new PageController();
                     $data = $pageController->access404();
-                    //echo 'Erreur : tous les champs ne sont pas remplis !';
+            
                 }
             }
             else {
                 $pageController = new PageController();
                 $data = $pageController->access404();
-                //echo 'Erreur : aucun identifiant de billet envoyé';
+               
             }
         }
         else {
             $pageController = new PageController();
             $data = $pageController->access404();
-            //echo 'Veuillez vous connecter pour accéder à l\'administration du blog';
+           
         }
 
     }
@@ -305,13 +304,13 @@ if (isset($_GET['action'])) {
             else {
                 $pageController = new PageController();
                 $data = $pageController->access404();
-                //echo 'Erreur : aucun identifiant de billet envoyé';
+            
             }
         }
         else {
             $pageController = new PageController();
             $data = $pageController->access404();
-            //echo 'Veuillez vous connecter pour accéder à l\'administration du blog';
+           
         }
     }
 
@@ -329,13 +328,13 @@ if (isset($_GET['action'])) {
             else {
                 $pageController = new PageController();
                 $data = $pageController->access404();
-                //echo 'Erreur : tous les champs ne sont pas remplis !';
+               
             }
         }
          else {
             $pageController = new PageController();
             $data = $pageController->access404();
-            //echo 'Veuillez vous connecter pour accéder à l\'administration du blog';
+           
         }
     }
 
@@ -350,13 +349,13 @@ if (isset($_GET['action'])) {
             else {
                 $pageController = new PageController();
                 $data = $pageController->access404();
-                //echo 'Erreur : le message n\'a pas été modéré !!!';
+         
             }
         }
         else {
             $pageController = new PageController();
             $data = $pageController->access404();
-            //echo 'Veuillez vous connecter pour accéder à l\'administration du blog';
+           
         }
     }
 
