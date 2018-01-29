@@ -14,6 +14,7 @@
             <tr>
                 <th scope="col">N°commentaire</th>
                 <th scope="col">Chapitre concerné</th>
+                <th scope="col">Auteur</th>
                 <th scope="col">Contenu</th>
                 <th scope="col">Modération</th>
             </tr>
@@ -25,6 +26,7 @@
                 <tr>  
                     <td scope="row">{{ comment.id|e }}</td>
                     <td>{{ comment.concernedArticle|e }}</td>
+                    <td>{{ comment.author|e }}</td>
                     <td>{{ comment.comment|e }}</td>
                     <td>
                         <!-- Button trigger modal -->
