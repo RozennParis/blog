@@ -13,7 +13,7 @@ class Manager
 	{
 		try
 		{
-		    $db= new PDO('mysql:host=localhost;dbname=blog_Jean_Forteroche;charset=utf8', 'root', 'tahiti', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+		    $db= new PDO('mysql:host=localhost;dbname=blog_Jean_Forteroche;charset=utf8', 'identifiant', 'mdp', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 		}
 		
 		catch(Exception $e)
